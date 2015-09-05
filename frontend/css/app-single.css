@@ -276,6 +276,7 @@ article {
 
 
 .reservation {
+    border-radius: 15px;
     margin-top: 2em;
     padding: 1em;
     background: white;
@@ -361,30 +362,10 @@ article {
     padding: 4px;
 }
 
-#contact .person {
-    position: relative;
-    float: left;
-    margin-left: 1em;
+.contact {
+    color: black;
+    border-radius: 15px;
 }
-
-#contact .person .details {
-    margin-top: .5em;
-    margin-left: 0.5em;
-    margin-right: 3em;
-    float: right;
-}
-
-#contact .person .details .name {
-    display: block;
-    font-weight: bold;
-}
-
-#contact .person .photo {
-    position: relative;
-    width: 80px;
-    height: 100px;
-}
-
 
 #map_canvas {
     float: right;
