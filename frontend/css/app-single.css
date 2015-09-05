@@ -291,6 +291,7 @@ article {
     font-size: 1.2em;
     font-weight: bold;
     border-bottom: 1px solid black;
+    padding-bottom: .2em;
     margin-bottom: 4px;
 }
 
