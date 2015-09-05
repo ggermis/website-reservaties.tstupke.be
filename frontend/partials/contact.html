@@ -1,0 +1,77 @@
+<div id="wrapper">
+    <section>
+        <script>
+            $(function () {
+                var mapCanvas = document.getElementById('map_canvas');
+                var location = new google.maps.LatLng(50.787760, 5.585217);
+                var mapOptions = {
+                    center: location,
+                    zoom: 16,
+                    mapTypeId: google.maps.MapTypeId.TERRAIN
+                };
+                var map = new google.maps.Map(mapCanvas, mapOptions);
+                var marker = new google.maps.Marker({
+                    position: location,
+                    map: map,
+                    title: 'Kampplaats t Stupke: 50°47\'15.9"N 5°35\'06.8"E'
+                });
+                var infowindow = new google.maps.InfoWindow({
+                    content: '<h3>Kampplaats \'t Stupke</h3>Lengtegraad: 5°35\'06.8"E<br/>Breedtegraad: 50°47\'15.9"N'
+                });
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.open(map, marker);
+                });
+
+            });
+        </script>
+
+        <br>
+        <article>
+            <h3>Contactpersonen</h3>
+
+            <div id="contact">
+                <div class="person">
+                    <img class="photo" src="http://placehold.it/80x100" alt="photo Peter Burns">
+                    <div class="details">
+                        <span class="name">Peter Burns</span>
+                        <span class="phone"><img src="/img/tel.png" alt="phone number"> 0495 / 24.66.50</span>
+                    </div>
+                </div>
+
+                <div class="person">
+                    <img class="photo" src="http://placehold.it/80x100" alt="photo Fabienne Rosias">
+                    <div class="details">
+                        <span class="name">Fabienne Rosias</span>
+                        <span class="phone"><img src="/img/tel.png" alt="phone number"> 0496 / 38.61.13</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="clear: both"></div>
+        </article>
+        <br>
+
+        <article class="location">
+            <h3>Locatie</h3>
+
+            <div id="map_canvas"></div>
+
+            <div id="address">
+                <b>Kampplaats 't Stupke</b><br>
+                Stroekenstraat zn<br>
+                3770 Valmeer (Riemst)<br>
+                <a href="mailto:kampplaats@tstupke.be?subject=Kampplaats 't Stupke">kampplaats@tstupke.be</a>
+            </div>
+
+            <div id="gps">
+                <span class="name">Lengtegraad</span><br>
+                5°35'06.8"E<br><br>
+                <span class="name">Breedtegraad</span><br>
+                50°47'15.9"N
+            </div>
+
+            <div style="clear:both"></div>
+
+        </article>
+    </section>
+</div>

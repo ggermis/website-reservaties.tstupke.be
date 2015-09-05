@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS reservations (
+  _id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+
+  _entity VARCHAR(255) NOT NULL,
+  _nr_of_people INT NOT NULL,
+
+  _name VARCHAR(255) NOT NULL,
+  _address VARCHAR(255) NOT NULL,
+  _email VARCHAR(255) NOT NULL,
+  _phone VARCHAR(255) NOT NULL,
+
+  _arrival DATE NOT NULL,
+  _departure DATE NOT NULL,
+
+  _remarks TEXT,
+
+  _created TIMESTAMP NOT NULL,
+
+  _agreed BOOLEAN DEFAULT FALSE,
+  _email_sent BOOLEAN DEFAULT FALSE,
+  _status VARCHAR(255) NOT NULL DEFAULT 'pending'
+) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;

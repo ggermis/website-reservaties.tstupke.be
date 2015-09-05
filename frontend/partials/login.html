@@ -1,0 +1,24 @@
+<div id="wrapper" class="loginForm">
+    <section>
+        <br>
+        <article>
+            <h3>Aanmelden</h3>
+
+            <div class="form">
+                <form ng-submit="login(auth.user, auth.pass)">
+                    <label for="user">Gebruiker:</label><input id="user" size="10" type="text" ng-model="auth.user"
+                                                               placeholder="Gebruikersnaam">
+                    <br>
+                    <label for="password">Wachtwoord:</label><input id="password" size="10" type="password"
+                                                                    ng-model="auth.pass"
+                                                                    placeholder="Wachtwoord"><br>
+                    <br>
+                    <button>Login</button>
+                    <br>
+                    <div>Status: {{login_message}}</span>
+
+                </form>
+            </div>
+        </article>
+    </section>
+</div>

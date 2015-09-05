@@ -1,0 +1,58 @@
+<!doctype html>
+<html ng-app="Main">
+<head>
+    <title>Kampplaats 't Stupke</title>
+
+    <link rel="stylesheet" type="text/css" href="css/normalize.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.theme.min.css">
+    <link rel="stylesheet" type="text/css" href="css/animation.css">
+    <link rel="stylesheet" type="text/css" href="css/app-single.css">
+
+    <script src="vendor/jquery-1.11.1.min.js"></script>
+    <script src="vendor/jquery-ui.min.js"></script>
+    <!--<script src="https://maps.googleapis.com/maps/api/js"></script>-->
+
+    <script src="vendor/angular-1.2.9/angular.min.js"></script>
+    <script src="vendor/angular-1.2.9/angular-cookies.min.js"></script>
+    <script src="vendor/angular-1.2.9/angular-route.min.js"></script>
+    <script src="vendor/angular-1.2.9/angular-resource.min.js"></script>
+    <script src="vendor/angular-translate.min.js"></script>
+    <script src="vendor/modernizr.min.js"></script>
+    <script src="vendor/md5.js"></script>
+
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/factories.js"></script>
+    <script src="js/directives.js"></script>
+</head>
+
+<body ng-controller="MainCtrl">
+
+<div id="content">
+
+    <div id="login" ng-if="!auth_token">
+        <a href="#/login">Aanmelden</a>
+    </div>
+    <div id="logout" ng-controller="LoginCtrl" ng-if="auth_token">
+        <button ng-click="logout()">Afmelden</button>
+    </div>
+
+    <div class="overlay">
+        <a href="#/"><img class="logo" src="img/logo.png" alt="logo"></a>
+
+        <div class="info">
+            Kampplaats<br> 't Stupke
+        </div>
+    </div>
+
+    <ul class="slideshow">
+        <li><span>Image 1</span></li>
+        <li><span>Image 2</span></li>
+    </ul>
+
+    <div class="fadeIn" ng-view></div>
+
+</div>
+</body>
+</html>

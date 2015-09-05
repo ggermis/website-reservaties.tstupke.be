@@ -1,0 +1,73 @@
+@keyframes slide {
+    0% {
+        left: -2000px;
+    }
+
+    100% {
+        left: 0;
+    }
+}
+
+@-webkit-keyframes slide {
+    0% {
+        left: -2000px;
+    }
+
+    100% {
+        left: 0;
+    }
+}
+
+.slide {
+    -webkit-animation: slide 0.5s forwards; /* Safari 4+ */
+    -moz-animation: slide 0.5s forwards; /* Fx 5+ */
+    -o-animation: slide 0.5s forwards; /* Opera 12+ */
+    -ms-animation: slide 0.5s forwards;
+    animation: slide 0.5s forwards; /* IE 10+, Fx 29+ */
+    left: -2000px;
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.fadeIn {
+    -webkit-animation: fadeIn 1s forwards; /* Safari 4+ */
+    -moz-animation: fadeIn 1s forwards; /* Fx 5+ */
+    -o-animation: fadeIn 1s forwards; /* Opera 12+ */
+    -ms-animation: fadeIn 1s forwards;
+    animation: fadeIn 1s forwards; /* IE 10+, Fx 29+ */
+}
+
+@keyframes imageAnimation {
+    0% { opacity: 0; animation-timing-function: ease-in;  }
+    5% { opacity: 1; animation-timing-function: ease-out; }
+    50% { opacity: 1; }
+    55% { opacity: 0; }
+    100% { opacity: 0;}
+}
+
+@-webkit-keyframes imageAnimation {
+    0% { opacity: 0; -webkit-animation-timing-function: ease-in;  }
+    5% { opacity: 1; -webkit-animation-timing-function: ease-out; }
+    50% { opacity: 1; }
+    55% { opacity: 0; }
+    100% { opacity: 0;}
+}
