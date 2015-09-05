@@ -474,7 +474,7 @@ td {
 }
 
 .closed {
-    color: rgba(255, 255, 255, 0.6);;
+    color: rgba(255, 255, 255, 0.6);
     background-color: darkslategray;
 }
 
@@ -558,4 +558,16 @@ button.adminButton  {
     position: relative;
     margin-left: 2em;
     font-size: 1em;
+    border-radius: 15px;
+    padding: 4px 1em;
+    border: none;
+    background-color: black;
+    color: white;
 }
+
+button.adminButton:disabled {
+    opacity: .4;
+}
+
+
+
