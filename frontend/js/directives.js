@@ -11,7 +11,7 @@ angular.module('Main')
                     yearRange: "-0:+5",
                     minDate: '0',
                     beforeShowDay: function (date) {
-                        return [CalendarHelper.isDayFree(scope.reservations, date, scope.reservation._type), ""];
+                        return [CalendarHelper.isDayFree(scope.all_reservations, date, scope.reservation._type), ""];
                     },
                     onSelect: function (date) {
                         var toDate = new Date(element.datepicker("getDate"));
@@ -43,7 +43,7 @@ angular.module('Main')
                     minDate: '1d',
                     beforeShowDay: function (date) {
                         var from_date = new Date(withFrom.val());
-                        return [CalendarHelper.isDayFree(scope.reservations, date, scope.reservation._type, from_date), ""];
+                        return [CalendarHelper.isDayFree(scope.all_reservations, date, scope.reservation._type, from_date), ""];
                     },
                     onSelect: function (date) {
                         scope.reservation._departure = date;

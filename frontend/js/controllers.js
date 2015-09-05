@@ -65,9 +65,12 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     $scope.reservation_types = ['weekend', 'bivak'];
     $scope.reset();
 
-    function loadReservations() {
+    function loadReservations(reset) {
         Reservations.getAll(function (response) {
-            $scope.reset();
+            if (reset) {
+                $scope.reset();
+            }
+            $scope.all_reservations = response;
             $scope.reservations = response.filter(function(reservation) {
                 return new RegExp('^' + $scope.year + '-').test(reservation._arrival); 
             });
@@ -118,7 +121,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             .then(function (data) {
                 $scope.status = 'ok';
                 $scope.reservation_button = 'Reservatie succesvol verstuurd!';
-                loadReservations();
+                loadReservations(false);
                 mail = {};
                 mail.message = $scope.reservation;
                 Mailer.sendMail({}, mail);
@@ -136,7 +139,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         $scope.message = 'Verwijderen reservatie ' + id + '...';
         Reservations.delete({id: id}).$promise
             .then(function (data) {
-                loadReservations();
+                loadReservations(false);
             }, function (error) {
                 $scope.status = 'Fout bij verwijderen van reservatie';
                 $scope.message = error.response;
@@ -149,11 +152,11 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             .then(function (data) {
                 $scope.status = 'ok';
                 $scope.message = 'Reservatie succesvol geupdate';
-                loadReservations();
+                loadReservations(false);
             }, function (error) {
                 $scope.status = 'Fout bij updaten van reservatie';
                 $scope.message = error.data;
-                loadReservations();
+                loadReservations(false);
             });
     };
 

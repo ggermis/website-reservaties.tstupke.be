@@ -16,7 +16,7 @@ angular.module('Main').factory('Reservations', ['$resource', function ($resource
         getAll: { method: 'GET', isArray: true },
         create: { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded'} },
         update: { method: 'PUT', params: {id: '@id'} },
-        delete: {method: 'DELETE', params: {id: '@id'} }
+        delete: { method: 'DELETE', params: {id: '@id'} }
     })
 }]);
 
