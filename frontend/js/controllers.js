@@ -65,14 +65,20 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     $scope.reservation_types = ['weekend', 'bivak'];
     $scope.reset();
 
+    function loadReservations() {
+        Reservations.getAll(function (response) {
+            $scope.reset();
+            $scope.reservations = response.filter(function(reservation) {
+                return new RegExp('^' + $scope.year + '-').test(reservation._arrival); 
+            });
+        });
+    }
+
     $scope.is_authorized = function() {
         return $scope.auth_token != null;
     };
 
-    Reservations.getAll(function (response) {
-        $scope.reset();
-        $scope.reservations = response;
-    });
+    loadReservations();
 
     $scope.numberOfDays = function(from_date, to_date) {
         var days = Math.abs(Math.floor(( Date.parse(from_date) - Date.parse(to_date) ) / 86400000));
@@ -81,7 +87,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
 
     $scope.submitAdminReservationForm = function(item, event) {
         $scope.message = "Wordt opgeslagen...";
-        
+
         $scope.reservation._name = "'t Stupke";
         $scope.reservation._address = "Stroekestraat, Val-Meer";
         $scope.reservation._email = "kampplaats@tstupke.be";
@@ -98,10 +104,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
                 .then(function(data) {
                     $scope.status = 'ok';
                     $scope.message = 'Success';
-                    Reservations.getAll(function (response) {
-                        $scope.reservations = response;
-                        $scope.reset();
-                    });
+                    loadReservations();
                 }, function(error) {
                     $scope.message = error.data;
                 });
@@ -115,9 +118,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             .then(function (data) {
                 $scope.status = 'ok';
                 $scope.reservation_button = 'Reservatie succesvol verstuurd!';
-                Reservations.getAll(function (response) {
-                    $scope.reservations = response;
-                });
+                loadReservations();
                 mail = {};
                 mail.message = $scope.reservation;
                 Mailer.sendMail({}, mail);
@@ -135,11 +136,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         $scope.message = 'Verwijderen reservatie ' + id + '...';
         Reservations.delete({id: id}).$promise
             .then(function (data) {
-                Reservations.getAll(function (response) {
-                    $scope.status = 'ok';
-                    $scope.message = 'Reservatie succesvol verwijderd';
-                    $scope.reservations = response;
-                })
+                loadReservations();
             }, function (error) {
                 $scope.status = 'Fout bij verwijderen van reservatie';
                 $scope.message = error.response;
@@ -152,16 +149,17 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             .then(function (data) {
                 $scope.status = 'ok';
                 $scope.message = 'Reservatie succesvol geupdate';
-                Reservations.getAll(function (response) {
-                    $scope.reservations = response;
-                });
+                loadReservations();
             }, function (error) {
                 $scope.status = 'Fout bij updaten van reservatie';
                 $scope.message = error.data;
-                Reservations.getAll(function (response) {
-                    $scope.reservations = response;
-                });
+                loadReservations();
             });
     };
+
+    $scope.$watch('year', function (newValue, oldValue) {
+        loadReservations();
+    }, true);
+
 
 }]);
