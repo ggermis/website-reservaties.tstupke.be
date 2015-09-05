@@ -569,5 +569,8 @@ button.adminButton:disabled {
     opacity: .4;
 }
 
-
+form.adminReservationForm {
+    text-align: center;
+    margin: 0 auto;
+}
 

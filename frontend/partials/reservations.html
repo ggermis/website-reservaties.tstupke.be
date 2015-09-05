@@ -28,8 +28,8 @@
         </article>
         <br>
 
-        <article class="adminReservationForm" ng-if="is_authorized()">
-            <form name="adminReservationForm" novalidate>
+        <article ng-if="is_authorized()">
+            <form class="adminReservationForm" name="adminReservationForm" novalidate>
                  <input type="text" id="arrival" name="arrival" size="10" ng-model="reservation._arrival" readonly>
                  <input type="text" id="departure" name="arrival" size="10" ng-model="reservation._departure" readonly>
                  <input type="text" id="entity" name="entity" ng-model="reservation._entity" placeholder="Omschrijving" required>

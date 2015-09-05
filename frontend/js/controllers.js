@@ -80,6 +80,8 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     };
 
     $scope.submitAdminReservationForm = function(item, event) {
+        $scope.message = "Wordt opgeslagen...";
+        
         $scope.reservation._name = "'t Stupke";
         $scope.reservation._address = "Stroekestraat, Val-Meer";
         $scope.reservation._email = "kampplaats@tstupke.be";
@@ -90,7 +92,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         var isDoubleBooked = CalendarHelper.existsReservationBetween($scope.reservations, new Date($scope.reservation._arrival), new Date($scope.reservation._departure));
         if (isDoubleBooked) {
             $scope.status = 'error';
-            $scope.message = 'Dubbele boeking!';
+            $scope.message = 'Dubbele boeking! Reservatie niet opgeslagen!';
         } else {
             Reservations.create({}, $scope.reservation).$promise
                 .then(function(data) {
