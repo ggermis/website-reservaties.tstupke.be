@@ -122,14 +122,20 @@ angular.module('Main')
                                     cellText = document.createTextNode(d.getDate());
                                     cell.appendChild(cellText);
                                     if (scope.is_authorized()) {
-                                        function captureDate(d, field) {
-                                            return function() { 
-                                                scope.reservation[field] = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+                                        function captureArrivalDate(d) {
+                                            return function(event) { 
+                                                scope.reservation._arrival = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
                                                 scope.$apply();
                                             }
                                         }
-                                        cell.onmousedown = captureDate(d, '_arrival');
-                                        cell.onmouseup = captureDate(d, '_departure');
+                                        function captureDepartureDate(d) {
+                                            return function(event) {
+                                                scope.reservation._departure = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+                                                scope.$apply();
+                                            }
+                                        }
+                                        cell.onmousedown = captureArrivalDate(d);
+                                        cell.onmouseup = captureDepartureDate(d);
                                     }                                    
                                     var reservation = CalendarHelper.getReservation(scope.reservations, d);
                                     cell.className = "day " + (reservation ? reservation._status : 'free');

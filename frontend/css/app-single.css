@@ -549,6 +549,10 @@ td {
     text-align: center;
 }
 
+.day.selected {
+    background-color: blue;
+}
+
 button.adminButton  {
     display: inline;
     position: relative;
