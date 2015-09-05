@@ -548,3 +548,10 @@ td {
 .price {
     text-align: center;
 }
+
+button.adminButton  {
+    display: inline;
+    position: relative;
+    margin-left: 2em;
+    font-size: 1em;
+}
