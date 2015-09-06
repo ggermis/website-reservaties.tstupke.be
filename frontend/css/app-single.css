@@ -556,3 +556,6 @@ form.adminReservationForm {
     margin: 0 auto;
 }
 
+.done {
+    opacity: .2;
+}

@@ -160,6 +160,11 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             });
     };
 
+    $scope.reservation_class = function(reservation) {
+        console.log(reservation);
+        return new Date(reservation._arrival).valueOf() < new Date().valueOf() ? 'done' : 'todo';
+    }
+
     $scope.$watch('year', function (newValue, oldValue) {
         loadReservations();
     }, true);

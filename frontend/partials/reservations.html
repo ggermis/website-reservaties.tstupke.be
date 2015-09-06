@@ -140,7 +140,7 @@
             <article>
                 <h3>Reservaties voor {{year}}</h3>
 
-                <div class="reservation {{ reservation._status }}" ng-repeat="reservation in reservations">
+                <div class="reservation {{ reservation._status }} {{ reservation_class(reservation) }}" ng-repeat="reservation in reservations">
                     <span class="delete">
                         <a href="" class="remove" ng-click="deleteReservation(reservation._id)">Verwijder deze reservatie</a>
                     </span> 
