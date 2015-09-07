@@ -151,6 +151,7 @@
                         {{reservation._entity}} ({{reservation._name}})
                     </div>
                     <div>Aantal personen: <input  type="number" ng-model="reservation._nr_of_people" ng-change="updateReservation(reservation)"></div>
+                    <div>Aangevraagd op: <input type="text" size="20" ng-model="reservation._created" disabled></div>
                     <div>Van: <input type="text" size="10" ng-model="reservation._arrival" datepicker autocomplete="off" readonly ng-change="updateReservation(reservation)"></div>
                     <div>Tot: <input type="text" size="10" ng-model="reservation._departure" datepicker autocomplete="off" readonly ng-change="updateReservation(reservation)"></div>
                     <div class="status">Status: <select ng-model="reservation._status"
