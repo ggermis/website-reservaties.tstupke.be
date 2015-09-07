@@ -126,7 +126,7 @@ angular.module('Main')
                                             return function(event) { 
                                                 scope.message = '';
                                                 scope.reservation._arrival = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
-                                                scope.reservation._departure = ''
+                                                scope.reservation._departure = '';
                                                 scope.$apply();
                                             }
                                         }
