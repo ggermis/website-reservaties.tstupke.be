@@ -25,8 +25,9 @@
                 <div style="display: inline-block; width: 20px" class="closed">&nbsp;</div>
                 = Gesloten
             </div>
+            <br>
         </article>
-        <br>
+
 
         <article ng-if="is_authorized()">
             <form class="adminReservationForm" name="adminReservationForm" novalidate>
@@ -38,8 +39,6 @@
                          ng-disabled="!adminReservationForm.$valid">{{reservation_button}}</button>
 
                 <div class="status {{status}}">{{message}}</div>
-                </p>
-
             </form>
         </article>
 
@@ -166,7 +165,6 @@
 
                 </div>
             </article>
-            <p>
         </div>
 
 </section>
