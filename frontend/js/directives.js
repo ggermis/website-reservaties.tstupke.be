@@ -132,7 +132,14 @@ angular.module('Main')
                                         }
                                         function captureDepartureDate(d) {
                                             return function(event) {
-                                                scope.reservation._departure = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+                                                var departure_date = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+                                                if (new Date(departure_date).valueOf() < new Date(scope.reservation._arrival)) {
+                                                    scope.reservation._departure = scope.reservation._arrival;
+                                                    scope.reservation._arrival = departure_date;
+                                                } else {
+                                                    scope.reservation._departure = departure_date;
+                                                }
+                                                
                                                 scope.$apply();
                                             }
                                         }

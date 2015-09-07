@@ -122,9 +122,9 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
                 $scope.status = 'ok';
                 $scope.reservation_button = 'Reservatie succesvol verstuurd!';
                 loadReservations(false);
-                mail = {};
-                mail.message = $scope.reservation;
-                Mailer.sendMail({}, mail);
+                // mail = {};
+                // mail.message = $scope.reservation;
+                // Mailer.sendMail({}, mail);
             }, function (error) {
                 $scope.reservation_button = 'Fout bij versturen van reservatie. Probeer later opnieuw.';
                 $scope.already_sending = false;
@@ -161,8 +161,12 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     };
 
     $scope.reservation_class = function(reservation) {
-        console.log(reservation);
         return new Date(reservation._arrival).valueOf() < new Date().valueOf() ? 'done' : 'todo';
+    }
+
+    $scope.reservation_expired = function(reservation) {
+        var creation_date = new Date(reservation._created.split(' ')[0]);
+        return ((reservation._status == 'pending') && ((new Date() - creation_date) > 12096e5)); // 12096e5 = 14 days
     }
 
     $scope.$watch('year', function (newValue, oldValue) {

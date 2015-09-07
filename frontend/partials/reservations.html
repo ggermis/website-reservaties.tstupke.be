@@ -146,7 +146,10 @@
                     </span> 
 
 
-                    <div class="entity">{{reservation._entity}} ({{reservation._name}})</div>
+                    <div class="entity">
+                        <span ng-if="reservation_expired(reservation)"><img src="/img/alert.png" alt="expired"></span>
+                        {{reservation._entity}} ({{reservation._name}})
+                    </div>
                     <div>Aantal personen: <input  type="number" ng-model="reservation._nr_of_people" ng-change="updateReservation(reservation)"></div>
                     <div>Van: <input type="text" size="10" ng-model="reservation._arrival" datepicker autocomplete="off" readonly ng-change="updateReservation(reservation)"></div>
                     <div>Tot: <input type="text" size="10" ng-model="reservation._departure" datepicker autocomplete="off" readonly ng-change="updateReservation(reservation)"></div>
