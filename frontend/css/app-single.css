@@ -13,7 +13,6 @@ body, html {
     min-height: 100%;
     min-width: 850px;
     width: 100%;
-    /*background-color: rgb(39,62,0);*/
     color: black;
 }
 
@@ -37,24 +36,14 @@ h3 {
     font-size: 1.4em;
     border-top: 1px solid #aaa;
     border-bottom: 1px solid #aaa;
-/*    text-align: center;
-    padding: 4px;
-    background-color: rgba(200,200,200, 0.7);
-    box-shadow: 0px 2px 4px black;
-    font-size: 1.1em;
-    margin-top: 0;
-*/}
+}
 
 input, textarea, select {
     color: black;
 }
 
 article {
-    /*box-shadow: 2px 2px 2px black;*/
-    /*border: 1px solid rgba(200, 200, 200, 0.7);*/
-    /*border-radius: 15px;*/
     padding: 0 0 1em 0;
-    /*background-color: black;*/
     margin: 0.5em 0em;
 }
 
@@ -108,7 +97,6 @@ article {
     z-index: 20;
     left: 2%;
     top: 1em;
-    /*background-color: rgba(100, 100, 100, 0.7);*/
     background-color: white;
     color: black;
     padding-left: 7em;
@@ -151,12 +139,7 @@ article {
     left: 5%;
     top: 19em;
     min-width: 790px;
-    /*min-height: 100%;*/
-    /*width: 100%;*/
-    /*margin: 0px auto;*/
-    /*margin-top: 3em;*/
     padding: 4px;
-    /*background-color: rgba(200,200,200,0.3);*/
 }
 
 .photo {
@@ -287,6 +270,8 @@ article {
     background: white;
     color: black;
     box-shadow: 5px 5px 5px #888888;
+    opacity: .9;
+    border: 1px solid #ccc;
 }
 
 .reservation a {
@@ -562,7 +547,7 @@ form.adminReservationForm {
 }
 
 .done {
-    opacity: .2;
+    opacity: .4;
 }
 
 .expired {
