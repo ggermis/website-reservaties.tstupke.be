@@ -140,6 +140,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         $scope.message = 'Verwijderen reservatie ' + id + '...';
         Reservations.delete({id: id}).$promise
             .then(function (data) {
+                $scope.current_reservation = null;
                 $scope.message = 'Reservatie succesvol verwijderd';
                 loadReservations(false);
             }, function (error) {
