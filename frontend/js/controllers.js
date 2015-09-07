@@ -106,9 +106,10 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             Reservations.create({}, $scope.reservation).$promise
                 .then(function(data) {
                     $scope.status = 'ok';
-                    $scope.message = 'Success';
+                    $scope.message = 'Reservatie succesvol aangemaakt!';
                     loadReservations();
                 }, function(error) {
+                    $scope.message = 'Fout bij aanmaken van reservatie. Probeer later opnieuw.';
                     $scope.message = error.data;
                 });
         }
@@ -139,6 +140,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         $scope.message = 'Verwijderen reservatie ' + id + '...';
         Reservations.delete({id: id}).$promise
             .then(function (data) {
+                $scope.message = 'Reservatie succesvol verwijderd';
                 loadReservations(false);
             }, function (error) {
                 $scope.status = 'Fout bij verwijderen van reservatie';

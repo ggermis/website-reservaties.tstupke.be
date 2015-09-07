@@ -151,6 +151,14 @@ angular.module('Main')
                                     if (scope.is_authorized() && reservation) {
                                         cell.title = reservation._name + ' (' + reservation._entity + ')';
                                     }
+                                    var now = new Date();
+                                    var yesterday = new Date().setDate(now.getDate()-1);
+                                    if (d.valueOf() < yesterday.valueOf()) {
+                                        cell.className = cell.className + " done";
+                                    }
+                                    if ((d.getYear() == now.getYear()) && (d.getMonth() == now.getMonth()) && (d.getDate() == now.getDate())) {
+                                        cell.className = cell.className + " today";
+                                    }                                
                                 }
                             }
                             row.appendChild(cell);

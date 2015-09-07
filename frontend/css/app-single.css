@@ -558,3 +558,7 @@ form.adminReservationForm {
     background-color: orangered !important;
     color: white;
 }
+
+.today {
+    border: 3px inset black;
+}
