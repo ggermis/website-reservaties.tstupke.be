@@ -31,9 +31,9 @@
 
         <article ng-if="is_authorized()">
             <form class="adminReservationForm" name="adminReservationForm" novalidate>
-                 <input type="text" id="arrival" name="arrival" size="10" ng-model="reservation._arrival" readonly>
-                 <input type="text" id="departure" name="arrival" size="10" ng-model="reservation._departure" readonly>
-                 <input type="text" id="entity" name="entity" ng-model="reservation._entity" placeholder="Omschrijving" required>
+                 <input type="text" id="arrival" name="arrival" size="10" ng-model="reservation._arrival" required readonly>
+                 <input type="text" id="departure" name="arrival" size="10" ng-model="reservation._departure" required readonly>
+                 <input type="text" id="entity" name="entity" ng-model="reservation._entity" placeholder="Omschrijving" tabindex="1" autofocus required>
 
                  <button class="adminButton" ng-click="submitAdminReservationForm()"
                          ng-disabled="!adminReservationForm.$valid">{{reservation_button}}</button>

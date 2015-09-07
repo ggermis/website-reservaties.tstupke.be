@@ -6,10 +6,10 @@
 
             <div class="form">
                 <form ng-submit="login(auth.user, auth.pass)">
-                    <label for="user">Gebruiker:</label><input id="user" size="10" type="text" ng-model="auth.user"
+                    <label for="user">Gebruiker:</label><input id="user" size="10" type="text" ng-model="auth.user" tabindex="1" autofocus
                                                                placeholder="Gebruikersnaam">
                     <br>
-                    <label for="password">Wachtwoord:</label><input id="password" size="10" type="password"
+                    <label for="password">Wachtwoord:</label><input id="password" size="10" type="password" tabindex=2
                                                                     ng-model="auth.pass"
                                                                     placeholder="Wachtwoord"><br>
                     <br>
