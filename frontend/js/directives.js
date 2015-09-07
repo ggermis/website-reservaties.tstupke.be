@@ -139,7 +139,7 @@ angular.module('Main')
                                                 } else {
                                                     scope.reservation._departure = departure_date;
                                                 }
-                                                
+                                                $('#entity').focus();
                                                 scope.$apply();
                                             }
                                         }
