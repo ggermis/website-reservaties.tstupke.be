@@ -545,8 +545,7 @@ form.adminReservationForm {
     text-align: center;
     margin: 0 3em;
     border: 1px solid #ccc;
-    padding: 4px;
-    border-radius: 25px;
+    padding: 6px;
     background-color: #eee;
     box-shadow: 5px 5px 5px #888888;
 }
