@@ -571,3 +571,9 @@ form.adminReservationForm {
 .today {
     border: 3px inset black;
 }
+
+.alert {
+    background-color: red;
+    font-size: 1.5em;
+    color: white;
+}

@@ -76,28 +76,6 @@ angular.module('Main').factory('CalendarHelper', function () {
             return false;
         },
 
-        findConflictingReservations: function (reservations) {
-            var conflicts = [];
-            if (reservations) {
-                reservations.forEach(function (reservation) {
-                    var a1 = new Date(reservation._arrival);
-                    var d1 = new Date(reservation._departure);
-                    reservations.forEach(function (other) {
-                        var a2 = new Date(other._arrival);
-                        var d2 = new Date(other._departure);
-                        if (
-                            (a1.valueOf() > a2.valueOf() && a1.valueOf() < d2.valueOf()) ||
-                            (d1.valueOf() > a2.valueOf() && d1.valueOf() < d2.valueOf()) ||
-                            (a2.valueOf() > a1.valueOf() && d2.valueOf() < d1.valueOf())
-                           ) { 
-                            conflicts.push(other);
-                        }
-                    });
-                });
-            }
-            return conflicts;
-        },
-
         isDayFree: function (reservations, date, type, start_date) {
             var reservation = this.getReservation(reservations, date);
             if (type == 'weekend') {

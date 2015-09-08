@@ -70,37 +70,6 @@
                     </span>
                 </div>
             </div>
-
-            <div ng-if="conflicting_reservations.length > 0">
-                <br>
-                <h3>Dubbele boekingen</h3>
-
-                <div class="reservation {{ reservation._status }} {{ reservation_class(conflicting_reservations) }}" ng-repeat="reservation in conflicting_reservations">
-                    <span class="delete">
-                        <a href="" class="remove" ng-click="deleteReservation(reservation._id)"><img src="/img/trash.png" alt="delete"></a>
-                    </span> 
-                    <div class="entity">
-                        <span ng-if="reservation_expired(reservation)"><img src="/img/alert.png" alt="expired"></span>
-                        {{reservation._entity}} ({{reservation._name}})
-                    </div>
-                    <div>Aantal personen: <input  type="number" ng-model="reservation._nr_of_people" ng-change="updateReservation(reservation)"></div>
-                    <div>Aangevraagd op: <input type="text" size="20" ng-model="reservation._created" disabled></div>
-                    <div>Van: <input type="text" size="10" ng-model="reservation._arrival" datepicker autocomplete="off" readonly ng-change="updateReservation(reservation)"></div>
-                    <div>Tot: <input type="text" size="10" ng-model="reservation._departure" datepicker autocomplete="off" readonly ng-change="updateReservation(reservation)"></div>
-                    <div class="status">Status: <select ng-model="reservation._status"
-                                                        ng-options="s for s in reservation_status"
-                                                        ng-change="updateReservation(reservation)"></select></div>
-
-                    <span class="contact">
-                        <div>Naam: {{reservation._name}}</div>
-                        <div>Email: <a href="mailto:{{reservation._email}}?subject=Kampplaats 't Stupke">{{reservation._email}}</a></div>
-                        <div>Telefoon: {{reservation._phone}}</div>
-                    </span>
-
-                </div>
-
-
-            </div>
         </article>
 
 
