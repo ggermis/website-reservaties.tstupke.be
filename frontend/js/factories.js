@@ -30,7 +30,7 @@ angular.module('Main').factory('AuthService', ['$resource', function ($resource)
 angular.module('Main').factory('CalendarHelper', function () {
     return {
         getReservation: function (reservations, date) {
-            var result = null;
+            var result = [];
             if (reservations) {
                 reservations.forEach(function (entry) {
                     var arrival = new Date(entry._arrival);
@@ -40,7 +40,7 @@ angular.module('Main').factory('CalendarHelper', function () {
                     departure.setHours(0, 0, 0, 0);
                     date.setHours(0, 0, 0, 0);
                     if (arrival.valueOf() <= date.valueOf() && date.valueOf() <= departure.valueOf()) {
-                        result = entry;
+                        result.push(entry);
                     }
                 });
             }
@@ -77,7 +77,8 @@ angular.module('Main').factory('CalendarHelper', function () {
         },
 
         isDayFree: function (reservations, date, type, start_date) {
-            var reservation = this.getReservation(reservations, date);
+            var found_reservations = this.getReservation(reservations, date);
+            var reservation = found_reservations.length == 0 ? null : found_reservations[0];
             if (type == 'weekend') {
                 var day = date.getDay();
                 var month = date.getMonth();

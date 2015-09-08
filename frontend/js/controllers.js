@@ -108,7 +108,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
                     $scope.status = 'ok';
                     $scope.message = 'Reservatie succesvol aangemaakt!';
                     loadReservations();
-                    $scope.current_reservation = data;
+                    $scope.current_reservations = [ data ];
                 }, function(error) {
                     $scope.message = 'Fout bij aanmaken van reservatie. Probeer later opnieuw.';
                     $scope.message = error.data;
@@ -141,7 +141,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         $scope.message = 'Verwijderen reservatie ' + id + '...';
         Reservations.delete({id: id}).$promise
             .then(function (data) {
-                $scope.current_reservation = null;
+                $scope.current_reservations = [];
                 $scope.message = 'Reservatie succesvol verwijderd';
                 loadReservations(false);
             }, function (error) {
@@ -174,7 +174,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     }
 
     $scope.$watch('year', function (newValue, oldValue) {
-        $scope.current_reservation = null;
+        $scope.current_reservation = [];
         loadReservations();
     }, true);
 

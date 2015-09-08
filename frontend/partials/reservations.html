@@ -42,11 +42,12 @@
                 <div class="status {{status}}">{{message}}</div>
             </form>
 
-            <div class="adminCurrentReservation fadeIn" ng-if="current_reservation">
+            <div class="adminCurrentReservation fadeIn" ng-if="current_reservations">
                 <br>
-                <h3>Geselecteerde reservatie</h3>
+                <h3>Geselecteerde reservaties</h3>
 
-                <div class="reservation {{ current_reservation._status }} {{ reservation_class(current_reservation) }}">
+                <div class="reservation {{ current_reservation._status }} {{ reservation_class(current_reservation) }}" ng-repeat="current_reservation in current_reservations">
+
                     <span class="delete">
                         <a href="" class="remove" ng-click="deleteReservation(current_reservation._id)"><img src="/img/trash.png" alt="delete"></a>
                     </span> 
