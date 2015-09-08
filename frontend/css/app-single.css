@@ -266,7 +266,7 @@ article {
 .reservation {
     border-radius: 15px;
     margin-top: 2em;
-    padding: 1em;
+    padding: .5em 1em;
     background: white;
     color: black;
     box-shadow: 5px 5px 5px #888888;
@@ -548,6 +548,15 @@ form.adminReservationForm {
     padding: 6px;
     background-color: #eee;
     box-shadow: 5px 5px 5px #888888;
+}
+
+.adminCurrentReservation {
+    margin: 0 3em;
+}
+
+.adminCurrentReservation .delete {
+    position: absolute;
+    right: 5em;
 }
 
 .done {

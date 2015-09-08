@@ -42,7 +42,7 @@
                 <div class="status {{status}}">{{message}}</div>
             </form>
 
-            <div ng-if="current_reservation">
+            <div class="adminCurrentReservation fadeIn" ng-if="current_reservation">
                 <br>
                 <h3>Geselecteerde reservatie</h3>
 
@@ -57,8 +57,8 @@
                     </div>
                     <div>Aantal personen: <input  type="number" ng-model="current_reservation._nr_of_people" ng-change="updateReservation(current_reservation)"></div>
                     <div>Aangevraagd op: <input type="text" size="20" ng-model="current_reservation._created" disabled></div>
-                    <div>Van: <input type="text" size="10" ng-model="current_reservation._arrival" datepicker autocomplete="off" readonly ng-change="updateReservation(reservation)"></div>
-                    <div>Tot: <input type="text" size="10" ng-model="current_reservation._departure" datepicker autocomplete="off" readonly ng-change="updateReservation(reservation)"></div>
+                    <div>Van: <input type="text" size="10" ng-model="current_reservation._arrival" datepicker autocomplete="off" readonly ng-change="updateReservation(current_reservation)"></div>
+                    <div>Tot: <input type="text" size="10" ng-model="current_reservation._departure" datepicker autocomplete="off" readonly ng-change="updateReservation(current_reservation)"></div>
                     <div class="status">Status: <select ng-model="current_reservation._status"
                                                         ng-options="s for s in reservation_status"
                                                         ng-change="updateReservation(current_reservation)"></select></div>

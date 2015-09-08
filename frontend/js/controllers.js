@@ -108,6 +108,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
                     $scope.status = 'ok';
                     $scope.message = 'Reservatie succesvol aangemaakt!';
                     loadReservations();
+                    $scope.current_reservation = data;
                 }, function(error) {
                     $scope.message = 'Fout bij aanmaken van reservatie. Probeer later opnieuw.';
                     $scope.message = error.data;
@@ -123,9 +124,9 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
                 $scope.status = 'ok';
                 $scope.reservation_button = 'Reservatie succesvol verstuurd!';
                 loadReservations(false);
-                // mail = {};
-                // mail.message = $scope.reservation;
-                // Mailer.sendMail({}, mail);
+                mail = {};
+                mail.message = $scope.reservation;
+                Mailer.sendMail({}, mail);
             }, function (error) {
                 $scope.reservation_button = 'Fout bij versturen van reservatie. Probeer later opnieuw.';
                 $scope.already_sending = false;
@@ -173,6 +174,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     }
 
     $scope.$watch('year', function (newValue, oldValue) {
+        $scope.current_reservation = null;
         loadReservations();
     }, true);
 

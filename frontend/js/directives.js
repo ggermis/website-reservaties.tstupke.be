@@ -166,6 +166,13 @@ angular.module('Main')
                         }
                         tblBody.appendChild(row);
                     }
+
+                    if (scope.is_authorized()) {
+                        scope.reservation._arrival = '';
+                        scope.reservation._departure = '';
+                        scope.reservation._entity = '';
+                    }
+                    
                     tbl.appendChild(tblBody);
                     element.append(tbl);
                 }
