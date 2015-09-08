@@ -74,6 +74,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             $scope.reservations = response.filter(function(reservation) {
                 return new RegExp('^' + $scope.year + '-').test(reservation._arrival); 
             });
+            $scope.conflicting_reservations = CalendarHelper.findConflictingReservations($scope.reservations);
         });
     }
 
