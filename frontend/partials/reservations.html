@@ -48,7 +48,7 @@
 
                 <div class="reservation {{ current_reservation._status }} {{ reservation_class(current_reservation) }}">
                     <span class="delete">
-                        <a href="" class="remove" ng-click="deleteReservation(current_reservation._id)">Verwijder deze reservatie</a>
+                        <a href="" class="remove" ng-click="deleteReservation(current_reservation._id)"><img src="/img/trash.png" alt="delete"></a>
                     </span> 
 
                     <div class="entity">
@@ -171,7 +171,7 @@
 
                 <div class="reservation {{ reservation._status }} {{ reservation_class(reservation) }}" ng-repeat="reservation in reservations">
                     <span class="delete">
-                        <a href="" class="remove" ng-click="deleteReservation(reservation._id)">Verwijder deze reservatie</a>
+                        <a href="" class="remove" ng-click="deleteReservation(reservation._id)"><img src="/img/trash.png" alt="delete"></a>
                     </span> 
 
 

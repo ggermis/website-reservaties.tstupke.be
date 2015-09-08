@@ -288,7 +288,7 @@ article {
 
 .reservation .delete {
     position: absolute;
-    right: 1em;
+    right: 1.3em;
 }
 
 .reservation input {
@@ -556,7 +556,7 @@ form.adminReservationForm {
 
 .adminCurrentReservation .delete {
     position: absolute;
-    right: 5em;
+    right: 4.3em;
 }
 
 .done {
