@@ -167,7 +167,7 @@
 
             <br>
             <article>
-                <h3>Reservaties voor {{year}}</h3>
+                <h3>{{reservations.length}} reservaties voor {{year}}</h3>
 
                 <div class="reservation {{ reservation._status }} {{ reservation_class(reservation) }}" ng-repeat="reservation in reservations">
                     <span class="delete">
