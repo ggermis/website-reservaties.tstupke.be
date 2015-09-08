@@ -174,7 +174,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     }
 
     $scope.$watch('year', function (newValue, oldValue) {
-        $scope.current_reservation = [];
+        $scope.current_reservations = [];
         loadReservations();
     }, true);
 
