@@ -127,7 +127,7 @@ angular.module('Main')
                                                 scope.message = '';
                                                 scope.reservation._arrival = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
                                                 scope.reservation._departure = '';
-                                                scope.current_reservations = CalendarHelper.getReservation(scope.reservations, d);
+                                                scope.current_reservations = CalendarHelper.getReservations(scope.reservations, d);
                                                 scope.$apply();
                                             }
                                         }
@@ -147,7 +147,7 @@ angular.module('Main')
                                         cell.onmousedown = captureArrivalDate(d);
                                         cell.onmouseup = captureDepartureDate(d);
                                     }                                    
-                                    var found_reservations = CalendarHelper.getReservation(scope.reservations, d);
+                                    var found_reservations = CalendarHelper.getReservations(scope.reservations, d);
                                     var reservation = found_reservations.length == 0 ? null : found_reservations[0];
                                     cell.className = "day " + (reservation ? reservation._status : 'free');
                                     if (scope.is_authorized() && reservation) {
