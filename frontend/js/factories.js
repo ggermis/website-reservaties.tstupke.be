@@ -29,6 +29,26 @@ angular.module('Main').factory('AuthService', ['$resource', function ($resource)
 
 angular.module('Main').factory('CalendarHelper', function () {
     return {
+        doRangesOverlap: function(start_a, end_a, start_b, end_b) {
+            return (start_a < end_b) && (end_a > start_b);
+        },
+
+        getReservationsWithOverlap: function(reservations, date) {
+            var result = [];
+            var self = this;
+            var r = this.getReservations(reservations, date);
+            reservations.forEach(function (reservation) {
+                r.forEach(function (res) {
+                    if ( self.doRangesOverlap(res._arrival, res._departure, reservation._arrival, reservation._departure) ) {
+                        if (result.indexOf(reservation) == -1) {
+                            result.push(reservation);
+                        }
+                    }
+                });
+            });
+            return result;
+        },
+
         getReservations: function (reservations, date) {
             var result = [];
             if (reservations) {
