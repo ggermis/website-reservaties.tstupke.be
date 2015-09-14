@@ -1,0 +1,10 @@
+API reference:
+
+
+GET     /api/reservation           (list) -> Array
+POST    /api/reservation           (create)
+
+GET     /api/reservation/:id       (find)
+PUT     /api/reservation/:id       (update)
+DELETE  /api/reservation/:id       (remove)
+
