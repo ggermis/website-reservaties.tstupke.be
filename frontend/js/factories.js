@@ -44,7 +44,7 @@ angular.module('Main').factory('CalendarHelper', function () {
                             result.push(reservation);
                         }
                     }
-                });
+                });                
             });
             return result;
         },
