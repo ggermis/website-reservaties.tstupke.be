@@ -12,12 +12,16 @@ angular.module('Main').factory('httpRequestInterceptor', ['$rootScope', '$window
 }]);
 
 angular.module('Main').factory('Reservations', ['$resource', function ($resource) {
-    return $resource('/api/reservation/:id', {}, {
-        getAll: { method: 'GET', isArray: true },
+    return {
+      all: $resource('/api/reservation/all/:year', {}, {
+        get: { method: 'GET', isArray: true },
+      }),
+      single: $resource('/api/reservation/:id', {}, {
         create: { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded'} },
         update: { method: 'PUT', params: {id: '@id'} },
         delete: { method: 'DELETE', params: {id: '@id'} }
-    })
+      })
+    }
 }]);
 
 angular.module('Main').factory('AuthService', ['$resource', function ($resource) {

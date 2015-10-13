@@ -27,6 +27,7 @@ if ($request_method == 'PUT' || $request_method == 'DELETE') { // bypass for rea
 // Model interaction
 
 $id = $_REQUEST['id'];
+$year = $_REQUEST['year'];
 $model_name = $_REQUEST['model'];
 $model_path = __ROOT__ . "/backend/model/{$model_name}.php";
 if (!file_exists($model_path)) {
@@ -39,7 +40,7 @@ $model = null;
 
 switch($model_name) {
     case 'reservation':
-        $model = new Reservation();
+        $model = new Reservation($year);
         break;
     default:
         header(':', true, 400);

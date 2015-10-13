@@ -66,7 +66,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     $scope.reset();
 
     function loadReservations(reset) {
-        Reservations.getAll(function (response) {
+        Reservations.all.get({year: $scope.year}, function (response) {
             if (reset) {
                 $scope.reset();
             }
@@ -103,7 +103,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             $scope.status = 'error';
             $scope.message = 'Dubbele boeking! Reservatie niet opgeslagen!';
         } else {
-            Reservations.create({}, $scope.reservation).$promise
+            Reservations.single.create({}, $scope.reservation).$promise
                 .then(function(data) {
                     $scope.status = 'ok';
                     $scope.message = 'Reservatie succesvol aangemaakt!';
@@ -119,7 +119,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     $scope.submitReservationForm = function (item, event) {
         $scope.already_sending = true;
         $scope.reservation_button = 'De reservatie wordt verstuurd...';
-        Reservations.create({}, $scope.reservation).$promise
+        Reservations.single.create({}, $scope.reservation).$promise
             .then(function (data) {
                 $scope.status = 'ok';
                 $scope.reservation_button = 'Reservatie succesvol verstuurd!';
@@ -139,7 +139,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             return;
         }
         $scope.message = 'Verwijderen reservatie ' + id + '...';
-        Reservations.delete({id: id}).$promise
+        Reservations.single.delete({id: id}).$promise
             .then(function (data) {
                 $scope.current_reservations = [];
                 $scope.message = 'Reservatie succesvol verwijderd';
@@ -152,7 +152,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
 
     $scope.updateReservation = function (reservation) {
         $scope.message = 'Updaten reservatie ' + reservation._id + '...';
-        Reservations.update({id: reservation._id}, reservation).$promise
+        Reservations.single.update({id: reservation._id}, reservation).$promise
             .then(function (data) {
                 $scope.status = 'ok';
                 $scope.message = 'Reservatie succesvol geupdate';

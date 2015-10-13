@@ -3,6 +3,8 @@
 class Reservation extends Model {
     protected static $_table_name = 'reservations';
 
+    protected $year;
+
     protected $_id;
 
     protected $_entity;
@@ -22,8 +24,9 @@ class Reservation extends Model {
     protected $_email_sent;
     protected $_status;
 
-    function __construct() {
+    function __construct($year) {
         parent::__construct();
+        $this->year = $year;
     }
 
 
@@ -33,6 +36,7 @@ class Reservation extends Model {
             self::$_db->where('_id', $id);
             return self::$_db->getOne(self::$_table_name);
         } else {
+            self::$_db->where('YEAR(_arrival)', $this->year);
             self::$_db->orderBy('_arrival', 'desc');
             return self::$_db->get(self::$_table_name);
         }
