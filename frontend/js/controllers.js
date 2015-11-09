@@ -83,6 +83,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     }
 
     $scope.loadEmailHistory = function (reservation) {
+        $('#myModal').appendTo("body");
         $scope.email_reservation = reservation;
         EmailHistory.find({id: reservation._id}, function (response) {
             $scope.email_history = response;
