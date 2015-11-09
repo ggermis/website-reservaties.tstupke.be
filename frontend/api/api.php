@@ -42,6 +42,9 @@ switch($model_name) {
     case 'reservation':
         $model = new Reservation($year);
         break;
+    case 'email_history':
+        $model = new EmailHistory();
+        break;
     default:
         header(':', true, 400);
         echo '{ "error": "not yet implemented!" }';

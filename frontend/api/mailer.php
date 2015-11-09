@@ -6,28 +6,51 @@ $params = json_decode(file_get_contents('php://input'), true);
 
 
 class Mailer {
-    function __construct($template, $reservation) {
+
+    function __construct($reservation, $template) {
+        $this->sql = new MysqliDb(__DB_HOST__, __DB_USER__, __DB_PASS__, __DB_DB__);
         $smarty = new Smarty;
+        // $smarty->setCompileDir('/tmp/templates_cc');
         $smarty->assign('reservation', $reservation);
+        $this->reservation = $reservation;
         $this->message = $smarty->fetch($template);
         $this->headers = 'MIME-Version: 1.0' . PHP_EOL .
             'Content-Type: text/html; charset=utf-8' . PHP_EOL .
-            'From: Kampplaats \'t Stupke <kampplaats@tstupke.be>' . PHP_EOL .
-            'Reply-To: Kampplaats \'t Stupke <kampplaats@tstupke.be>' . PHP_EOL;
+            'From: ' . __MAIL_TSTUPE__ . PHP_EOL .
+            'Reply-To: ' . __MAIL_TSTUPE__ . PHP_EOL;
     }
 
-    function send($to, $subject) {
+    function sendWithoutHistory($to, $subject, $type = "reservation") {
         return mail($to, $subject, $this->message, $this->headers);
     }
+
+    function send($to, $subject, $type = "reservation") {
+        $result = mail($to, $subject, $this->message, $this->headers);
+        if ($result) {
+            $audit_query = "INSERT INTO email_history (_type, _reservation, _to, _subject, _body) VALUES(?, ?, ?, ?, ?)";
+            $this->sql->rawQuery($audit_query, Array($type, $this->findStoredReservationId(), $to, $subject, $this->message)); 
+        }
+        return $result;
+    }
+
+    function findStoredReservationId() {
+        $query = "SELECT _id FROM reservations WHERE _arrival = ? AND _departure = ? AND _entity = ? AND _email = ? LIMIT 1";
+        $result = $this->sql->rawQuery($query, Array($this->reservation['_arrival'], $this->reservation['_departure'], $this->reservation['_entity'], $this->reservation['_email']));
+        file_put_contents('/tmp/test.txt', $result[0]['_id']);
+        return $result[0]['_id'];
+    }
 }
+
 
 $reservation = $params['message'];
 
 
-$mailer = new Mailer('reservation-internal.tpl', $reservation);
-$mailer->send('kampplaats@tstupke.be', "Reservatie: " . $reservation['_entity'] . ' (' . $reservation['_name'] . ')');
+$template = realpath(dirname(__FILE__)) . '/reservation-internal.tpl';
+$mailer = new Mailer($reservation, $template);
+$mailer->sendWithoutHistory('kampplaats@tstupke.be', "Reservatie: " . $reservation['_entity'] . ' (' . $reservation['_name'] . ')');
 
-$mailer = new Mailer('reservation-public.tpl', $reservation);
+$template = realpath(dirname(__FILE__)) . '/mail-templates/' . $reservation['_type'] . '/reservation.tpl';
+$mailer = new Mailer($reservation, $template);
 if ($mailer->send($reservation['_email'], "Bevestiging reservatie")) {
     echo json_encode(array("status" => "ok"));
 } else {

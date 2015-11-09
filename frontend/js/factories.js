@@ -24,6 +24,12 @@ angular.module('Main').factory('Reservations', ['$resource', function ($resource
     }
 }]);
 
+angular.module('Main').factory('EmailHistory', ['$resource', function($resource) {
+    return $resource('/api/email_history/:id', {}, {
+        find: { method: 'GET', params: {id: '@id'}, isArray: true }
+    })
+}]);
+
 angular.module('Main').factory('AuthService', ['$resource', function ($resource) {
     return $resource('/auth/:action', {}, {
         login: { method: 'POST', params: {action: 'login'}, headers: { 'Content-Type': 'application/x-www-form-urlencoded'} },
@@ -106,9 +112,9 @@ angular.module('Main').factory('CalendarHelper', function () {
             if (type == 'weekend') {
                 var day = date.getDay();
                 var month = date.getMonth();
-                var isFriday = day == 5;
+                // var isFriday = day == 5;
                 var isSummer = (month == 6 || month == 7);
-                return (reservation == null || reservation._status === 'pending') && isFriday; // && !isSummer;
+                return (reservation == null || reservation._status === 'pending') && !isSummer; // && isFriday;
             } else {
                 var isFreeDate = (reservation == null || this.isReservationBorder(reservation, date));
                 start_date = (typeof start_date === "undefined") ? null : start_date;

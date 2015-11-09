@@ -1,3 +1,33 @@
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        Emails: {{email_reservation._entity}} ({{email_reservation._name}}) - {{email_reservation._created}}
+      </div>
+      <div class="modal-body">
+        <div class="history" ng-if="email_history">
+            <div class="email" ng-repeat="history in email_history">
+                <div class="header">
+                    Aan: <span class="to">{{history._to}}</span><br>
+                    Onderwerp: <span class="subject">{{history._subject}}</span><br>
+                    Verstuurd op: <span class="sent">{{history._sent}}</span><br>
+                </div>
+                <hr>
+                <div ng-bind-html="history._body | to_trusted"></div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearEmailHistory()">Sluiten</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="wrapper" class="reservationForm">
     <section>
         <br>
@@ -31,6 +61,9 @@
 
         <article ng-if="is_authorized()">
             <form class="adminReservationForm" name="adminReservationForm" novalidate>
+
+                 <select id="type" name="entity" ng-model="reservation._type" ng-options="t for t in reservation_types"></select>
+
                  <input type="text" id="arrival" name="arrival" size="10" min="{{today}}" ng-model="reservation._arrival" placeholder="Aankomst" date-from with-to="departure" readonly autocomplete="off" required>
                  <input type="text" id="departure" name="departure" size="10" min="{{reservation._arrival}}" ng-model="reservation._departure" placeholder="Vertrek" date-to with-from="arrival" autocomplete="off" readonly required>
 
@@ -42,20 +75,23 @@
                 <div class="status {{status}}">{{message}}</div>
             </form>
 
-            <div class="adminCurrentReservation fadeIn" ng-if="current_reservations">
+            <div class="adminCurrentReservation reservationList fadeIn" ng-if="current_reservations">
                 <br>
                 <h3>Geselecteerde reservaties</h3>
 
                 <div class="reservation {{ current_reservation._status }} {{ reservation_class(current_reservation) }}" ng-repeat="current_reservation in current_reservations">
 
+                    <span class="emails">
+                        <a href="" class="emails" ng-click="loadEmailHistory(current_reservation)" data-toggle="modal" data-target="#myModal"><img src="/img/email.png" alt="emails"></a>
+                    </span>
                     <span class="delete">
                         <a href="" class="remove" ng-click="deleteReservation(current_reservation._id)"><img src="/img/trash.png" alt="delete"></a>
                     </span> 
 
-                    <div class="entity">
-                        <span ng-if="reservation_expired(current_reservation)"><img src="/img/alert.png" alt="expired"></span>
-                        {{current_reservation._entity}} ({{current_reservation._name}})
-                    </div>
+                    <div class="entity">{{current_reservation._entity}} ({{current_reservation._name}})</div>
+                    <div>Type: <select id="type" name="entity" ng-model="current_reservation._type" 
+                                                               ng-options="t for t in reservation_types"
+                                                               ng-change="updateReservation(current_reservation)"></select></div>
                     <div>Aantal personen: <input  type="number" ng-model="current_reservation._nr_of_people" ng-change="updateReservation(current_reservation)"></div>
                     <div>Aangevraagd op: <input type="text" size="20" ng-model="current_reservation._created" disabled></div>
                     <div>Van: <input type="text" size="10" ng-model="current_reservation._arrival" datepicker autocomplete="off" readonly ng-change="updateReservation(current_reservation)"></div>
@@ -159,6 +195,7 @@
             </div>
         </article>
 
+
         <span ng-if="is_authorized()">
             <!--<p>-->
 
@@ -167,23 +204,29 @@
 
 
             <br>
+            <div class="reservationList">
             <article>
-                <h3>{{reservations.length}} reservaties voor {{year}}</h3>
+                <h3>{{reservation_count}} reservaties voor {{year}}</h3>
 
                 <div class="reservation {{ reservation._status }} {{ reservation_class(reservation) }}" ng-repeat="reservation in reservations">
+                    <span class="emails">
+                        <a href="" class="emails" ng-click="loadEmailHistory(reservation)" data-toggle="modal" data-target="#myModal"><img src="/img/email.png" alt="emails"></a>
+                    </span>
                     <span class="delete">
                         <a href="" class="remove" ng-click="deleteReservation(reservation._id)"><img src="/img/trash.png" alt="delete"></a>
                     </span> 
 
 
-                    <div class="entity">
-                        <span ng-if="reservation_expired(reservation)"><img src="/img/alert.png" alt="expired"></span>
-                        {{reservation._entity}} ({{reservation._name}})
-                    </div>
+                    <div class="entity">{{reservation._entity}} ({{reservation._name}})</div>
+                    <div>Type: <select id="type" name="entity" ng-model="reservation._type" 
+                                                               ng-options="t for t in reservation_types"
+                                                               ng-change="updateReservation(reservation)"></select></div>
                     <div>Aantal personen: <input  type="number" ng-model="reservation._nr_of_people" ng-change="updateReservation(reservation)"></div>
                     <div>Aangevraagd op: <input type="text" size="20" ng-model="reservation._created" disabled></div>
-                    <div>Van: <input type="text" size="10" ng-model="reservation._arrival" datepicker autocomplete="off" readonly ng-change="updateReservation(reservation)"></div>
-                    <div>Tot: <input type="text" size="10" ng-model="reservation._departure" datepicker autocomplete="off" readonly ng-change="updateReservation(reservation)"></div>
+                    <div>
+                    <span>Van: <input type="text" size="10" ng-model="reservation._arrival" datepicker autocomplete="off" readonly ng-change="updateReservation(reservation)"></span>
+                    <span>Tot: <input type="text" size="10" ng-model="reservation._departure" datepicker autocomplete="off" readonly ng-change="updateReservation(reservation)"></span>
+                    </div>
                     <div class="status">Status: <select ng-model="reservation._status"
                                                         ng-options="s for s in reservation_status"
                                                         ng-change="updateReservation(reservation)"></select></div>
@@ -193,10 +236,9 @@
                         <div>Email: <a href="mailto:{{reservation._email}}?subject=Kampplaats 't Stupke">{{reservation._email}}</a></div>
                         <div>Telefoon: {{reservation._phone}}</div>
                     </span>
-
                 </div>
             </article>
+            </div>
         </span>
-
 </section>
 </div>

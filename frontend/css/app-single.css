@@ -543,7 +543,7 @@ button.adminButton:disabled {
 
 form.adminReservationForm {
     text-align: center;
-    margin: 0 3em;
+    margin: 0 1em;
     border: 1px solid #ccc;
     padding: 6px;
     background-color: #eee;
@@ -576,4 +576,32 @@ form.adminReservationForm {
     background-color: red;
     font-size: 1.5em;
     color: white;
+}
+
+.emails {
+    position: absolute;
+    right: 1.8em;
+}
+
+.adminCurrentReservation .emails {
+    position: absolute;
+    right: 3.3em;
+}
+
+
+.email {
+    margin-top: 1em;
+    font-size: .8em;
+    padding: 1em;
+    background-color: cyan;
+    border-radius: 15px;
+    border: 1px solid black;
+}
+
+.email .header .sent, .email .header .to, .email .header .subject {
+    font-weight: bold;
+}
+
+div.modal-body {
+    padding: 0px 15px;
 }

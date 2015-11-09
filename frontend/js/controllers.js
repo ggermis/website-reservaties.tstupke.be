@@ -29,12 +29,12 @@ angular.module('Main').controller('LoginCtrl', ['$rootScope', '$window', 'AuthSe
 }]);
 
 
-angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Reservations', 'Mailer', 'CalendarHelper', function ($scope, $filter, Reservations, Mailer, CalendarHelper) {
+angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Reservations', 'Mailer', 'EmailHistory', 'CalendarHelper', function ($scope, $filter, Reservations, Mailer, EmailHistory, CalendarHelper) {
     $scope.reset = function () {
         $scope.message = '';
         $scope.status = 'ok';
         $scope.reservation = {};
-        $scope.reservation._type = 'bivak';
+        $scope.reservation._type = 'weekend';
         $scope.set_limits($scope.reservation);
         $scope.already_sending = false;
         $scope.reservation_button = 'Reserveer nu!';
@@ -63,6 +63,8 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     $scope.years = [$scope.year, $scope.year + 1, $scope.year + 2, $scope.year + 3, $scope.year + 4, $scope.year + 5];
     $scope.reservation_status = ['pending', 'confirmed', 'closed'];
     $scope.reservation_types = ['weekend', 'bivak'];
+
+    $scope.email_history = [];
     $scope.reset();
 
     function loadReservations(reset) {
@@ -74,8 +76,22 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             $scope.reservations = response.filter(function(reservation) {
                 return new RegExp('^' + $scope.year + '-').test(reservation._arrival); 
             });
+            $scope.reservation_count = $scope.reservations.filter(function(reservation) {
+                return reservation._status != 'closed';
+            }).length;
         });
     }
+
+    $scope.loadEmailHistory = function (reservation) {
+        $scope.email_reservation = reservation;
+        EmailHistory.find({id: reservation._id}, function (response) {
+            $scope.email_history = response;
+        });
+    };
+    $scope.clearEmailHistory = function () {
+        $scope.email_reservation = '';
+        $scope.email_history = [];
+    };
 
     $scope.is_authorized = function() {
         return $scope.auth_token != null;
@@ -92,6 +108,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         $scope.message = "Wordt opgeslagen...";
 
         $scope.reservation._name = "'t Stupke";
+        $scope.reservation._type = "weekend";
         $scope.reservation._address = "Stroekestraat, Val-Meer";
         $scope.reservation._email = "kampplaats@tstupke.be";
         $scope.reservation._phone = "0495/246650";
@@ -177,6 +194,5 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         $scope.current_reservations = [];
         loadReservations();
     }, true);
-
 
 }]);
