@@ -87,7 +87,9 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             $scope.reservation_count = $scope.reservations.filter(function(reservation) {
                 return reservation._status != 'closed';
             }).length;
-            $scope.loadReservationBlocks(true);
+            if (!$scope.already_sending) {
+                $scope.loadReservationBlocks(true);
+            }
         });
     }
 
@@ -111,7 +113,6 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
 
     $scope.numberOfDays = function(from_date, to_date) {
         var days = Math.abs(Math.floor(( Date.parse(from_date) - Date.parse(to_date) ) / 86400000));
-        console.log(from_date + " (" + $scope.reservation._arrival + "), " + to_date + "(" + $scope.reservation._departure + "): " + days);
         return days;
     };
 
@@ -126,7 +127,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         $scope.reservation._agreed = true;
         $scope.reservation._status = 'confirmed';
 
-        var isDoubleBooked = CalendarHelper.existsReservationBetween($scope.reservations, new Date($scope.reservation._arrival), new Date($scope.reservation._departure));
+        var isDoubleBooked = CalendarHelper.existsReservationBetween($scope.reservations, new Date($scope.reservation._arrival), new Date($scope.reservation._departure), false);
         if (isDoubleBooked) {
             $scope.status = 'error';
             $scope.message = 'Dubbele boeking! Reservatie niet opgeslagen!';

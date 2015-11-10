@@ -86,7 +86,7 @@ angular.module('Main').factory('CalendarHelper', function () {
             return arrival.valueOf() == date.valueOf() || departure.valueOf() == date.valueOf();
         },
 
-        existsReservationBetween: function (reservations, start_date, end_date) {
+        existsReservationBetween: function (reservations, start_date, end_date, exact) {
             if (reservations) {
                 return reservations.some(function (entry) {
                     var arrival = new Date(entry._arrival);
@@ -95,8 +95,15 @@ angular.module('Main').factory('CalendarHelper', function () {
                     departure.setHours(0, 0, 0, 0);
                     start_date.setHours(0, 0, 0, 0);
                     end_date.setHours(0, 0, 0, 0);
-                    var doubleBooking = ((start_date.valueOf() <= arrival.valueOf()) && (arrival.valueOf() <= end_date.valueOf())) ||
-                                        ((arrival.valueOf() <= start_date.valueOf()) && (start_date.valueOf() <= departure.valueOf()));
+                    if ((start_date.getFullYear() >= 2019) && exact) {
+                        var doubleBooking = (start_date.valueOf() == arrival.valueOf()) && (end_date.valueOf() == departure.valueOf());
+                    } else if (exact) {
+                        var doubleBooking = ((start_date.valueOf() <= arrival.valueOf()) && (arrival.valueOf() < end_date.valueOf())) ||
+                                            ((arrival.valueOf() < start_date.valueOf()) && (start_date.valueOf() <= departure.valueOf()));                        
+                    } else {
+                        var doubleBooking = ((start_date.valueOf() <= arrival.valueOf()) && (arrival.valueOf() <= end_date.valueOf())) ||
+                                            ((arrival.valueOf() <= start_date.valueOf()) && (start_date.valueOf() <= departure.valueOf()));
+                    }
                     // if (start_date.getDate() == 1 && arrival.getFullYear() == 2017 && arrival.getMonth() == 6) {
                     //     console.log("Start: " + start_date +", end: " + end_date + ", Arrival: " + arrival + ", Departure: " + departure + " -> " + doubleBooking);
                     // }
@@ -109,7 +116,7 @@ angular.module('Main').factory('CalendarHelper', function () {
         },
 
         isBlockFree: function (reservations, start_date, end_date) {
-            return !this.existsReservationBetween(reservations, new Date(start_date), new Date(end_date));  
+            return !this.existsReservationBetween(reservations, new Date(start_date), new Date(end_date), true);  
         },
 
         isDayFree: function (reservations, date, type, start_date) {
@@ -125,7 +132,7 @@ angular.module('Main').factory('CalendarHelper', function () {
                 var isFreeDate = (reservation == null || this.isReservationBorder(reservation, date));
                 start_date = (typeof start_date === "undefined") ? null : start_date;
                 if (start_date) {
-                    var enclosedReservation = this.existsReservationBetween(reservations, start_date, date);
+                    var enclosedReservation = this.existsReservationBetween(reservations, start_date, date, false);
                     return enclosedReservation ? false : isFreeDate;
                 }
                 return reservation == null || reservation._status == 'pending' || isFreeDate;
