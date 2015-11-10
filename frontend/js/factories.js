@@ -95,9 +95,11 @@ angular.module('Main').factory('CalendarHelper', function () {
                     departure.setHours(0, 0, 0, 0);
                     start_date.setHours(0, 0, 0, 0);
                     end_date.setHours(0, 0, 0, 0);
-                    var doubleBooking = ((start_date.valueOf() < arrival.valueOf()) && (arrival.valueOf() < end_date.valueOf())) ||
-                                        ((arrival.valueOf() < start_date.valueOf()) && (start_date.valueOf() < departure.valueOf()));
-                    // console.log("Start: " + start_date +", end: " + end_date + ", Arrival: " + arrival + ", Departure: " + departure + " -> " + doubleBooking);
+                    var doubleBooking = ((start_date.valueOf() <= arrival.valueOf()) && (arrival.valueOf() <= end_date.valueOf())) ||
+                                        ((arrival.valueOf() <= start_date.valueOf()) && (start_date.valueOf() <= departure.valueOf()));
+                    // if (start_date.getDate() == 1 && arrival.getFullYear() == 2017 && arrival.getMonth() == 6) {
+                    //     console.log("Start: " + start_date +", end: " + end_date + ", Arrival: " + arrival + ", Departure: " + departure + " -> " + doubleBooking);
+                    // }
                     if (entry._status != 'pending' && doubleBooking) {
                         return true;
                     }
@@ -106,14 +108,18 @@ angular.module('Main').factory('CalendarHelper', function () {
             return false;
         },
 
+        isBlockFree: function (reservations, start_date, end_date) {
+            return !this.existsReservationBetween(reservations, new Date(start_date), new Date(end_date));  
+        },
+
         isDayFree: function (reservations, date, type, start_date) {
             var found_reservations = this.getReservations(reservations, date);
             var reservation = found_reservations.length == 0 ? null : found_reservations[0];
             if (type == 'weekend') {
-                var day = date.getDay();
+                var day = date.getDate();
                 var month = date.getMonth();
                 // var isFriday = day == 5;
-                var isSummer = (month == 6 || month == 7);
+                var isSummer = (month == 6 || (month == 7 && day <= 14) );
                 return (reservation == null || reservation._status === 'pending') && !isSummer; // && isFriday;
             } else {
                 var isFreeDate = (reservation == null || this.isReservationBorder(reservation, date));

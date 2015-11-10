@@ -40,7 +40,11 @@ $model = null;
 
 switch($model_name) {
     case 'reservation':
-        $model = new Reservation($year);
+        if ($year) {
+            $model = new Reservation($year);
+        } else {
+            $model = new Reservation();
+        }
         break;
     case 'email_history':
         $model = new EmailHistory();

@@ -24,7 +24,7 @@ class Reservation extends Model {
     protected $_email_sent;
     protected $_status;
 
-    function __construct($year) {
+    function __construct($year = null) {
         parent::__construct();
         $this->year = $year;
     }

@@ -61,6 +61,17 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     $scope.today = new Date();
     $scope.year = $scope.today.getFullYear();
     $scope.years = [$scope.year, $scope.year + 1, $scope.year + 2, $scope.year + 3, $scope.year + 4, $scope.year + 5];
+    $scope.block = {
+        year: $scope.today.getFullYear(),
+        blocks: [
+            { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
+            { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
+            { "id": 3, "from": "07-23", "to": "08-03", disabled: false },
+            { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
+        ],
+        selected_block: "0"        
+    };
+
     $scope.reservation_status = ['pending', 'confirmed', 'closed'];
     $scope.reservation_types = ['weekend', 'bivak'];
 
@@ -68,17 +79,15 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     $scope.reset();
 
     function loadReservations(reset) {
-        Reservations.all.get({year: $scope.year}, function (response) {
-            if (reset) {
-                $scope.reset();
-            }
+        Reservations.all.get({}, function (response) {
             $scope.all_reservations = response;
             $scope.reservations = response.filter(function(reservation) {
-                return new RegExp('^' + $scope.year + '-').test(reservation._arrival); 
+                return new RegExp('^' + $scope.year + '-').test(reservation._arrival);
             });
             $scope.reservation_count = $scope.reservations.filter(function(reservation) {
                 return reservation._status != 'closed';
             }).length;
+            $scope.loadReservationBlocks(true);
         });
     }
 
@@ -102,6 +111,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
 
     $scope.numberOfDays = function(from_date, to_date) {
         var days = Math.abs(Math.floor(( Date.parse(from_date) - Date.parse(to_date) ) / 86400000));
+        console.log(from_date + " (" + $scope.reservation._arrival + "), " + to_date + "(" + $scope.reservation._departure + "): " + days);
         return days;
     };
 
@@ -191,8 +201,47 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         return ((reservation._status == 'pending') && ((new Date() - creation_date) > 12096e5)); // 12096e5 = 14 days
     }
 
+    $scope.loadReservationBlocks = function(keep_year) {
+        $scope.block.selected_block = "0";
+        if (!keep_year) {
+            $scope.year = $scope.block.year;
+        }
+        for (var $i=0; $i<$scope.block.blocks.length; $i++) {
+            var $block = $scope.block.blocks[$i];
+            var $start_date = $scope.block.year + "-" + $block.from;
+            var $end_date = $scope.block.year + "-" + $block.to;
+            $block.disabled = !CalendarHelper.isBlockFree($scope.all_reservations, $start_date, $end_date);
+        }        
+        $scope.selectedReservationBlock();
+    }    
+
+    $scope.selectedReservationBlock = function() {        
+        switch ($scope.block.selected_block) {
+            case "1":
+                $scope.reservation._arrival = $scope.block.year + "-" + $scope.block.blocks[0].from;
+                $scope.reservation._departure = $scope.block.year + "-" + $scope.block.blocks[0].to;
+                break;
+            case "2":
+                $scope.reservation._arrival = $scope.block.year + "-" + $scope.block.blocks[1].from;
+                $scope.reservation._departure = $scope.block.year + "-" + $scope.block.blocks[1].to;
+                break;
+            case "3":
+                $scope.reservation._arrival = $scope.block.year + "-" + $scope.block.blocks[2].from;
+                $scope.reservation._departure = $scope.block.year + "-" + $scope.block.blocks[2].to;
+                break;
+            case "4":
+                $scope.reservation._arrival = $scope.block.year + "-" + $scope.block.blocks[3].from;
+                $scope.reservation._departure = $scope.block.year + "-" + $scope.block.blocks[3].to;
+                break;  
+            default:
+                $scope.reservation._arrival = "";
+                $scope.reservation._departure = "";              
+        }        
+    }
+
     $scope.$watch('year', function (newValue, oldValue) {
         $scope.current_reservations = [];
+        $scope.block.year = newValue;
         loadReservations();
     }, true);
 

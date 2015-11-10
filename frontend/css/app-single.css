@@ -135,10 +135,10 @@ article {
 #wrapper section {
     position: relative;
     bottom:1em;
-    width: 90%;
+    /*width: 90%;*/
     left: 5%;
     top: 19em;
-    min-width: 790px;
+    /*min-width: 790px;*/
     padding: 4px;
 }
 
@@ -167,7 +167,7 @@ article {
     color:    lightgray;
 }
 
-.reservationForm form > label {
+.reservationForm form label {
     position: relative;
     float: left;
     clear: right;
@@ -604,4 +604,23 @@ form.adminReservationForm {
 
 div.modal-body {
     padding: 0px 15px;
+}
+
+.radio {
+    position: relative; 
+    left: 1.4em;
+}
+
+.disabled {
+    color: lightgrey;
+}
+
+.formWrapper {
+    width: 70%;
+    margin: 0px auto;
+}
+
+.formFields {
+    position: relative;
+    left: 5em;
 }
