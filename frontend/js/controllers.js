@@ -82,7 +82,8 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         Reservations.all.get({}, function (response) {
             $scope.all_reservations = response;
             $scope.reservations = response.filter(function(reservation) {
-                return new RegExp('^' + $scope.year + '-').test(reservation._arrival);
+                var regexp = new RegExp('^' + $scope.year + '-');
+                return regexp.test(reservation._arrival) || regexp.test(reservation._departure);
             });
             $scope.reservation_count = $scope.reservations.filter(function(reservation) {
                 return reservation._status != 'closed';
@@ -120,7 +121,6 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         $scope.message = "Wordt opgeslagen...";
 
         $scope.reservation._name = "'t Stupke";
-        $scope.reservation._type = "weekend";
         $scope.reservation._address = "Stroekestraat, Val-Meer";
         $scope.reservation._email = "kampplaats@tstupke.be";
         $scope.reservation._phone = "0495/246650";
@@ -216,28 +216,15 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         $scope.selectedReservationBlock();
     }    
 
-    $scope.selectedReservationBlock = function() {        
-        switch ($scope.block.selected_block) {
-            case "1":
-                $scope.reservation._arrival = $scope.block.year + "-" + $scope.block.blocks[0].from;
-                $scope.reservation._departure = $scope.block.year + "-" + $scope.block.blocks[0].to;
-                break;
-            case "2":
-                $scope.reservation._arrival = $scope.block.year + "-" + $scope.block.blocks[1].from;
-                $scope.reservation._departure = $scope.block.year + "-" + $scope.block.blocks[1].to;
-                break;
-            case "3":
-                $scope.reservation._arrival = $scope.block.year + "-" + $scope.block.blocks[2].from;
-                $scope.reservation._departure = $scope.block.year + "-" + $scope.block.blocks[2].to;
-                break;
-            case "4":
-                $scope.reservation._arrival = $scope.block.year + "-" + $scope.block.blocks[3].from;
-                $scope.reservation._departure = $scope.block.year + "-" + $scope.block.blocks[3].to;
-                break;  
-            default:
-                $scope.reservation._arrival = "";
-                $scope.reservation._departure = "";              
-        }        
+    $scope.selectedReservationBlock = function() {
+        var block_id = parseInt($scope.block.selected_block) - 1;
+        if (block_id && block_id >= 0) {
+            $scope.reservation._arrival = $scope.block.year + "-" + $scope.block.blocks[block_id].from;
+            $scope.reservation._departure = $scope.block.year + "-" + $scope.block.blocks[block_id].to;
+        } else {
+            $scope.reservation._arrival = "";
+            $scope.reservation._departure = "";                          
+        }
     }
 
     $scope.$watch('year', function (newValue, oldValue) {

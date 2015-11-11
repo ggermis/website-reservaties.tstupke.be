@@ -624,3 +624,7 @@ div.modal-body {
     position: relative;
     left: 5em;
 }
+
+*:focus {
+    outline: none;
+}

@@ -99,7 +99,7 @@ angular.module('Main').factory('CalendarHelper', function () {
                         var doubleBooking = (start_date.valueOf() == arrival.valueOf()) && (end_date.valueOf() == departure.valueOf());
                     } else if (exact) {
                         var doubleBooking = ((start_date.valueOf() <= arrival.valueOf()) && (arrival.valueOf() < end_date.valueOf())) ||
-                                            ((arrival.valueOf() < start_date.valueOf()) && (start_date.valueOf() <= departure.valueOf()));                        
+                                            ((arrival.valueOf() <= start_date.valueOf()) && (start_date.valueOf() < departure.valueOf()));                        
                     } else {
                         var doubleBooking = ((start_date.valueOf() <= arrival.valueOf()) && (arrival.valueOf() <= end_date.valueOf())) ||
                                             ((arrival.valueOf() <= start_date.valueOf()) && (start_date.valueOf() <= departure.valueOf()));
@@ -125,9 +125,15 @@ angular.module('Main').factory('CalendarHelper', function () {
             if (type == 'weekend') {
                 var day = date.getDate();
                 var month = date.getMonth();
-                // var isFriday = day == 5;
                 var isSummer = (month == 6 || (month == 7 && day <= 14) );
-                return (reservation == null || reservation._status === 'pending') && !isSummer; // && isFriday;
+                if (!isSummer && (reservation == null || reservation._status === 'pending')) {
+                    // check if 2 days from now is free too (weekend lasts 3 days)
+                    var future_date = new Date(date.valueOf() + 60*60*24*1*1000); // 1 days from now
+                    var found_future_reservations = this.getReservations(reservations, future_date);
+                    var future_reservation = found_future_reservations.length == 0 ? null : found_future_reservations[0];
+                    return !isSummer && (future_reservation == null || future_reservation._status == 'pending');
+                }
+                return false;
             } else {
                 var isFreeDate = (reservation == null || this.isReservationBorder(reservation, date));
                 start_date = (typeof start_date === "undefined") ? null : start_date;

@@ -149,7 +149,16 @@ angular.module('Main')
                                     }                                    
                                     var found_reservations = CalendarHelper.getReservations(scope.reservations, d);
                                     var reservation = found_reservations.length == 0 ? null : found_reservations[0];
-                                    cell.className = "day " + (reservation ? reservation._status : 'free');
+                                    var statuses = (reservation ? reservation._status : 'free');
+
+                                    // support multiple reservation statuses
+                                    if (found_reservations.length > 0) {
+                                        statuses = found_reservations.map(function (r) {
+                                            return r._status
+                                        }).join(' ');
+                                    }
+                                    
+                                    cell.className = "day " + statuses;
                                     if (scope.is_authorized() && reservation) {
                                         cell.title = reservation._name + ' (' + reservation._entity + ')';
                                     }
