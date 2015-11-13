@@ -583,19 +583,31 @@ form.adminReservationForm {
     right: 1.8em;
 }
 
+.notes {
+    position: absolute;
+    right: 3em;
+}
+
 .adminCurrentReservation .emails {
     position: absolute;
     right: 3.3em;
 }
 
+.adminCurrentReservation .notes {
+    position: absolute;
+    right: 4.5em;
+}
 
 .email {
-    margin-top: 1em;
+    margin: 0px 1em 1em 1em;
+    padding: .5em;
     font-size: .8em;
     padding: 1em;
     background-color: cyan;
     border-radius: 15px;
-    border: 1px solid black;
+    border-bottom: 1px solid #e5e5e5;
+    border: 1px solid gray;
+    box-shadow: 5px 5px 5px #888888;
 }
 
 .email .header .sent, .email .header .to, .email .header .subject {
@@ -624,6 +636,37 @@ div.modal-body {
     position: relative;
     left: 5em;
 }
+
+.notesForm {
+    padding-top: .5em;
+}
+
+.note {
+    margin: 0px 1em 1em 1em;
+    padding: .5em;
+    background-color: rgba(255, 228, 92, .5);
+    border-radius: 15px;
+    border-bottom: 1px solid #e5e5e5;
+    border: 1px solid gray;
+    box-shadow: 5px 5px 5px #888888;
+    opacity: .9;
+
+}
+
+.note .header {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.note .delete {
+    padding-top: 4px;
+    float: right;
+}
+
+.note .text {
+    padding: .5em;
+}
+
 
 *:focus {
     outline: none;

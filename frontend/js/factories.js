@@ -30,6 +30,18 @@ angular.module('Main').factory('EmailHistory', ['$resource', function($resource)
     })
 }]);
 
+angular.module('Main').factory('Notes', ['$resource', function($resource) {
+    return {
+        all: $resource('/api/note/reservation/:id', {}, {
+            find: { method: 'GET', params: {id: '@id'}, isArray: true },
+        }),
+        single: $resource('/api/note/:id', {}, { 
+            create: { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded'} },
+            delete: { method: 'DELETE', params: {id: '@id'} }
+        })
+    }
+}]);
+
 angular.module('Main').factory('AuthService', ['$resource', function ($resource) {
     return $resource('/auth/:action', {}, {
         login: { method: 'POST', params: {action: 'login'}, headers: { 'Content-Type': 'application/x-www-form-urlencoded'} },

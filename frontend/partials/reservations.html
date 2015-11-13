@@ -1,14 +1,14 @@
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<!-- Modals -->
+<div id="emailModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
-
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         Emails: {{email_reservation._entity}} ({{email_reservation._name}}) - {{email_reservation._created}}
       </div>
       <div class="modal-body">
+        <br>
         <div class="history" ng-if="email_history">
             <div class="email" ng-repeat="history in email_history">
                 <div class="header">
@@ -23,6 +23,41 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="clearEmailHistory()">Sluiten</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="notesModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        Notities: {{note_reservation._entity}} ({{note_reservation._name}})
+      </div>
+      <div class="modal-body">
+        <br>
+        <form name="notesForm" novalidate>
+            <textarea style="width: 100%" rows="3" ng-model="note._note" placeholder="Notitie"/><br>
+            <div class="submit">
+                <button ng-click="createNote()">Save</button>
+            </div>
+        </form>
+        <br>
+        <div ng-if="notes">
+            <div class="note" ng-repeat="note in notes">
+                <span class="delete">
+                    <a href="" class="remove" ng-click="deleteNote(note._id)"><img src="/img/trash.png" alt="delete"></a>
+                </span> 
+                <div class="header">
+                    <span class="date">{{note._created}}</span>
+                </div>
+                <div class="text">{{note._note}}</div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Sluiten</button>
       </div>
     </div>
   </div>
@@ -81,8 +116,11 @@
 
                 <div class="reservation {{ current_reservation._status }} {{ reservation_class(current_reservation) }}" ng-repeat="current_reservation in current_reservations">
 
+                    <span class="notes">
+                        <a href="" class="notes" ng-click="loadNotes(current_reservation)" data-toggle="modal" data-target="#notesModal"><img src="/img/notes.png" alt="notes"></a>
+                    </span>
                     <span class="emails">
-                        <a href="" class="emails" ng-click="loadEmailHistory(current_reservation)" data-toggle="modal" data-target="#myModal"><img src="/img/email.png" alt="emails"></a>
+                        <a href="" class="emails" ng-click="loadEmailHistory(current_reservation)" data-toggle="modal" data-target="#emailModal"><img src="/img/email.png" alt="emails"></a>
                     </span>
                     <span class="delete">
                         <a href="" class="remove" ng-click="deleteReservation(current_reservation._id)"><img src="/img/trash.png" alt="delete"></a>
@@ -222,8 +260,11 @@
                 <h3>{{reservation_count}} reservaties voor {{year}}</h3>
 
                 <div class="reservation {{ reservation._status }} {{ reservation_class(reservation) }}" ng-repeat="reservation in reservations">
+                    <span class="notes">
+                        <a href="" class="notes" ng-click="loadNotes(reservation)" data-toggle="modal" data-target="#notesModal"><img src="/img/notes.png" alt="notes"></a>
+                    </span>
                     <span class="emails">
-                        <a href="" class="emails" ng-click="loadEmailHistory(reservation)" data-toggle="modal" data-target="#myModal"><img src="/img/email.png" alt="emails"></a>
+                        <a href="" class="emails" ng-click="loadEmailHistory(reservation)" data-toggle="modal" data-target="#emailModal"><img src="/img/email.png" alt="emails"></a>
                     </span>
                     <span class="delete">
                         <a href="" class="remove" ng-click="deleteReservation(reservation._id)"><img src="/img/trash.png" alt="delete"></a>

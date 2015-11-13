@@ -29,7 +29,7 @@ angular.module('Main').controller('LoginCtrl', ['$rootScope', '$window', 'AuthSe
 }]);
 
 
-angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Reservations', 'Mailer', 'EmailHistory', 'CalendarHelper', function ($scope, $filter, Reservations, Mailer, EmailHistory, CalendarHelper) {
+angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Reservations', 'Mailer', 'EmailHistory', 'Notes', 'CalendarHelper', function ($scope, $filter, Reservations, Mailer, EmailHistory, Notes, CalendarHelper) {
     $scope.reset = function () {
         $scope.message = '';
         $scope.status = 'ok';
@@ -58,6 +58,8 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         reservation._departure = '';
     };
 
+    $scope.note = {};
+    $scope.note_reservation = {};
     $scope.today = new Date();
     $scope.year = $scope.today.getFullYear();
     $scope.years = [$scope.year, $scope.year + 1, $scope.year + 2, $scope.year + 3, $scope.year + 4, $scope.year + 5];
@@ -95,15 +97,47 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     }
 
     $scope.loadEmailHistory = function (reservation) {
-        $('#myModal').appendTo("body");
+        $('#emailModal').appendTo("body");
         $scope.email_reservation = reservation;
         EmailHistory.find({id: reservation._id}, function (response) {
             $scope.email_history = response;
         });
     };
+
     $scope.clearEmailHistory = function () {
         $scope.email_reservation = '';
         $scope.email_history = [];
+    };
+
+    $scope.loadNotes = function (reservation) {
+        $('#notesModal').appendTo("body");
+        $scope.note_reservation = reservation;
+        $scope.note._note = "";
+        $scope.note._reservation = reservation._id;
+        Notes.all.find({id: reservation._id}, function (response) {
+            $scope.notes = response;
+        })
+    };
+
+    $scope.createNote = function () {
+        Notes.single.create({}, $scope.note).$promise
+            .then(function (data) {
+                $scope.status = 'ok';
+                $scope.loadNotes($scope.note_reservation);
+            }, function (error) {
+                $scope.status = 'error';
+                $scope.message = error.data;
+            });
+    };
+
+    $scope.deleteNote = function (id) {
+        Notes.single.delete({id: id}).$promise
+            .then(function (data) {
+                $scope.loadNotes($scope.note_reservation);
+            }, function (error) {
+                $scope.status = 'Fout bij verwijderen van reservatie';
+                $scope.message = error.response;
+            });
     };
 
     $scope.is_authorized = function() {

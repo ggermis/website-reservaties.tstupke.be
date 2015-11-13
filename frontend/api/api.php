@@ -28,6 +28,7 @@ if ($request_method == 'PUT' || $request_method == 'DELETE') { // bypass for rea
 
 $id = $_REQUEST['id'];
 $year = $_REQUEST['year'];
+$reservation_id = $_REQUEST['reservation_id'];
 $model_name = $_REQUEST['model'];
 $model_path = __ROOT__ . "/backend/model/{$model_name}.php";
 if (!file_exists($model_path)) {
@@ -48,6 +49,13 @@ switch($model_name) {
         break;
     case 'email_history':
         $model = new EmailHistory();
+        break;
+    case 'note':
+        if ($reservation_id) {
+            $model = new Note($reservation_id);
+        } else {
+            $model = new Note();
+        }
         break;
     default:
         header(':', true, 400);
