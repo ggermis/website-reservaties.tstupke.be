@@ -40,7 +40,7 @@
         <form name="notesForm" novalidate>
             <textarea style="width: 100%" rows="3" ng-model="note._note" placeholder="Notitie"/><br>
             <div class="submit">
-                <button ng-click="createNote()">Save</button>
+                <button ng-click="createNote()" ng-disabled="!note._note">Opslaan</button>
             </div>
         </form>
         <br>
@@ -116,11 +116,11 @@
 
                 <div class="reservation {{ current_reservation._status }} {{ reservation_class(current_reservation) }}" ng-repeat="current_reservation in current_reservations">
 
-                    <span class="notes">
-                        <a href="" class="notes" ng-click="loadNotes(current_reservation)" data-toggle="modal" data-target="#notesModal"><img src="/img/notes.png" alt="notes"></a>
-                    </span>
-                    <span class="emails">
+                    <span class="emails" ng-if="current_reservation._has_emails">
                         <a href="" class="emails" ng-click="loadEmailHistory(current_reservation)" data-toggle="modal" data-target="#emailModal"><img src="/img/email.png" alt="emails"></a>
+                    </span>
+                    <span class="notes">
+                        <a href="" class="notes" ng-click="loadNotes(current_reservation)" data-toggle="modal" data-target="#notesModal"><img ng-src="/img/{{current_reservation._has_notes ? 'has-notes' : 'notes' }}.png" alt="notes"></a>
                     </span>
                     <span class="delete">
                         <a href="" class="remove" ng-click="deleteReservation(current_reservation._id)"><img src="/img/trash.png" alt="delete"></a>
@@ -260,11 +260,11 @@
                 <h3>{{reservation_count}} reservaties voor {{year}}</h3>
 
                 <div class="reservation {{ reservation._status }} {{ reservation_class(reservation) }}" ng-repeat="reservation in reservations">
-                    <span class="notes">
-                        <a href="" class="notes" ng-click="loadNotes(reservation)" data-toggle="modal" data-target="#notesModal"><img src="/img/notes.png" alt="notes"></a>
-                    </span>
-                    <span class="emails">
+                    <span class="emails" ng-if="reservation._has_emails">
                         <a href="" class="emails" ng-click="loadEmailHistory(reservation)" data-toggle="modal" data-target="#emailModal"><img src="/img/email.png" alt="emails"></a>
+                    </span>
+                    <span class="notes">
+                        <a href="" class="notes" ng-click="loadNotes(reservation)" data-toggle="modal" data-target="#notesModal"><img ng-src="/img/{{reservation._has_notes ? 'has-notes' : 'notes' }}.png" alt="notes"></a>
                     </span>
                     <span class="delete">
                         <a href="" class="remove" ng-click="deleteReservation(reservation._id)"><img src="/img/trash.png" alt="delete"></a>

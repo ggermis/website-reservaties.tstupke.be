@@ -89,6 +89,8 @@ class Mailer {
           $audit_query = "INSERT INTO email_history (_type, _reservation, _to, _subject, _body) VALUES(?, ?, ?, ?, ?)";
           $sql = new MysqliDb(__DB_HOST__, __DB_USER__, __DB_PASS__, __DB_DB__);
           $sql->rawQuery($audit_query, Array($type, $this->reservation['_id'], $to, $subject, $this->message)); 
+          $status_query = "UPDATE reservations SET _has_emails = TRUE WHERE _id = ?";
+          $sql->rawQuery($status_query, Array($this->reservation['_id']));
       }
     }
 }

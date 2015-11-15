@@ -123,6 +123,15 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         Notes.single.create({}, $scope.note).$promise
             .then(function (data) {
                 $scope.status = 'ok';
+                $scope.note_reservation['_has_notes'] = true;
+                Reservations.single.update({id: $scope.note_reservation._id}, $scope.note_reservation).$promise
+                    .then(function (data) {
+                        $scope.status = 'ok';
+                        loadReservations(false);
+                    }, function (error) {
+                        $scope.message = error.data;
+                        loadReservations(false);
+                    });
                 $scope.loadNotes($scope.note_reservation);
             }, function (error) {
                 $scope.status = 'error';
@@ -133,6 +142,17 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     $scope.deleteNote = function (id) {
         Notes.single.delete({id: id}).$promise
             .then(function (data) {
+                if ($scope.notes.length == 1) {
+                    $scope.note_reservation['_has_notes'] = false;
+                    Reservations.single.update({id: $scope.note_reservation._id}, $scope.note_reservation).$promise
+                        .then(function (data) {
+                            $scope.status = 'ok';
+                            loadReservations(false);
+                        }, function (error) {
+                            $scope.message = error.data;
+                            loadReservations(false);
+                        });
+                }
                 $scope.loadNotes($scope.note_reservation);
             }, function (error) {
                 $scope.status = 'Fout bij verwijderen van reservatie';

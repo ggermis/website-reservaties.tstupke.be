@@ -27,8 +27,11 @@ class Mailer {
     function send($to, $subject, $type = "reservation") {
         $result = mail($to, $subject, $this->message, $this->headers);
         if ($result) {
+            $reservation_id = $this->findStoredReservationId();
+            $status_query = "UPDATE reservations SET _has_emails = TRUE WHERE _id = ?";
+            $this->sql->rawQuery($status_query, Array($reservation_id));
             $audit_query = "INSERT INTO email_history (_type, _reservation, _to, _subject, _body) VALUES(?, ?, ?, ?, ?)";
-            $this->sql->rawQuery($audit_query, Array($type, $this->findStoredReservationId(), $to, $subject, $this->message)); 
+            $this->sql->rawQuery($audit_query, Array($type, $reservation_id, $to, $subject, $this->message)); 
         }
         return $result;
     }

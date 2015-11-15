@@ -22,6 +22,8 @@ class Reservation extends Model {
     // Status
     protected $_created;
     protected $_email_sent;
+    protected $_has_emails;
+    protected $_has_notes;
     protected $_status;
 
     function __construct($year = null) {
@@ -86,6 +88,8 @@ class Reservation extends Model {
             '_created' => $this->_created,
             '_agreed' => $this->_agreed,
             '_email_sent' => $this->_email_sent,
+            '_has_emails' => $this->_has_emails,
+            '_has_notes' => $this->_has_notes,
             '_status' => $this->_status,
         );
     }

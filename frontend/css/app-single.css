@@ -580,22 +580,22 @@ form.adminReservationForm {
 
 .emails {
     position: absolute;
-    right: 1.8em;
+    right: 3em;
 }
 
 .notes {
     position: absolute;
-    right: 3em;
+    right: 1.8em;
 }
 
 .adminCurrentReservation .emails {
     position: absolute;
-    right: 3.3em;
+    right: 4.4em;
 }
 
 .adminCurrentReservation .notes {
     position: absolute;
-    right: 4.5em;
+    right: 3.3em;
 }
 
 .email {
