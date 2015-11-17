@@ -52,7 +52,7 @@
                 <div class="header">
                     <span class="date">{{note._created}}</span>
                 </div>
-                <div class="text">{{note._note}}</div>
+                <div class="text" ng-bind-html="note._note | to_trusted"></div>
             </div>
         </div>
       </div>
