@@ -67,7 +67,31 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     $scope.years = [$scope.state.year, $scope.state.year + 1, $scope.state.year + 2, $scope.state.year + 3, $scope.state.year + 4, $scope.state.year + 5];
     $scope.block = {
         year: $scope.today.getFullYear(),
-        blocks: [
+        legacy_blocks_2015: [
+            { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
+            { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
+            { "id": 3, "from": "07-23", "to": "08-03", disabled: false },
+            { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
+        ],
+        legacy_blocks_2016: [
+            { "id": 1, "from": "07-01", "to": "07-10", disabled: false },
+            { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
+            { "id": 3, "from": "07-23", "to": "08-03", disabled: false },
+            { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
+        ],
+        legacy_blocks_2017: [
+            { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
+            { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
+            { "id": 3, "from": "07-23", "to": "08-03", disabled: false },
+            { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
+        ],
+        legacy_blocks_2018: [
+            { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
+            { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
+            { "id": 3, "from": "07-23", "to": "08-03", disabled: false },
+            { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
+        ],
+        default_blocks: [
             { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
             { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
             { "id": 3, "from": "07-23", "to": "08-03", disabled: false },
@@ -262,9 +286,9 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         $scope.block.selected_block = "0";
         if (!keep_year) {
             $scope.state.year = $scope.block.year;
-        }
-        for (var $i=0; $i<$scope.block.blocks.length; $i++) {
-            var $block = $scope.block.blocks[$i];
+        }        
+        for (var $i=0; $i<$scope.block[$scope.blocks_to_use].length; $i++) {
+            var $block = $scope.block[$scope.blocks_to_use][$i];
             var $start_date = $scope.block.year + "-" + $block.from;
             var $end_date = $scope.block.year + "-" + $block.to;
             $block.disabled = !CalendarHelper.isBlockFree($scope.all_reservations, $start_date, $end_date);
@@ -274,9 +298,9 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
 
     $scope.selectedReservationBlock = function() {
         var block_id = parseInt($scope.block.selected_block) - 1;
-        if (block_id >= 0 && block_id < $scope.block.blocks.length) {
-            $scope.reservation._arrival = $scope.block.year + "-" + $scope.block.blocks[block_id].from;
-            $scope.reservation._departure = $scope.block.year + "-" + $scope.block.blocks[block_id].to;
+        if (block_id >= 0 && block_id < $scope.block[$scope.blocks_to_use].length) {
+            $scope.reservation._arrival = $scope.block.year + "-" + $scope.block[$scope.blocks_to_use][block_id].from;
+            $scope.reservation._departure = $scope.block.year + "-" + $scope.block[$scope.blocks_to_use][block_id].to;
         } else {
             $scope.reservation._arrival = "";
             $scope.reservation._departure = "";                          
@@ -306,6 +330,9 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     $scope.$watch('state.year', function (newValue, oldValue) {
         $scope.current_reservations = [];
         $scope.block.year = newValue;
+        var legacy_blocks = "legacy_blocks_" + $scope.state.year;
+        $scope.blocks_to_use = (typeof $scope.block[legacy_blocks] === "undefined") ? "default_blocks" : legacy_blocks;
+        console.log($scope.blocks_to_use);
         loadReservations();
     }, true);
 

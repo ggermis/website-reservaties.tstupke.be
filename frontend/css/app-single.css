@@ -687,7 +687,11 @@ div.modal-body {
 }
 
 
-.closed .editable-click, .pending .editable-click {
+.closed .editable-click {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.pending .editable-click {
     color: white;
 }
 

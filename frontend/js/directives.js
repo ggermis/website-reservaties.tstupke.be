@@ -187,11 +187,10 @@ angular.module('Main')
                                     }                                
 
                                     if (d.getMonth() == 6 || d.getMonth() == 7) {
-                                        for (var $i=0; $i<scope.block.blocks.length; $i++) {
-                                            var $block = scope.block.blocks[$i];
+                                        for (var $i=0; $i<scope.block[scope.blocks_to_use].length; $i++) {
+                                            var $block = scope.block[scope.blocks_to_use][$i];
                                             var $start_date = new Date(scope.block.year + "-" + $block.from).setHours(0, 0, 0, 0);
                                             var $end_date = new Date(scope.block.year + "-" + $block.to).setHours(0, 0, 0, 0);
-                                            // console.log($start_date + ", " + $end_date + ", " + d);
                                             if (new Date($start_date).valueOf() <= d.valueOf() && d.valueOf() <= new Date($end_date)) {
                                                cell.className = cell.className + " period" + ($i+1); 
                                             }

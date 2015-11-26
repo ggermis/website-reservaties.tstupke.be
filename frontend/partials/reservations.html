@@ -81,6 +81,9 @@
                 <div style="display: inline-block; width: 20px" class="free">&nbsp;</div>
                 = Vrij
 
+                <div style="display: inline-block; width: 20px" class="legend_selected_period">&nbsp;</div>
+                = Selectie
+
                 <div style="display: inline-block; width: 20px" class="pending">&nbsp;</div>
                 = Aangevraagd
 
@@ -89,9 +92,6 @@
 
                 <div style="display: inline-block; width: 20px" class="closed">&nbsp;</div>
                 = Gesloten
-
-                <div style="display: inline-block; width: 20px" class="legend_selected_period">&nbsp;</div>
-                = Selectie
             </div>
             <br>
         </article>
@@ -129,7 +129,11 @@
                         <a href="" class="remove" ng-click="deleteReservation(current_reservation._id)"><img src="/img/trash.png" alt="delete"></a>
                     </span> 
 
-                    <div class="entity">{{current_reservation._entity}} ({{current_reservation._name}})</div>
+                    <div class="entity">
+                        <span editable-text="current_reservation._entity" onaftersave="updateReservation(current_reservation)" buttons="no">{{current_reservation._entity}}</span>
+                        <span editable-text="current_reservation._name" onaftersave="updateReservation(current_reservation)" buttons="no">({{current_reservation._name}})</span>
+                    </div>
+
                     <div>Type: <select id="type" name="entity" ng-model="current_reservation._type" 
                                                                ng-options="t for t in reservation_types"
                                                                ng-change="updateReservation(current_reservation)"></select></div>
@@ -225,7 +229,7 @@
                         <span class="validation-error" ng-show="!reservation._arrival">Verplicht!</span>
                         <br><br>
 
-                        <div ng-repeat="b in block.blocks">
+                        <div ng-repeat="b in block[blocks_to_use]">
                             <input name="period" type="radio" value="{{b.id}}" ng-model="block.selected_block" ng-change="selectedReservationBlock()" ng-disabled="b.disabled" ng-required="true">
                             <span class="radio {{b.disabled ? 'disabled' : ''}}">Periode: {{block.year}}-{{b.from}} - {{block.year}}-{{b.to}}</span>
                         </div>                        
