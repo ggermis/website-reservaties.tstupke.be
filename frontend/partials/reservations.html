@@ -70,7 +70,7 @@
             <h3>Beschikbaarheid kampplaats</h3>
 
             <div class="my-calendar">
-                <span class="year">Selecteer jaar: <select ng-model="year"
+                <span class="year">Selecteer jaar: <select ng-model="state.year"
                                                            ng-options="y for y in years"></select></span><br>
 
                 <div class="calendar" my-calendar></div>
@@ -89,6 +89,9 @@
 
                 <div style="display: inline-block; width: 20px" class="closed">&nbsp;</div>
                 = Gesloten
+
+                <div style="display: inline-block; width: 20px" class="legend_selected_period">&nbsp;</div>
+                = Selectie
             </div>
             <br>
         </article>
@@ -139,9 +142,9 @@
                                                         ng-change="updateReservation(current_reservation)"></select></div>
 
                     <span class="contact">
-                        <div>Naam: {{current_reservation._name}}</div>
-                        <div>Email: <a href="mailto:{{current_reservation._email}}?subject=Kampplaats 't Stupke">{{current_reservation._email}}</a></div>
-                        <div>Telefoon: {{current_reservation._phone}}</div>
+                        <div>Naam: <span editable-text="current_reservation._name" onaftersave="updateReservation(current_reservation)" buttons="no">{{current_reservation._name}}</span></div>
+                        <div>Email: <a href="#" editable-text="current_reservation._email" onaftersave="updateReservation(current_reservation)" buttons="no">{{current_reservation._email}}</a></div>
+                        <div>Telefoon: <span editable-text="current_reservation._phone" onaftersave="updateReservation(current_reservation)" buttons="no"> {{current_reservation._phone}}</span></div>
                     </span>
                 </div>
             </div>
@@ -202,7 +205,7 @@
                     <div ng-if="reservation._type == 'weekend'">
                         <!-- VAN -->
                         <label for="arrival">Aankomst</label>
-                        <input type="text" id="arrival" name="arrival" size="10" min="{{today}}" ng-model="reservation._arrival"
+                        <input type="text" id="arrival" name="arrival" size="10" min="{{today}}" ng-model="reservation._arrival" 
                                placeholder="Aankomst" date-from with-to="departure" readonly autocomplete="off" required>
                         <span class="validation-error" ng-show="reservationForm.arrival.$error.required">Verplicht!</span>
                         <br>
@@ -257,7 +260,7 @@
             <br>
             <div class="reservationList">
             <article>
-                <h3>{{reservation_count}} reservaties voor {{year}}</h3>
+                <h3>{{reservation_count}} reservaties voor {{state.year}}</h3>
 
                 <div class="reservation {{ reservation._status }} {{ reservation_class(reservation) }}" ng-repeat="reservation in reservations">
                     <span class="emails" ng-if="reservation._has_emails">
@@ -271,7 +274,10 @@
                     </span> 
 
 
-                    <div class="entity">{{reservation._entity}} ({{reservation._name}})</div>
+                    <div class="entity">
+                        <span editable-text="reservation._entity" onaftersave="updateReservation(reservation)" buttons="no">{{reservation._entity}}</span>
+                        <span editable-text="reservation._name" onaftersave="updateReservation(reservation)" buttons="no">({{reservation._name}})</span>
+                    </div>
                     <div>Type: <select id="type" name="entity" ng-model="reservation._type" 
                                                                ng-options="t for t in reservation_types"
                                                                ng-change="updateReservation(reservation)"></select></div>
@@ -286,9 +292,9 @@
                                                         ng-change="updateReservation(reservation)"></select></div>
 
                     <span class="contact">
-                        <div>Naam: {{reservation._name}}</div>
-                        <div>Email: <a href="mailto:{{reservation._email}}?subject=Kampplaats 't Stupke">{{reservation._email}}</a></div>
-                        <div>Telefoon: {{reservation._phone}}</div>
+                        <div>Naam: <span editable-text="reservation._name" onaftersave="updateReservation(reservation)" buttons="no">{{reservation._name}}</span></div>
+                        <div>Email: <a href="#" editable-text="reservation._email" onaftersave="updateReservation(reservation)" buttons="no">{{reservation._email}}</a></div>
+                        <div>Telefoon: <span editable-text="reservation._phone" onaftersave="updateReservation(reservation)" buttons="no"> {{reservation._phone}}</span></div>
                     </span>
                 </div>
             </article>

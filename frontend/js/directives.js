@@ -13,17 +13,23 @@ angular.module('Main')
                     beforeShowDay: function (date) {
                         return [CalendarHelper.isDayFree(scope.all_reservations, date, scope.reservation._type), ""];
                     },
+                    onChangeMonthYear: function (year, month, inst) {
+                        scope.state.year = year;
+                        scope.$apply();
+                    },
                     onSelect: function (date) {
-                        var toDate = new Date(element.datepicker("getDate"));
-                        toDate.setDate(toDate.getDate() + scope.min_days);
-                        withTo.datepicker('option', 'minDate', toDate);
-                        if (scope.reservation._type == 'weekend') {
-                            withTo.datepicker('disable');
-                        } else {
-                            withTo.datepicker('enable');
-                        }
                         scope.reservation._arrival = date;
-                        scope.reservation._departure = $filter('date')(toDate, 'yyyy-MM-dd', toDate.getTimezoneOffset());
+                        if (! scope.is_authorized()) {
+                            var toDate = new Date(element.datepicker("getDate"));
+                            toDate.setDate(toDate.getDate() + scope.min_days);
+                            withTo.datepicker('option', 'minDate', toDate);
+                            // if (scope.reservation._type == 'weekend') {
+                            //     withTo.datepicker('disable');
+                            // } else {
+                            //     withTo.datepicker('enable');
+                            // }
+                            scope.reservation._departure = $filter('date')(toDate, 'yyyy-MM-dd', toDate.getTimezoneOffset());
+                        }
                         scope.$apply();
                     }
                 });
@@ -44,6 +50,10 @@ angular.module('Main')
                     beforeShowDay: function (date) {
                         var from_date = new Date(withFrom.val());
                         return [CalendarHelper.isDayFree(scope.all_reservations, date, scope.reservation._type, from_date), ""];
+                    },
+                    onChangeMonthYear: function (year, month, inst) {
+                        scope.state.year = year;
+                        scope.$apply();
                     },
                     onSelect: function (date) {
                         scope.reservation._departure = date;
@@ -121,6 +131,8 @@ angular.module('Main')
                                     var d = new Date(year, j - 1, i - firstDay);
                                     cellText = document.createTextNode(d.getDate());
                                     cell.appendChild(cellText);
+
+
                                     if (scope.is_authorized()) {
                                         function captureArrivalDate(d) {
                                             return function(event) { 
@@ -157,11 +169,14 @@ angular.module('Main')
                                             return r._status
                                         }).join(' ');
                                     }
-                                    
+
                                     cell.className = "day " + statuses;
                                     if (scope.is_authorized() && reservation) {
                                         cell.title = reservation._name + ' (' + reservation._entity + ')';
                                     }
+
+                                    cell.className = cell.className + " d" + d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+
                                     var now = new Date();
                                     var yesterday = new Date().setDate(now.getDate()-1);
                                     if (d.valueOf() < yesterday.valueOf()) {
@@ -170,6 +185,18 @@ angular.module('Main')
                                     if ((d.getYear() == now.getYear()) && (d.getMonth() == now.getMonth()) && (d.getDate() == now.getDate())) {
                                         cell.className = cell.className + " today";
                                     }                                
+
+                                    if (d.getMonth() == 6 || d.getMonth() == 7) {
+                                        for (var $i=0; $i<scope.block.blocks.length; $i++) {
+                                            var $block = scope.block.blocks[$i];
+                                            var $start_date = new Date(scope.block.year + "-" + $block.from).setHours(0, 0, 0, 0);
+                                            var $end_date = new Date(scope.block.year + "-" + $block.to).setHours(0, 0, 0, 0);
+                                            // console.log($start_date + ", " + $end_date + ", " + d);
+                                            if (new Date($start_date).valueOf() <= d.valueOf() && d.valueOf() <= new Date($end_date)) {
+                                               cell.className = cell.className + " period" + ($i+1); 
+                                            }
+                                        }
+                                    }
                                 }
                             }
                             row.appendChild(cell);
@@ -187,11 +214,11 @@ angular.module('Main')
                     element.append(tbl);
                 }
 
-                scope.$watch('year', function (newValue, oldValue) {
+                scope.$watch('state.year', function (newValue, oldValue) {
                     updateCalendar(newValue);
                 }, true);
                 scope.$watch('reservations', function (newValue, oldValue) {
-                    updateCalendar(scope.year);
+                    updateCalendar(scope.state.year);
                 }, true);
             }
         }

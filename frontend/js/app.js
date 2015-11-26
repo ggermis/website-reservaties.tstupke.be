@@ -1,7 +1,7 @@
 //$api_user = 'api';
 //$api_pass = '73B6557F5987';
 
-angular.module('Main', ['ngRoute', 'ngResource', 'ngCookies', 'pascalprecht.translate'])
+angular.module('Main', ['ngRoute', 'ngResource', 'ngCookies', 'pascalprecht.translate', 'xeditable'])
     .config(['$routeProvider', '$locationProvider', '$httpProvider', function ($routeProvider, $locationProvider, $httpProvider) {
         $httpProvider.interceptors.push('httpRequestInterceptor');
 

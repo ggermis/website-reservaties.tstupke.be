@@ -38,6 +38,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         $scope.set_limits($scope.reservation);
         $scope.already_sending = false;
         $scope.reservation_button = 'Reserveer nu!';
+        $scope.selected_block = "0";
     };
 
     $scope.set_limits = function(reservation) {
@@ -53,16 +54,17 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             $scope.max_days = 2;
         }
         reservation._nr_of_people = 0;
-//        reservation._nr_of_people = $scope.min_nr_of_people;
         reservation._arrival = '';
         reservation._departure = '';
+        $scope.block.selected_block = "0";
     };
 
     $scope.note = {};
     $scope.note_reservation = {};
     $scope.today = new Date();
-    $scope.year = $scope.today.getFullYear();
-    $scope.years = [$scope.year, $scope.year + 1, $scope.year + 2, $scope.year + 3, $scope.year + 4, $scope.year + 5];
+    $scope.state = {};
+    $scope.state.year = $scope.today.getFullYear();
+    $scope.years = [$scope.state.year, $scope.state.year + 1, $scope.state.year + 2, $scope.state.year + 3, $scope.state.year + 4, $scope.state.year + 5];
     $scope.block = {
         year: $scope.today.getFullYear(),
         blocks: [
@@ -84,7 +86,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         Reservations.all.get({}, function (response) {
             $scope.all_reservations = response;
             $scope.reservations = response.filter(function(reservation) {
-                var regexp = new RegExp('^' + $scope.year + '-');
+                var regexp = new RegExp('^' + $scope.state.year + '-');
                 return regexp.test(reservation._arrival) || regexp.test(reservation._departure);
             });
             $scope.reservation_count = $scope.reservations.filter(function(reservation) {
@@ -259,7 +261,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     $scope.loadReservationBlocks = function(keep_year) {
         $scope.block.selected_block = "0";
         if (!keep_year) {
-            $scope.year = $scope.block.year;
+            $scope.state.year = $scope.block.year;
         }
         for (var $i=0; $i<$scope.block.blocks.length; $i++) {
             var $block = $scope.block.blocks[$i];
@@ -272,7 +274,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
 
     $scope.selectedReservationBlock = function() {
         var block_id = parseInt($scope.block.selected_block) - 1;
-        if (block_id && block_id >= 0) {
+        if (block_id >= 0 && block_id < $scope.block.blocks.length) {
             $scope.reservation._arrival = $scope.block.year + "-" + $scope.block.blocks[block_id].from;
             $scope.reservation._departure = $scope.block.year + "-" + $scope.block.blocks[block_id].to;
         } else {
@@ -281,7 +283,27 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         }
     }
 
-    $scope.$watch('year', function (newValue, oldValue) {
+    $scope.updateCalendarSelection = function() {
+       $('.selected_period').removeClass('selected_period');
+       var start_date = new Date($scope.reservation._arrival);
+       start_date.setHours(0, 0, 0, 0);
+       var end_date = new Date($scope.reservation._departure)
+       end_date.setHours(0, 0, 0, 0);
+       while (start_date <= end_date) {
+            $(".d" + start_date.getFullYear() + "-" + ("0" + (start_date.getMonth() + 1)).slice(-2) + "-" + ("0" + start_date.getDate()).slice(-2)).addClass('selected_period');
+            start_date = new Date(start_date.valueOf() + 60*60*24*1*1000); // 1 days from now
+       }
+    }
+
+    $scope.$watch('reservation._arrival', function (newValue, oldValue) {
+       $scope.updateCalendarSelection();
+    }, true);
+
+    $scope.$watch('reservation._departure', function (newValue, oldValue) {
+       $scope.updateCalendarSelection();
+    }, true);
+
+    $scope.$watch('state.year', function (newValue, oldValue) {
         $scope.current_reservations = [];
         $scope.block.year = newValue;
         loadReservations();
