@@ -450,6 +450,11 @@ td {
     background-color: darkslategray;
 }
 
+.selected_period, .legend_selected_period {
+    background-color: rgba(0, 0, 255, .5);
+    color: white;
+    font-weight: bold;
+}
 
 
 #login {
@@ -670,12 +675,6 @@ div.modal-body {
 
 *:focus {
     outline: none;
-}
-
-.selected_period, .legend_selected_period {
-    background-color: rgba(0, 0, 255, .7);
-    color: white;
-    font-weight: bold;
 }
 
 

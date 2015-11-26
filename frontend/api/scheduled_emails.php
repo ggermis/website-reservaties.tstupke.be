@@ -105,8 +105,9 @@ for ($i=0; $i<count($result); ++$i) {
     $reservation = $result[$i];   
     $template = realpath(dirname(__FILE__)) . '/mail-templates/' . $reservation['_type'] . '/' . $type . '.tpl';
  
-    printf("sending %s mail to: %s [%s] - arriving at %s\n", $type, $reservation['_email'], $reservation['_entity'], $reservation['_arrival']);
-    (new Mailer($reservation, $template))->send($reservation['_email'], "Herinnering reservatie Kampplaats 't Stupke", $type);    
+    printf("%s email verstuurd naar: %s [%s] - de reservatie start op %s\n", $type, $reservation['_email'], $reservation['_entity'], $reservation['_arrival']);
+    $mailer = new Mailer($reservation, $template);
+    $mailer->send($reservation['_email'], "Herinnering reservatie Kampplaats 't Stupke", $type);    
 }
 
 

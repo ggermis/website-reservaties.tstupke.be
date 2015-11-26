@@ -48,7 +48,7 @@ class Mailer {
 $reservation = $params['message'];
 
 
-$template = realpath(dirname(__FILE__)) . '/reservation-internal.tpl';
+$template = realpath(dirname(__FILE__)) . '/mail-templates/internal/reservation.tpl';
 $mailer = new Mailer($reservation, $template);
 $mailer->sendWithoutHistory('kampplaats@tstupke.be', "Reservatie: " . $reservation['_entity'] . ' (' . $reservation['_name'] . ')');
 

@@ -12,6 +12,7 @@ CREATE TABLE `accounts` (
 
 CREATE TABLE IF NOT EXISTS reservations (
   _id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  _type VARCHAR(255) NOT NULL,
   _entity VARCHAR(255) NOT NULL,
   _nr_of_people INT NOT NULL,
   _name VARCHAR(255) NOT NULL,
