@@ -67,29 +67,17 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     $scope.years = [$scope.state.year, $scope.state.year + 1, $scope.state.year + 2, $scope.state.year + 3, $scope.state.year + 4, $scope.state.year + 5];
     $scope.block = {
         year: $scope.today.getFullYear(),
-        legacy_blocks_2015: [
-            { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
-            { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
-            { "id": 3, "from": "07-23", "to": "08-03", disabled: false },
-            { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
-        ],
         legacy_blocks_2016: [
             { "id": 1, "from": "07-01", "to": "07-10", disabled: false },
             { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
             { "id": 3, "from": "07-23", "to": "08-03", disabled: false },
             { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
         ],
-        legacy_blocks_2017: [
-            { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
-            { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
-            { "id": 3, "from": "07-23", "to": "08-03", disabled: false },
-            { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
-        ],
         legacy_blocks_2018: [
-            { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
-            { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
-            { "id": 3, "from": "07-23", "to": "08-03", disabled: false },
-            { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
+            { "id": 1, "from": "07-01", "to": "07-10", disabled: false },
+            { "id": 2, "from": "07-10", "to": "07-21", disabled: false },
+            { "id": 3, "from": "07-21", "to": "08-01", disabled: false },
+            { "id": 4, "from": "08-01", "to": "08-12", disabled: false }
         ],
         default_blocks: [
             { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
@@ -332,7 +320,6 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         $scope.block.year = newValue;
         var legacy_blocks = "legacy_blocks_" + $scope.state.year;
         $scope.blocks_to_use = (typeof $scope.block[legacy_blocks] === "undefined") ? "default_blocks" : legacy_blocks;
-        console.log($scope.blocks_to_use);
         loadReservations();
     }, true);
 
