@@ -128,7 +128,9 @@ angular.module('Main').factory('CalendarHelper', function () {
         },
 
         isBlockFree: function (reservations, start_date, end_date) {
-            return !this.existsReservationBetween(reservations, new Date(start_date), new Date(end_date), true);  
+            var start = new Date(start_date);
+            var end = new Date(end_date);
+            return start.valueOf() > new Date().valueOf() && !this.existsReservationBetween(reservations, start, end, true);  
         },
 
         isDayFree: function (reservations, date, type, start_date) {
