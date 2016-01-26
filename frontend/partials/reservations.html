@@ -10,7 +10,7 @@
       <div class="modal-body">
         <br>
         <div class="history" ng-if="email_history">
-            <div class="email" ng-repeat="history in email_history">
+            <div class="email {{history._type}}" ng-repeat="history in email_history">
                 <div class="header">
                     Aan: <span class="to">{{history._to}}</span><br>
                     Onderwerp: <span class="subject">{{history._subject}}</span><br>

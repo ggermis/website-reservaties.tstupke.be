@@ -19,7 +19,7 @@ class EmailHistory extends Model {
     public function find($reservation_id)
     {
         self::$_db->where('_reservation', $reservation_id);
-        self::$_db->orderBy('_sent', 'asc');
+        self::$_db->orderBy('_sent', 'desc');
         return self::$_db->get(self::$_table_name);
     }
 

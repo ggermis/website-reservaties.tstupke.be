@@ -608,11 +608,15 @@ form.adminReservationForm {
     padding: .5em;
     font-size: .8em;
     padding: 1em;
-    background-color: cyan;
+    background-color: aquamarine;
     border-radius: 15px;
     border-bottom: 1px solid #e5e5e5;
     border: 1px solid gray;
     box-shadow: 5px 5px 5px #888888;
+}
+
+.incoming {
+    background-color: cyan;
 }
 
 .email .header .sent, .email .header .to, .email .header .subject {
