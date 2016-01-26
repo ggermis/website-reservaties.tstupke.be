@@ -6,6 +6,7 @@ class Reservation extends Model {
     protected $year;
 
     protected $_id;
+    protected $_code;
 
     protected $_entity;
 
@@ -25,6 +26,7 @@ class Reservation extends Model {
     protected $_has_emails;
     protected $_has_notes;
     protected $_status;
+    protected $_deleted;
 
     function __construct($year = null) {
         parent::__construct();
@@ -35,10 +37,10 @@ class Reservation extends Model {
     public function find($id)
     {
         if ($id) {
-            self::$_db->where('_id', $id);
+            self::$_db->where('_id', $id)->where('_deleted', false);
             return self::$_db->getOne(self::$_table_name);
         } else {
-            self::$_db->where('YEAR(_arrival)', $this->year);
+            self::$_db->where('_deleted', false)->where('YEAR(_arrival)', $this->year);
             self::$_db->orderBy('_arrival', 'desc');
             return self::$_db->get(self::$_table_name);
         }
@@ -66,19 +68,19 @@ class Reservation extends Model {
     public function delete($id)
     {
         self::$_db->where('_id', $id);
-        if (self::$_db->delete(self::$_table_name)) {
-            return array('status' => 'ok');
+        if (self::$_db->update(self::$_table_name, array('_deleted' => true))) {
+            return $this->find($id);
         }
         http_response_code(500);
-        return array('status' => 'error');
+        return array('error' => 'update failed');
     }
-
 
 
     private function toData() {
         return array(
             '_id' => $this->_id,
             '_entity' => $this->_entity,
+            '_code' => $this->_code,
             '_arrival' => $this->_from,
             '_departure' => $this->_until,
             '_name' => $this->_name,
@@ -91,6 +93,7 @@ class Reservation extends Model {
             '_has_emails' => $this->_has_emails,
             '_has_notes' => $this->_has_notes,
             '_status' => $this->_status,
+            '_deleted' => $this->_deleted
         );
     }
 

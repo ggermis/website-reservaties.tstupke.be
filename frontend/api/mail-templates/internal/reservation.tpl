@@ -20,3 +20,6 @@ voor de periode van {$reservation._arrival} tot {$reservation._departure} voor {
 
 <h3>Opmerkingen</h3>
 {$reservation._remarks}
+
+<h3>Reservatiecode</h3>
+{$reservation._code}

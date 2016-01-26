@@ -50,11 +50,11 @@ $reservation = $params['message'];
 
 $template = realpath(dirname(__FILE__)) . '/mail-templates/internal/reservation.tpl';
 $mailer = new Mailer($reservation, $template);
-$mailer->sendWithoutHistory('kampplaats@tstupke.be', "Reservatie: " . $reservation['_entity'] . ' (' . $reservation['_name'] . ')');
+$mailer->sendWithoutHistory(__MAIL_TSTUPKE_EMAIL__, "Reservatie: " . $reservation['_entity'] . ' (' . $reservation['_name'] . ') - ' . $reservation['_code']);
 
 $template = realpath(dirname(__FILE__)) . '/mail-templates/' . $reservation['_type'] . '/reservation.tpl';
 $mailer = new Mailer($reservation, $template);
-if ($mailer->send($reservation['_email'], "Bevestiging reservatie")) {
+if ($mailer->send($reservation['_email'], "Bevestiging reservatie " . $reservation['_code'])) {
     echo json_encode(array("status" => "ok"));
 } else {
     header(':', true, 500);

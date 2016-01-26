@@ -12,6 +12,7 @@ CREATE TABLE `accounts` (
 
 CREATE TABLE IF NOT EXISTS reservations (
   _id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  _code VARCHAR(50),
   _type VARCHAR(255) NOT NULL,
   _entity VARCHAR(255) NOT NULL,
   _nr_of_people INT NOT NULL,
@@ -27,7 +28,8 @@ CREATE TABLE IF NOT EXISTS reservations (
   _email_sent BOOLEAN DEFAULT FALSE,
   _has_emails BOOLEAN DEFAULT FALSE,
   _has_notes BOOLEAN DEFAULT FALSE,
-  _status VARCHAR(255) NOT NULL DEFAULT 'pending'
+  _status VARCHAR(255) NOT NULL DEFAULT 'pending',
+  _deleted BOOLEAN DEFAULT FALSE,
 ) ENGINE=InnoDB DEFAULT CHARACTER SET=utf8;
 
 CREATE TABLE IF NOT EXISTS email_history (

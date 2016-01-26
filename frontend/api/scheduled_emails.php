@@ -44,6 +44,7 @@ $default_query =  <<<EOT
      WHERE r._arrival >= NOW() 
        AND DATEDIFF(r._arrival, NOW()) <= ?
        AND r._status = ? 
+       AND r._deleted IS FALSE
        AND r._type = ?
        AND r._id NOT IN (
          SELECT h._reservation
@@ -61,6 +62,7 @@ $reminder_query = <<<EOT
      WHERE r._arrival >= NOW()
        AND DATEDIFF(NOW(), r._created) > ?
        AND r._status = ?
+       AND r._deleted IS FALSE
        AND r._type = ?
        AND r._id NOT IN (
         SELECT h._reservation

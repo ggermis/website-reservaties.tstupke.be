@@ -29,7 +29,7 @@ angular.module('Main').controller('LoginCtrl', ['$rootScope', '$window', 'AuthSe
 }]);
 
 
-angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Reservations', 'Mailer', 'EmailHistory', 'Notes', 'CalendarHelper', function ($scope, $filter, Reservations, Mailer, EmailHistory, Notes, CalendarHelper) {
+angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Reservations', 'Mailer', 'EmailHistory', 'Notes', 'CalendarHelper', 'Util', function ($scope, $filter, Reservations, Mailer, EmailHistory, Notes, CalendarHelper, Util) {
     $scope.reset = function () {
         $scope.message = '';
         $scope.status = 'ok';
@@ -64,7 +64,14 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     $scope.today = new Date();
     $scope.state = {};
     $scope.state.year = $scope.today.getFullYear();
-    $scope.years = [$scope.state.year, $scope.state.year + 1, $scope.state.year + 2, $scope.state.year + 3, $scope.state.year + 4, $scope.state.year + 5];
+    if ($scope.auth_token != null) {
+        $scope.years = [];
+        for (var i=2015; i<=$scope.state.year+5; i++) {
+            $scope.years.push(i);
+        }
+    } else {
+        $scope.years = [$scope.state.year, $scope.state.year + 1, $scope.state.year + 2, $scope.state.year + 3, $scope.state.year + 4, $scope.state.year + 5];
+    }
     $scope.block = {
         year: $scope.today.getFullYear(),
         legacy_blocks_2016: [
@@ -216,6 +223,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     $scope.submitReservationForm = function (item, event) {
         $scope.already_sending = true;
         $scope.reservation_button = 'De reservatie wordt verstuurd...';
+        $scope.reservation._code = $scope.reservation._arrival + '-' + Util.createGuid();
         Reservations.single.create({}, $scope.reservation).$promise
             .then(function (data) {
                 $scope.status = 'ok';
