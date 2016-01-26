@@ -9,16 +9,17 @@ function extract_reservation_code($text) {
 	return count($matches > 0) ? $matches[0] : null;
 }
 
-function find_reservation_from_code($sql, $subject, $body, $to, $subject, $date) {
+function find_reservation_from_code($subject, $body, $to, $subject, $date) {
 	$reservation = null;
 	$reservation_code = extract_reservation_code($subject);
 	if ($reservation_code == null) {
 		$reservation_code = extract_reservation_code($body);
 	}
 	if ($reservation_code) {
+        $sql = new MysqliDb(__DB_HOST__, __DB_USER__, __DB_PASS__, __DB_DB__);
 		$result = $sql->rawQuery("SELECT * FROM reservations WHERE _code = ?", Array($reservation_code), false);
 		if (count($result) > 0) {
-			$reservation = $result[0];
+			$reservation = $result[0]; // use the first reservation
 			$sql->rawQuery("INSERT INTO email_history (_type, _reservation, _to, _subject, _body, _sent) VALUES(?, ?, ?, ?, ?, ?)", Array('incoming', $reservation['_id'], $to, $subject, $body, $date));
 			$sql->rawQuery("UPDATE reservations SET _has_emails = TRUE WHERE _id = ?", Array($reservation['_id']));
 		}
@@ -111,8 +112,6 @@ function getpart($mbox,$mid,$p,$partno) {
 }
 
 
-$sql = new MysqliDb(__DB_HOST__, __DB_USER__, __DB_PASS__, __DB_DB__);
-
 $mail = imap_open('{' . __INCOMING_MAIL_SERVER__ . ':' . __INCOMING_MAIL_PORT__ . '/pop3/novalidate-cert}INBOX', __INCOMING_MAIL_USERNAME__, __INCOMING_MAIL_PASSWORD__);
 $mbox = imap_check($mail); 
 for ($n = 1; $n <= $mbox->Nmsgs; $n++) {
@@ -124,7 +123,7 @@ for ($n = 1; $n <= $mbox->Nmsgs; $n++) {
 	$date = gmdate("Y-m-d H:m:s", $headers->udate);
 
 	getmsg($mail, $n);
-	$reservation = find_reservation_from_code($sql, $subject, $htmlmsg ? $htmlmsg : $plainmsg, $to, $subject, $date);
+	$reservation = find_reservation_from_code($subject, $htmlmsg ? $htmlmsg : $plainmsg, $to, $subject, $date);
 	if ($reservation) {
 		echo " -> Email ontvangen ivm reservatie: '{$reservation['_code']}'\n";
 	} else {
