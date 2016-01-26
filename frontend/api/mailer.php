@@ -16,8 +16,8 @@ class Mailer {
         $this->message = $smarty->fetch($template);
         $this->headers = 'MIME-Version: 1.0' . PHP_EOL .
             'Content-Type: text/html; charset=utf-8' . PHP_EOL .
-            'From: ' . __MAIL_TSTUPE__ . PHP_EOL .
-            'Reply-To: ' . __MAIL_TSTUPE__ . PHP_EOL;
+            'From: ' . __MAIL_TSTUPKE__ . PHP_EOL .
+            'Reply-To: ' . __MAIL_TSTUPKE__ . PHP_EOL;
     }
 
     function sendWithoutHistory($to, $subject, $type = "reservation") {
