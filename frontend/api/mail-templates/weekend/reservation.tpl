@@ -23,7 +23,7 @@ Met vriendelijke groeten,
 Fabienne Rosias
 </p>
 
-<br><br>
+<br>
 <p>
 PS: Gelieve bij verdere email-communicatie steeds de reservatie-code: <em>{$reservation._code}</em> te vermelden!
 <p>
