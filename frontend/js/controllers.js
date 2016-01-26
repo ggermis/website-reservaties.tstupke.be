@@ -186,7 +186,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         return $scope.auth_token != null;
     };
 
-    loadReservations();
+    // loadReservations();
 
     $scope.numberOfDays = function(from_date, to_date) {
         var days = Math.abs(Math.floor(( Date.parse(from_date) - Date.parse(to_date) ) / 86400000));
