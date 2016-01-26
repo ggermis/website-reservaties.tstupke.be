@@ -636,6 +636,19 @@ div.modal-body {
     padding: 0px 15px;
 }
 
+.modal.modal-wide .modal-dialog {
+  width: 80%;
+}
+
+.modal-wide .modal-body {
+  overflow-y: auto;
+}
+
+.modal-open {
+    overflow: hidden;
+}
+
+
 .radio {
     position: relative; 
     left: 1.4em;
