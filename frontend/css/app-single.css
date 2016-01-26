@@ -619,6 +619,15 @@ form.adminReservationForm {
     background-color: cyan;
 }
 
+.email h1 {
+    clear: both;
+    color: #aaa;
+    text-align: center;
+    font-size: 1.4em;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+}
+
 .email .header .sent, .email .header .to, .email .header .subject {
     font-weight: bold;
 }

@@ -50,7 +50,7 @@ $reservation = $params['message'];
 
 $template = realpath(dirname(__FILE__)) . '/mail-templates/internal/reservation.tpl';
 $mailer = new Mailer($reservation, $template);
-$mailer->sendWithoutHistory(__MAIL_TSTUPKE_EMAIL__, "Reservatie: " . $reservation['_entity'] . ' (' . $reservation['_name'] . ') - ' . $reservation['_code']);
+$mailer->sendWithoutHistory(__MAIL_TSTUPKE_EMAIL__, "Reservatie: " . $reservation['_entity'] . ' (' . $reservation['_name'] . ')');
 
 $template = realpath(dirname(__FILE__)) . '/mail-templates/' . $reservation['_type'] . '/reservation.tpl';
 $mailer = new Mailer($reservation, $template);
