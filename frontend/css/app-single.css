@@ -637,7 +637,8 @@ div.modal-body {
 }
 
 .modal.modal-wide .modal-dialog {
-  width: 80%;
+  width: 880px;
+  left: 1em;
 }
 
 .modal-wide .modal-body {
