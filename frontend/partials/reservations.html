@@ -96,7 +96,6 @@
             <br>
         </article>
 
-
         <article ng-if="is_authorized()">
             <form class="adminReservationForm" name="adminReservationForm" novalidate>
 
@@ -112,6 +111,11 @@
 
                 <div class="status {{status}}">{{message}}</div>
             </form>
+
+            <br>
+            <center>
+            <a href="/logs.txt" target="_blank">Toon logs</a>
+            </center>
 
             <div class="adminCurrentReservation reservationList fadeIn" ng-if="current_reservations">
                 <br>
