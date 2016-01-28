@@ -88,9 +88,13 @@ class Mailer {
 
     function send($to, $subject, $type = "reservation") {
       if (mail($to, $subject, $this->message, $this->headers)) {
-          $audit_query = "INSERT INTO email_history (_type, _reservation, _to, _subject, _body) VALUES(?, ?, ?, ?, ?)";
+          $dt = new DateTime();
+          $dt->setTimeZone(new DateTimeZone('Europe/Brussels'));
+          $date = $dt->format("Y-m-d H:m:s");
+
+          $audit_query = "INSERT INTO email_history (_type, _reservation, _to, _subject, _body, _sent) VALUES(?, ?, ?, ?, ?, ?)";
           $sql = new MysqliDb(__DB_HOST__, __DB_USER__, __DB_PASS__, __DB_DB__);
-          $sql->rawQuery($audit_query, Array($type, $this->reservation['_id'], $to, $subject, $this->message)); 
+          $sql->rawQuery($audit_query, Array($type, $this->reservation['_id'], $to, $subject, $this->message, $date)); 
           $status_query = "UPDATE reservations SET _has_emails = TRUE WHERE _id = ?";
           $sql->rawQuery($status_query, Array($this->reservation['_id']));
       }
@@ -105,11 +109,14 @@ if ($type == 'reminder') {
 
 for ($i=0; $i<count($result); ++$i) {
     $reservation = $result[$i];   
-    $template = realpath(dirname(__FILE__)) . '/mail-templates/' . $reservation['_type'] . '/' . $type . '.tpl';
+    $template = __ROOT__ . '/frontend/api/mail-templates/' . $reservation['_type'] . '/' . $type . '.tpl';
  
+    $dt = new DateTime();
+    $dt->setTimeZone(new DateTimeZone('Europe/Brussels'));
+
     $mailer = new Mailer($reservation, $template);
     $mailer->send($reservation['_email'], "Herinnering reservatie Kampplaats 't Stupke", $type);    
-    printf("[%s] - [uitgaande emails] - %s - %s email verstuurd naar: %s [%s] - de reservatie start op %s\n", date("Y-m-d H:m:s"), $reservation_type, $type, $reservation['_email'], $reservation['_entity'], $reservation['_arrival']);
+    printf("[%s] - [uitgaande emails] - %s - %s email verstuurd naar: %s [%s] - de reservatie start op %s\n", $dt->format("Y-m-d H:m:s"), $reservation_type, $type, $reservation['_email'], $reservation['_entity'], $reservation['_arrival']);
 }
 
 

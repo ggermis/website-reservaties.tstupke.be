@@ -142,8 +142,8 @@
                                                                ng-change="updateReservation(current_reservation)"></select></div>
                     <div>Aantal personen: <input  type="number" ng-model="current_reservation._nr_of_people" ng-change="updateReservation(current_reservation)"></div>
                     <div>Aangevraagd op: <input type="text" size="20" ng-model="current_reservation._created" disabled></div>
-                    <div>Van: <input type="text" size="10" ng-model="current_reservation._arrival" datepicker autocomplete="off" readonly ng-change="updateReservation(current_reservation)"></div>
-                    <div>Tot: <input type="text" size="10" ng-model="current_reservation._departure" datepicker autocomplete="off" readonly ng-change="updateReservation(current_reservation)"></div>
+                    <span>Van: <input type="text" size="10" ng-model="current_reservation._arrival" datepicker autocomplete="off" readonly ng-change="updateReservation(current_reservation)"></span>
+                    <span>Tot: <input type="text" size="10" ng-model="current_reservation._departure" datepicker autocomplete="off" readonly ng-change="updateReservation(current_reservation)"></span>
                     <div class="status">Status: <select ng-model="current_reservation._status"
                                                         ng-options="s for s in reservation_status"
                                                         ng-change="updateReservation(current_reservation)"></select></div>

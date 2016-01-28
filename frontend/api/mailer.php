@@ -27,11 +27,15 @@ class Mailer {
     function send($to, $subject, $type = "reservation") {
         $result = mail($to, $subject, $this->message, $this->headers);
         if ($result) {
+            $dt = new DateTime();
+            $dt->setTimeZone(new DateTimeZone('Europe/Brussels'));
+            $date = $dt->format("Y-m-d H:m:s");
+
             $reservation_id = $this->findStoredReservationId();
             $status_query = "UPDATE reservations SET _has_emails = TRUE WHERE _id = ?";
             $this->sql->rawQuery($status_query, Array($reservation_id));
-            $audit_query = "INSERT INTO email_history (_type, _reservation, _to, _subject, _body) VALUES(?, ?, ?, ?, ?)";
-            $this->sql->rawQuery($audit_query, Array($type, $reservation_id, $to, $subject, $this->message)); 
+            $audit_query = "INSERT INTO email_history (_type, _reservation, _to, _subject, _body, _sent) VALUES(?, ?, ?, ?, ?, ?)";
+            $this->sql->rawQuery($audit_query, Array($type, $reservation_id, $to, $subject, $this->message, $date)); 
         }
         return $result;
     }
@@ -48,7 +52,7 @@ class Mailer {
 $reservation = $params['message'];
 
 
-$template = realpath(dirname(__FILE__)) . '/mail-templates/internal/reservation.tpl';
+$template = __ROOT__ . '/frontend/api/mail-templates/internal/reservation.tpl';
 $mailer = new Mailer($reservation, $template);
 $mailer->sendWithoutHistory(__MAIL_TSTUPKE_EMAIL__, "Reservatie: " . $reservation['_entity'] . ' (' . $reservation['_name'] . ')');
 

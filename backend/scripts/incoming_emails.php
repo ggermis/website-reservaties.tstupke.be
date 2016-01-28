@@ -120,14 +120,20 @@ for ($n = 1; $n <= $mbox->Nmsgs; $n++) {
 	$sender = $headers->sender[0];
 	$from = $sender->mailbox . "@" . $sender->host;
 	$to = __MAIL_TSTUPKE_EMAIL__;
-	$date = gmdate("Y-m-d H:m:s", $headers->udate);
+    $dt = new DateTime('@' . $headers->udate);
+    $dt->setTimeZone(new DateTimeZone('Europe/Brussels'));
+	$date = $dt->format("Y-m-d H:m:s");
 
 	getmsg($mail, $n);
+    
+    $dt = new DateTime();
+    $dt->setTimeZone(new DateTimeZone('Europe/Brussels'));
+
 	$reservation = find_reservation_from_code($subject, $htmlmsg ? $htmlmsg : $plainmsg, $to, $subject, $date);
 	if ($reservation) {
 		printf("[%s] - [inkomende emails] - %s - email ontvangen voor reservatie: '%s' [%s] - de reservatie start op %s\n", date("Y-m-d H:m:s"), $reservation['_type'], $reservation['_code'], $reservation['_entity'], $reservation['_arrival']);
 	} else {
-		printf("[%s] - [inkomende emails] - ! Email %s genegeerd van %s [%s]. Geen reservatie-code gevonden.\n", date("Y-m-d H:m:s"), $n, $from, $subject);
+		printf("[%s] - [inkomende emails] - ! Email %s genegeerd van %s [%s]. Geen reservatie-code gevonden.\n", $dt->format("Y-m-d H:m:s"), $n, $from, $subject);
 	}
 	
 	imap_delete($mail, $n);
