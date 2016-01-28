@@ -1,3 +1,10 @@
+CLEAR DB:
+---------
+delete from reservations;
+delete from email_history;
+delete from notes;
+
+
 WEEKEND:
 --------
 
@@ -76,3 +83,12 @@ BIVAK:
 - verander datum naar 5/2/2016
 - loop script (-> instructions)
    - ./send_automated_mails.sh $(which php) $(pwd)    
+
+
+
+ADMIN IMPROVEMENTS:
+-------------------
+
+- editeerbare velden
+- emails
+- notes
