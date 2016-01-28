@@ -92,8 +92,8 @@ ADMIN IMPROVEMENTS:
 - editeerbare velden
 - emails
 - notes
-- dubbele boekingen
-- login per gebruiker
+- dubbele boekingen detectie
+- login per gebruiker (-> paswoorden genereren: echo -n 'password' | md5sum)
   - sandra
   - fabienne
   - peter

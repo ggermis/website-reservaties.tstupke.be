@@ -125,9 +125,9 @@ for ($n = 1; $n <= $mbox->Nmsgs; $n++) {
 	getmsg($mail, $n);
 	$reservation = find_reservation_from_code($subject, $htmlmsg ? $htmlmsg : $plainmsg, $to, $subject, $date);
 	if ($reservation) {
-		echo " -> Email ontvangen ivm reservatie: '{$reservation['_code']}'\n";
+		printf("[%s]: - Email ontvangen ivm reservatie: '%s' [%s (%s) - %s start op %s]\n", date("Y-m-d H:m:s"), $reservation['_code'], $reservation['_name'], $reservation['_entity'], $reservation['_type'], $reservation['_arrival']);
 	} else {
-		echo " !> Ignoring message {$n} from {$from}. No reservation code found.\n";
+		printf("[%s]: ! Ignoring message %s from %s. No reservation code found.\n", $n, $from);
 	}
 	
 	imap_delete($mail, $n);

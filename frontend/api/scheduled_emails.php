@@ -109,7 +109,7 @@ for ($i=0; $i<count($result); ++$i) {
  
     $mailer = new Mailer($reservation, $template);
     $mailer->send($reservation['_email'], "Herinnering reservatie Kampplaats 't Stupke", $type);    
-    printf("%s - %s email verstuurd naar: %s [%s] - de reservatie start op %s\n", $reservation_type, $type, $reservation['_email'], $reservation['_entity'], $reservation['_arrival']);
+    printf("[%s] %s - %s email verstuurd naar: %s [%s] - de reservatie start op %s\n", date("Y-m-d H:m:s"), $reservation_type, $type, $reservation['_email'], $reservation['_entity'], $reservation['_arrival']);
 }
 
 
