@@ -122,7 +122,6 @@
                 <h3>Geselecteerde reservaties</h3>
 
                 <div class="reservation {{ current_reservation._status }} {{ reservation_class(current_reservation) }}" ng-repeat="current_reservation in current_reservations">
-
                     <span class="emails" ng-if="current_reservation._has_emails">
                         <a href="" class="emails" ng-click="loadEmailHistory(current_reservation)" data-toggle="modal" data-target="#emailModal"><img src="/img/email.png" alt="emails"></a>
                     </span>
