@@ -2,5 +2,5 @@ config.php
 frontend/.htaccess
 frontend/api/templates_c
 templates_c
-backups/
+_backups/
 changes.txt
