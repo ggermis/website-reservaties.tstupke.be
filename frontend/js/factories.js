@@ -140,7 +140,7 @@ angular.module('Main').factory('CalendarHelper', function () {
                 var day = date.getDate();
                 var month = date.getMonth();
                 var isSummer = (month == 6 || (month == 7 && day <= 14) );
-                if (!isSummer && (reservation == null || reservation._status === 'pending')) {
+                if (!isSummer && (reservation == null || reservation._status === 'pending' || this.isReservationBorder(reservation, date))) {
                     // check if 2 days from now is free too (weekend lasts 3 days)
                     var future_date = new Date(date.valueOf() + 60*60*24*1*1000); // 1 days from now
                     var found_future_reservations = this.getReservations(reservations, future_date);

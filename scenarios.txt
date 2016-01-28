@@ -92,10 +92,12 @@ ADMIN IMPROVEMENTS:
 - editeerbare velden
 - emails
 - notes
+- dubbele boekingen
 - login per gebruiker
   - sandra
   - fabienne
   - peter
+
 
 RESERVATIEBLOKKEN DEFINIEREN:
 -----------------------------
