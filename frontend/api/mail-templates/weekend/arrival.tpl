@@ -24,3 +24,8 @@ Fabienne Rosias
 <br><br><br>
 P.S.: Aankomst en vertrekuren zijn bespreekbaar
 </p>
+
+<br>
+<p>
+PS: Gelieve bij verdere email-communicatie steeds de reservatie-code: <em>{$reservation._code}</em> te vermelden!
+<p>

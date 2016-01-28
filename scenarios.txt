@@ -1,8 +1,78 @@
 WEEKEND:
 --------
 
-- plaats een reservatie voor 
+- plaats een reservatie voor 17/5/2016
+- check email
+   - bevestigingsmail
+   - interne notificatiemail 
+- check admin scherm 
+   -> reservatie = pending
+- loop scripts
+   - php frontend/api/incoming_emails.php
+- check admin scherm 
+   -> emails
+      - email aan huurder (groen)
+      - email aan tstupke (originele parameters) (blauw)
+- loop scripts (emails versturen) -> gebeurt niets (creation date < 15 dagen)
+   - ./send_automated_mails.sh $(which php) $(pwd)  
+
+REMINDER (15 dagen na aanvraag)  
+
+- verander _created datum naar 10/1/2016 (> 15 dagen geleden)
+   - _created omdat ge ze binnen 15 dagen moeten betalen ongeacht wanneer ze komen
+- check created datum in admin scherm
+- loop scripts (emails versturen) -> verstuurt reminder mail (email w2)
+   - ./send_automated_mails.sh $(which php) $(pwd)   
+- check email
+   - reminder mail
+- check admin scherm
+   - emails
+
+
+- ofwel wissen, ofwel confirmen
+
+
+INSTRUCTIONS (2 maanden voor aankomst)
+
+- zet status op confirmed (betaald)   
+- loop scripts (emails versturen) -> verstuurt niets (> 2 maanden)
+   - ./send_automated_mails.sh $(which php) $(pwd)    
+- verander datum naar 17/3
+- loop scripts (emails versturen) -> verstuurt instruction mail (< 2 maanden)
+   - ./send_automated_mails.sh $(which php) $(pwd)    
+
+- antwoord op instructie mail (met reservatiecode)
+- loop scripts (-> zichtbaar in admin scherm)
+  - php frontend/api/incoming_emails.php
+
+
+ARRIVAL (1 week voor aankomst)
+
+- verander datum naar 1/2
+- loop scripts (-> arrival mail)
+  - ./send_automated_mails.sh $(which php) $(pwd)   
+
+
+
+ALLE EMAILS INEENS
+
+- plaats reservatie voor 30/1
+- verander created datum naar 10/1
+- loop script (reminder)
+    - ./send_automated_mails.sh $(which php) $(pwd)    
+- verander status naar confirmed
+- loop scripts (instructions + arrival)
+    - ./send_automated_mails.sh $(which php) $(pwd)    
 
 
 BIVAK:
 ------
+
+- plaats reservatie voor periode1
+- verander created naar 10/1/2016
+- loop scripts (reminder)
+   - ./send_automated_mails.sh $(which php) $(pwd)    
+- verander status in confirmed
+- verander datum naar 5/2/2016
+- loop script (-> instructions)
+   - ./send_automated_mails.sh $(which php) $(pwd)    
