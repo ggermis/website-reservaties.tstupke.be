@@ -202,6 +202,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         $scope.reservation._phone = "0495/246650";
         $scope.reservation._agreed = true;
         $scope.reservation._status = 'confirmed';
+        $scope.reservation._code = $scope.reservation._arrival + '-' + Util.createGuid();
 
         var isDoubleBooked = CalendarHelper.existsReservationBetween($scope.reservations, new Date($scope.reservation._arrival), new Date($scope.reservation._departure), true);
         if (isDoubleBooked) {
