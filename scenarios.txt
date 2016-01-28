@@ -92,3 +92,12 @@ ADMIN IMPROVEMENTS:
 - editeerbare velden
 - emails
 - notes
+- login per gebruiker
+  - sandra
+  - fabienne
+  - peter
+
+RESERVATIEBLOKKEN DEFINIEREN:
+-----------------------------
+- importeren huidige data
+- jaren afgaan -> controller.js aanpassen ($scope.block)

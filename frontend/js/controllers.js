@@ -203,7 +203,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         $scope.reservation._agreed = true;
         $scope.reservation._status = 'confirmed';
 
-        var isDoubleBooked = CalendarHelper.existsReservationBetween($scope.reservations, new Date($scope.reservation._arrival), new Date($scope.reservation._departure), false);
+        var isDoubleBooked = CalendarHelper.existsReservationBetween($scope.reservations, new Date($scope.reservation._arrival), new Date($scope.reservation._departure), true);
         if (isDoubleBooked) {
             $scope.status = 'error';
             $scope.message = 'Dubbele boeking! Reservatie niet opgeslagen!';
