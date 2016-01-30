@@ -128,7 +128,8 @@ angular.module('Main')
                                 var nrOfDays = daysInMonth(j, year);
                                 var firstDay = firstDayOfMonth(j - 1, year); // Mo = 0
                                 if (i > firstDay && i <= nrOfDays + firstDay) {
-                                    var d = new Date(year, j - 1, i - firstDay);
+                                    var d = new Date(year, j - 1, i - firstDay, 0, 0, 0);
+                                    var formattedDate = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2)
                                     cellText = document.createTextNode(d.getDate());
                                     cell.appendChild(cellText);
 
@@ -137,7 +138,7 @@ angular.module('Main')
                                         function captureArrivalDate(d) {
                                             return function(event) { 
                                                 scope.message = '';
-                                                scope.reservation._arrival = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+                                                scope.reservation._arrival = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);;
                                                 scope.reservation._departure = '';
                                                 scope.current_reservations = CalendarHelper.getReservationsWithOverlap(scope.reservations, d);
                                                 scope.$apply();
@@ -145,7 +146,7 @@ angular.module('Main')
                                         }
                                         function captureDepartureDate(d) {
                                             return function(event) {
-                                                var departure_date = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+                                                var departure_date = d.getFullYear() + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);;
                                                 if (new Date(departure_date).valueOf() < new Date(scope.reservation._arrival)) {
                                                     scope.reservation._departure = scope.reservation._arrival;
                                                     scope.reservation._arrival = departure_date;
@@ -166,7 +167,21 @@ angular.module('Main')
                                     // support multiple reservation statuses
                                     if (found_reservations.length > 0) {
                                         statuses = found_reservations.map(function (r) {
-                                            return r._status
+                                            if (r._status == 'closed') {
+                                                return r._status;
+                                            } 
+
+                                            var result = "";
+                                            if (formattedDate == r._arrival) {
+                                                result += " free start-" + r._status;
+                                            }
+                                            if (formattedDate == r._departure) {
+                                                result += " free end-" + r._status;
+                                            } 
+                                            if (!result) {
+                                                result = r._status;
+                                            }
+                                            return result;
                                         }).join(' ');
                                     }
 
@@ -175,7 +190,7 @@ angular.module('Main')
                                         cell.title = reservation._name + ' (' + reservation._entity + ')';
                                     }
 
-                                    cell.className = cell.className + " d" + d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+                                    cell.className = cell.className + " d" + formattedDate;
 
                                     var now = new Date();
                                     var yesterday = new Date().setDate(now.getDate()-1);
