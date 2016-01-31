@@ -52,7 +52,7 @@ class Mailer {
 $reservation = $params['message'];
 
 
-$template = __ROOT__ . '/frontend/api/mail-templates/internal/reservation.tpl';
+$template = __FRONTEND_DIR__ . '/api/mail-templates/internal/reservation.tpl';
 $mailer = new Mailer($reservation, $template);
 $mailer->sendWithoutHistory(__MAIL_TSTUPKE_EMAIL__, "Reservatie: " . $reservation['_entity'] . ' (' . $reservation['_name'] . ')');
 

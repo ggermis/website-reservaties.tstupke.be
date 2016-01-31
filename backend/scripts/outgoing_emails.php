@@ -109,7 +109,7 @@ if ($type == 'reminder') {
 
 for ($i=0; $i<count($result); ++$i) {
     $reservation = $result[$i];   
-    $template = __ROOT__ . '/frontend/api/mail-templates/' . $reservation['_type'] . '/' . $type . '.tpl';
+    $template = __FRONTEND_DIR__ . '/api/mail-templates/' . $reservation['_type'] . '/' . $type . '.tpl';
  
     $dt = new DateTime();
     $dt->setTimeZone(new DateTimeZone('Europe/Brussels'));
