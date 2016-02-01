@@ -454,14 +454,14 @@ td {
 
 /*pending*/
 .day.start-pending {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='orangered' stroke='black' stroke-width='0'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='orangered'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='3'/></svg>");
     background-repeat:no-repeat;
     background-position:center center;
     background-size: 100% 100%, auto;
 }
 
 .day.end-pending {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M0 0 L0 100 L100 0 L0 0' fill='orangered' stroke='black' stroke-width='0'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M0 0 L0 100 L100 0 L0 0' fill='orangered'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='3'/></svg>");
     background-repeat:no-repeat;
     background-position:center center;
     background-size: 100% 100%, auto;    
@@ -469,7 +469,7 @@ td {
 
 /*confirmed*/
 .day.start-confirmed {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='#ffe45c' stroke='black' stroke-width='0'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='#ffe45c'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='3'/></svg>");
     background-repeat:no-repeat;
     background-position:center center;
     background-size: 100% 100%, auto;
@@ -477,7 +477,7 @@ td {
 }
 
 .day.end-confirmed {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M0 0 L0 100 L100 0 L0 0' fill='#ffe45c' stroke='black' stroke-width='0'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M0 0 L0 100 L100 0 L0 0' fill='#ffe45c'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='3'/></svg>");
     background-repeat:no-repeat;
     background-position:center center;
     background-size: 100% 100%, auto; 
@@ -487,7 +487,7 @@ td {
 /*closed*/
 
 .day.start-closed {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='darkslategray' stroke='black' stroke-width='0'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='darkslategray'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='3'/></svg>");
     background-repeat:no-repeat;
     background-position:center center;
     background-size: 100% 100%, auto;
@@ -495,7 +495,7 @@ td {
 }
 
 .day.end-closed {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M0 0 L0 100 L100 0 L0 0' fill='darkslategray' stroke='black' stroke-width='0'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M0 0 L0 100 L100 0 L0 0' fill='darkslategray'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='3'/></svg>");
     background-repeat:no-repeat;
     background-position:center center;
     background-size: 100% 100%, auto;    
@@ -505,21 +505,21 @@ td {
 /*combinations*/
 
 .day.start-confirmed.end-confirmed {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='#ffe45c' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='#ffe45c' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='5'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='#ffe45c' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='#ffe45c' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='3'/></svg>");
     background-repeat:no-repeat;
     background-position:center center;
     background-size: 100% 100%, auto;    
 }
 
 .day.start-confirmed.end-pending {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='#ffe45c' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='orangered' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='5'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='#ffe45c' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='orangered' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='3'/></svg>");
     background-repeat:no-repeat;
     background-position:center center;
     background-size: 100% 100%, auto;    
 }
 
 .day.start-confirmed.end-closed {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='#ffe45c' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='darkslategray' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='5'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='#ffe45c' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='darkslategray' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='3'/></svg>");
     background-repeat:no-repeat;
     background-position:center center;
     background-size: 100% 100%, auto;
@@ -527,14 +527,14 @@ td {
 }
 
 .day.start-pending.end-pendng {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='orangered' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='orangered' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='5'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='orangered' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='orangered' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='3'/></svg>");
     background-repeat:no-repeat;
     background-position:center center;
     background-size: 100% 100%, auto;  
 }
 
 .day.start-pending.end-confirmed {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='orangered' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='#ffe45c' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='5'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='orangered' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='#ffe45c' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='3'/></svg>");
     background-repeat:no-repeat;
     background-position:center center;
     background-size: 100% 100%, auto;    
@@ -542,7 +542,7 @@ td {
 }
 
 .day.start-pending.end-closed {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='orangered' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='darkslategray' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='5'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='orangered' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='darkslategray' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='3'/></svg>");
     background-repeat:no-repeat;
     background-position:center center;
     background-size: 100% 100%, auto;    
@@ -550,7 +550,7 @@ td {
 }
 
 .day.start-closed.end-closed {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='darkslategray' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='darkslategray' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='5'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='darkslategray' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='darkslategray' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='3'/></svg>");
     background-repeat:no-repeat;
     background-position:center center;
     background-size: 100% 100%, auto;   
@@ -558,7 +558,7 @@ td {
 }
 
 .day.start-closed.end-confirmed {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='darkslategray' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='#ffe45c' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='5'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='darkslategray' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='#ffe45c' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='3'/></svg>");
     background-repeat:no-repeat;
     background-position:center center;
     background-size: 100% 100%, auto; 
@@ -566,7 +566,7 @@ td {
 }
 
 .day.start-closed.end-pending {
-    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='darkslategray' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='orangered' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='5'/></svg>");
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L100 100 L0 100 L100 0' fill='darkslategray' stroke='black'/><path d='M0 0 L0 100 L100 0 L0 0' fill='orangered' stroke='black'/><path d='M100 0 L0 100' fill='black' stroke='black' stroke-width='3'/></svg>");
     background-repeat:no-repeat;
     background-position:center center;
     background-size: 100% 100%, auto; 
