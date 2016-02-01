@@ -57,6 +57,10 @@ class Reservation extends Model {
 
     public function update($id, $data)
     {
+        if (!isset($id)) {
+            http_response_code(400);
+            return array('error' => 'no id supplied for update');
+        }
         self::$_db->where('_id', $id);
         if (self::$_db->update(self::$_table_name, get_object_vars($data))) {
             return $this->find($id);
@@ -67,6 +71,10 @@ class Reservation extends Model {
 
     public function delete($id)
     {
+        if (!isset($id)) {
+            http_response_code(400);
+            return array('error' => 'no id supplied for update');
+        }
         self::$_db->where('_id', $id);
         if (self::$_db->update(self::$_table_name, array('_deleted' => true))) {
             return $this->find($id);

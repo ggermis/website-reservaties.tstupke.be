@@ -26,9 +26,9 @@ if ($request_method == 'PUT' || $request_method == 'DELETE') { // bypass for rea
 
 // Model interaction
 
-$id = $_REQUEST['id'];
-$year = $_REQUEST['year'];
-$reservation_id = $_REQUEST['reservation_id'];
+$id = (isset($_REQUEST['id']) ? $_REQUEST['id'] : null);
+$year = (isset($_REQUEST['year']) ? $_REQUEST['year'] : null);
+$reservation_id = (isset($_REQUEST['reservation_id']) ? $_REQUEST['reservation_id'] : null);
 $model_name = $_REQUEST['model'];
 $model_path = __ROOT__ . "/backend/model/{$model_name}.php";
 if (!file_exists($model_path)) {
@@ -73,7 +73,7 @@ function ensure_variable_set($variable) {
     }
 }
 
-$action = $_REQUEST['action'];
+$action = (isset($_REQUEST['action']) ? $_REQUEST['action'] : null);
 
 switch($request_method) {
     case 'GET':
