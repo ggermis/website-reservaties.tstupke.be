@@ -466,6 +466,9 @@ td {
 }
 
 
+.r2, .r3, .r4, .r5 {
+    border: 3px solid red;
+}
 
 #login {
     position: absolute;

@@ -209,7 +209,6 @@
                     <span class="validation-error" ng-show="reservationForm.phone.$error.required">Verplicht!</span>
                     <br>
 
-                    <!-- TODO: different behaviour for bivak: select year + one of the available blocks -->
                     <div ng-if="reservation._type == 'weekend'">
                         <!-- VAN -->
                         <label for="arrival">Aankomst</label>
@@ -240,8 +239,7 @@
                     </div>
                     </div>
                     <br><br>
-                    <textarea ng-model="reservation._remarks" placeholder="Eventuele opmerkingen"/><br>
-
+                    <textarea ng-model="reservation._remarks" placeholder="Eventuele opmerkingen (vb: afwijkende aankomst/vertrekdatums)"/><br>
 
                     <input type="checkbox" ng-model="reservation._agreed"/><span class="agree">Ik ga akkoord met het <a
                         href="http://www.tstupke.be/Teksten/Huishoudelijk%20Reglement%20Kampplaats%20%27t%20Stupke.pdf" target="_blank">reglement</a></span><br><br><br>

@@ -29,7 +29,7 @@ class Mailer {
         if ($result) {
             $dt = new DateTime();
             $dt->setTimeZone(new DateTimeZone('Europe/Brussels'));
-            $date = $dt->format("Y-m-d H:m:s");
+            $date = $dt->format("Y-m-d H:i:s");
 
             $reservation_id = $this->findStoredReservationId();
             $status_query = "UPDATE reservations SET _has_emails = TRUE WHERE _id = ?";

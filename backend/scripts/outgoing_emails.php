@@ -90,7 +90,7 @@ class Mailer {
       if (mail($to, $subject, $this->message, $this->headers)) {
           $dt = new DateTime();
           $dt->setTimeZone(new DateTimeZone('Europe/Brussels'));
-          $date = $dt->format("Y-m-d H:m:s");
+          $date = $dt->format("Y-m-d H:i:s");
 
           $audit_query = "INSERT INTO email_history (_type, _reservation, _to, _subject, _body, _sent) VALUES(?, ?, ?, ?, ?, ?)";
           $sql = new MysqliDb(__DB_HOST__, __DB_USER__, __DB_PASS__, __DB_DB__);
@@ -116,7 +116,7 @@ for ($i=0; $i<count($result); ++$i) {
 
     $mailer = new Mailer($reservation, $template);
     $mailer->send($reservation['_email'], "Herinnering reservatie Kampplaats 't Stupke", $type);    
-    printf("[%s] - [uitgaande emails] - %s - %s email verstuurd naar: %s [%s] - de reservatie start op %s\n", $dt->format("Y-m-d H:m:s"), $reservation_type, $type, $reservation['_email'], $reservation['_entity'], $reservation['_arrival']);
+    printf("[%s] - [uitgaande emails] - %s - %s email verstuurd naar: %s [%s] - de reservatie start op %s\n", $dt->format("Y-m-d H:i:s"), $reservation_type, $type, $reservation['_email'], $reservation['_entity'], $reservation['_arrival']);
 }
 
 

@@ -163,9 +163,11 @@ angular.module('Main')
                                     var found_reservations = CalendarHelper.getReservations(scope.reservations, d);
                                     var reservation = found_reservations.length == 0 ? null : found_reservations[0];
                                     var statuses = (reservation ? reservation._status : 'free');
+                                    
 
                                     // support multiple reservation statuses
                                     if (found_reservations.length > 0) {
+                                        statuses = scope.is_authorized() ? ("r" + found_reservations.length + " ") : "";
                                         statuses = found_reservations.map(function (r) {
                                             if (r._status == 'closed') {
                                                 return r._status;
@@ -179,7 +181,8 @@ angular.module('Main')
                                                 result += " free end-" + r._status;
                                             } 
                                             if (!result) {
-                                                result = r._status;
+                                                result = scope.is_authorized() ? ("r" + found_reservations.length + " ") : "";
+                                                result += r._status;
                                             }
                                             return result;
                                         }).join(' ');
