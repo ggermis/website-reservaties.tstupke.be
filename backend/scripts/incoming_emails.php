@@ -5,8 +5,10 @@ require_once(realpath(dirname(__FILE__) . '/../../config.php'));
 
 function extract_reservation_code($text) {
     $pattern = '/(\d{4}-\d{2}-\d{2}-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})/';
-    preg_match($pattern, $text, $matches);
-    return count($matches > 0) ? $matches[0] : null;
+    if(preg_match($pattern, $text, $matches)) {
+        return $matches[0];
+    }
+    return null;
 }
 
 function find_reservation_from_code($subject, $body, $to, $subject, $date) {
@@ -42,9 +44,9 @@ function getmsg($mbox,$mid) {
 
     // BODY
     $s = imap_fetchstructure($mbox,$mid);
-    if (!$s->parts)  // simple
+    if (!(isset($s->parts) ? $s->parts : false)) {  // simple
         getpart($mbox,$mid,$s,0);  // pass 0 as part-number
-    else {  // multipart: cycle through each part
+    } else {  // multipart: cycle through each part
         foreach ($s->parts as $partno0=>$p)
             getpart($mbox,$mid,$p,$partno0+1);
     }
@@ -70,14 +72,14 @@ function getpart($mbox,$mid,$p,$partno) {
     if ($p->parameters)
         foreach ($p->parameters as $x)
             $params[strtolower($x->attribute)] = $x->value;
-    if ($p->dparameters)
+    if (isset($p->dparameters) ? $p->dparameters : false)
         foreach ($p->dparameters as $x)
             $params[strtolower($x->attribute)] = $x->value;
 
     // ATTACHMENT
     // Any part with a filename is an attachment,
     // so an attached text file (type 0) is not mistaken as the message.
-    if ($params['filename'] || $params['name']) {
+    if (isset($params['filename']) || isset($params['name'])) {
         // filename may be given as 'Filename' or 'Name' or both
         $filename = ($params['filename'])? $params['filename'] : $params['name'];
         // filename may be encoded, so see imap_mime_header_decode()
@@ -105,7 +107,7 @@ function getpart($mbox,$mid,$p,$partno) {
     }
 
     // SUBPART RECURSION
-    if ($p->parts) {
+    if (isset($p->parts) ? $p->parts : false) {
         foreach ($p->parts as $partno0=>$p2)
             getpart($mbox,$mid,$p2,$partno.'.'.($partno0+1));  // 1.2, 1.2.1, etc.
     }
