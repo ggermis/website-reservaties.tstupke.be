@@ -112,7 +112,7 @@ function getpart($mbox,$mid,$p,$partno) {
 }
 
 
-$mail = imap_open('{' . __INCOMING_MAIL_SERVER__ . ':' . __INCOMING_MAIL_PORT__ . '/pop3/novalidate-cert}INBOX', __INCOMING_MAIL_USERNAME__, __INCOMING_MAIL_PASSWORD__);
+$mail = imap_open('{' . __INCOMING_MAIL_SERVER__ . ':' . __INCOMING_MAIL_PORT__ . '/pop3/novalidate-cert}INBOX', __INCOMING_MAIL_USERNAME__, __INCOMING_MAIL_PASSWORD__, OP_SILENT);
 $mbox = imap_check($mail); 
 for ($n = 1; $n <= $mbox->Nmsgs; $n++) {
     $headers = imap_header($mail, $n);
