@@ -580,14 +580,14 @@ td {
     font-weight: bold !important;
 }
 
-.r2, .r3, .r4, .r5 {
-    /* !! multiple reservations !! */
-    border: 3px double red;
-}
-
 .pending.r2, .pending.r3, .pending.r4, .pending.r5 {
     /* !! multiple reservations !! */
     border: 3px double white;
+}
+
+.confirmed.r2, .confirmed.r3, .confirmed.r4, .confirmed.r5 {
+    /* !! multiple reservations !! */
+    border: 3px double red;
 }
 
 #login {
