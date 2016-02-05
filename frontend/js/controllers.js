@@ -145,15 +145,15 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         Notes.single.create({}, $scope.note).$promise
             .then(function (data) {
                 $scope.status = 'ok';
-                $scope.note_reservation['_has_notes'] = true;
-                Reservations.single.update({id: $scope.note_reservation._id}, $scope.note_reservation).$promise
-                    .then(function (data) {
-                        $scope.status = 'ok';
-                        loadReservations(false);
-                    }, function (error) {
-                        $scope.message = error.data;
-                        loadReservations(false);
-                    });
+                if (!$scope.note_reservation['_has_notes']) {
+                    $scope.note_reservation['_has_notes'] = true;
+                    Reservations.single.update({id: $scope.note_reservation._id}, $scope.note_reservation).$promise
+                        .then(function (data) {
+                            $scope.status = 'ok';
+                        }, function (error) {
+                            $scope.message = error.data;
+                        });
+                }
                 $scope.loadNotes($scope.note_reservation);
             }, function (error) {
                 $scope.status = 'error';
@@ -169,10 +169,8 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
                     Reservations.single.update({id: $scope.note_reservation._id}, $scope.note_reservation).$promise
                         .then(function (data) {
                             $scope.status = 'ok';
-                            loadReservations(false);
                         }, function (error) {
                             $scope.message = error.data;
-                            loadReservations(false);
                         });
                 }
                 $scope.loadNotes($scope.note_reservation);
