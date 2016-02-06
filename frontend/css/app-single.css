@@ -226,6 +226,14 @@ article {
 .reservationForm input[type=checkbox] {
     left: 1em;
 }
+.reservationList input[type=checkbox] {
+    left: 0;
+    margin-left: 3em;
+}
+
+.reservationList .filter {
+    text-align: center;
+}
 
 .reservationForm .validation-error {
     display: inline;

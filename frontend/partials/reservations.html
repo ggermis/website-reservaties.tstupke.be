@@ -268,7 +268,14 @@
             <article>
                 <h3>{{reservation_count}} reservaties voor {{state.year}}</h3>
 
-                <div class="reservation {{ reservation._status }} {{ reservation_class(reservation) }}" ng-repeat="reservation in reservations">
+                <div class="filter">
+                    Toon enkel:
+                    <span><input type="checkbox" ng-model="reservation_filter.pending"/>Pending</span>
+                    <span><input type="checkbox" ng-model="reservation_filter.confirmed"/>Confirmed</span>
+                    <span><input type="checkbox" ng-model="reservation_filter.closed"/>Closed</span>
+                </div>
+
+                <div class="reservation {{ reservation._status }} {{ reservation_class(reservation) }}" ng-repeat="reservation in reservations | filter_types:this">
                     <span class="emails" ng-if="reservation._has_emails">
                         <a href="" class="emails" ng-click="loadEmailHistory(reservation)" data-toggle="modal" data-target="#emailModal"><img src="/img/email.png" alt="emails"></a>
                     </span>

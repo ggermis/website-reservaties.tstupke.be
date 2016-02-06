@@ -95,6 +95,12 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         selected_block: "0"        
     };
 
+    $scope.reservation_filter = {
+        closed: false,
+        confirmed: true,
+        pending: true
+    };
+
     $scope.reservation_status = ['pending', 'confirmed', 'closed'];
     $scope.reservation_types = ['weekend', 'bivak'];
 
