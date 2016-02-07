@@ -118,11 +118,19 @@
                 <div class="status {{status}}">{{message}}</div>
             </form>
 
+            <div class="filter">
+                Toon:
+                <span><input type="checkbox" ng-model="reservation_filter.pending"/>Pending</span>
+                <span><input type="checkbox" ng-model="reservation_filter.confirmed"/>Confirmed</span>
+                <span><input type="checkbox" ng-model="reservation_filter.closed"/>Closed</span>
+                <span><input type="checkbox" ng-model="reservation_filter.deleted"/>Deleted</span>
+            </div>
+
             <div class="adminCurrentReservation reservationList fadeIn" ng-if="current_reservations">
                 <br>
                 <h3>Geselecteerde reservaties</h3>
 
-                <div class="reservation {{ current_reservation._status }} {{ reservation_class(current_reservation) }}" ng-repeat="current_reservation in current_reservations">
+                <div class="reservation {{ current_reservation._status }} {{ reservation_class(current_reservation) }}  {{ current_reservation._deleted ? 'deleted' : '' }}" ng-repeat="current_reservation in current_reservations | filter_types:this">
                     <span class="emails" ng-if="current_reservation._has_emails">
                         <a href="" class="emails" ng-click="loadEmailHistory(current_reservation)" data-toggle="modal" data-target="#emailModal"><img src="/img/email.png" alt="emails"></a>
                     </span>
@@ -130,7 +138,8 @@
                         <a href="" class="notes" ng-click="loadNotes(current_reservation)" data-toggle="modal" data-target="#notesModal"><img ng-src="/img/{{current_reservation._has_notes ? 'has-notes' : 'notes' }}.png" alt="notes"></a>
                     </span>
                     <span class="delete">
-                        <a href="" class="remove" ng-click="deleteReservation(current_reservation._id)"><img src="/img/trash.png" alt="delete"></a>
+                        <a href="" class="remove" ng-click="deleteReservation(current_reservation._id)" ng-if="current_reservation._deleted == false"><img src="/img/trash.png" alt="delete"></a>
+                        <a href="" class="remove" ng-click="undeleteReservation(current_reservation)" ng-if="current_reservation._deleted == true"><img src="/img/undelete.jpg" alt="undelete"></a>
                     </span> 
 
                     <div class="entity">
@@ -268,14 +277,7 @@
             <article>
                 <h3>{{reservation_count}} reservaties voor {{state.year}}</h3>
 
-                <div class="filter">
-                    Toon enkel:
-                    <span><input type="checkbox" ng-model="reservation_filter.pending"/>Pending</span>
-                    <span><input type="checkbox" ng-model="reservation_filter.confirmed"/>Confirmed</span>
-                    <span><input type="checkbox" ng-model="reservation_filter.closed"/>Closed</span>
-                </div>
-
-                <div class="reservation {{ reservation._status }} {{ reservation_class(reservation) }}" ng-repeat="reservation in reservations | filter_types:this">
+                <div class="reservation {{ reservation._status }} {{ reservation_class(reservation) }} {{ reservation._deleted ? 'deleted' : '' }}" ng-repeat="reservation in reservations | filter_types:this">
                     <span class="emails" ng-if="reservation._has_emails">
                         <a href="" class="emails" ng-click="loadEmailHistory(reservation)" data-toggle="modal" data-target="#emailModal"><img src="/img/email.png" alt="emails"></a>
                     </span>
@@ -283,7 +285,8 @@
                         <a href="" class="notes" ng-click="loadNotes(reservation)" data-toggle="modal" data-target="#notesModal"><img ng-src="/img/{{reservation._has_notes ? 'has-notes' : 'notes' }}.png" alt="notes"></a>
                     </span>
                     <span class="delete">
-                        <a href="" class="remove" ng-click="deleteReservation(reservation._id)"><img src="/img/trash.png" alt="delete"></a>
+                        <a href="" class="remove" ng-click="deleteReservation(reservation._id)" ng-if="reservation._deleted == false"><img src="/img/trash.png" alt="delete"></a>
+                        <a href="" class="remove" ng-click="undeleteReservation(reservation)" ng-if="reservation._deleted == true"><img src="/img/undelete.jpg" alt="undelete"></a>
                     </span> 
 
 

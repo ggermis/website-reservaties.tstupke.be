@@ -37,10 +37,10 @@ class Reservation extends Model {
     public function find($id)
     {
         if ($id) {
-            self::$_db->where('_id', $id)->where('_deleted', false);
+            self::$_db->where('_id', $id);
             return self::$_db->getOne(self::$_table_name);
         } else {
-            self::$_db->where('_deleted', false)->where('YEAR(_arrival)', $this->year);
+            self::$_db->where('YEAR(_arrival)', $this->year);
             self::$_db->orderBy('_arrival', 'desc');
             return self::$_db->get(self::$_table_name);
         }

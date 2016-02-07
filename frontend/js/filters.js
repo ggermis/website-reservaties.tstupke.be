@@ -10,9 +10,10 @@ angular.module('Main')
 		return function(reservations, scope) {
 			if (reservations == null) { return; }
 			return reservations.filter(function(reservation) {
-				return (scope.reservation_filter.confirmed && reservation._status == 'confirmed') ||
-					   (scope.reservation_filter.pending && reservation._status == 'pending') ||
-					   (scope.reservation_filter.closed && reservation._status == 'closed')
+				return (scope.reservation_filter.confirmed && reservation._status == 'confirmed' && ! reservation._deleted) ||
+					   (scope.reservation_filter.pending && reservation._status == 'pending' && ! reservation._deleted) ||
+					   (scope.reservation_filter.closed && reservation._status == 'closed' && ! reservation._deleted) ||
+					   (scope.reservation_filter.deleted && reservation._deleted)
 			})
 		}
 	});

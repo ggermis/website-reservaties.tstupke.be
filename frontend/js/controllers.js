@@ -98,7 +98,8 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     $scope.reservation_filter = {
         closed: false,
         confirmed: true,
-        pending: true
+        pending: true,
+        deleted: false
     };
 
     $scope.reservation_status = ['pending', 'confirmed', 'closed'];
@@ -115,7 +116,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
                 return regexp.test(reservation._arrival) || regexp.test(reservation._departure);
             });
             $scope.reservation_count = $scope.reservations.filter(function(reservation) {
-                return reservation._status != 'closed';
+                return reservation._status != 'closed' && ! reservation._deleted;
             }).length;
             if (!$scope.already_sending) {
                 $scope.loadReservationBlocks(true);
@@ -260,6 +261,22 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
                 $scope.message = error.response;
             });
     };
+
+    $scope.undeleteReservation = function(reservation) {
+        $scope.message = 'Herstellen reservatie ' + reservation._id + '...';
+        reservation._deleted = false;
+        Reservations.single.update({id: reservation._id}, reservation).$promise
+            .then(function (data) {
+                $scope.status = 'ok';
+                $scope.message = 'Reservatie succesvol hersteld';
+                loadReservations(false);
+            }, function (error) {
+                $scope.status = 'Fout bij herstellen van reservatie';
+                $scope.message = error.data;
+                loadReservations(false);
+            });
+
+    }
 
     $scope.updateReservation = function (reservation) {
         $scope.message = 'Updaten reservatie ' + reservation._id + '...';

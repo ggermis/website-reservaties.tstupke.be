@@ -226,12 +226,14 @@ article {
 .reservationForm input[type=checkbox] {
     left: 1em;
 }
-.reservationList input[type=checkbox] {
+
+.filter input[type=checkbox] {
     left: 0;
     margin-left: 3em;
 }
 
-.reservationList .filter {
+.filter {
+    margin-top: 1em;
     text-align: center;
 }
 
@@ -459,6 +461,10 @@ td {
     background-color: darkslategray;
 }
 
+.deleted {
+    color: black;
+    background-color: white;
+}
 
 /*pending*/
 .day.start-pending {
@@ -866,6 +872,10 @@ div.modal-body {
 
 .pending .editable-click {
     color: white;
+}
+
+.deleted .editable-click {
+    color: black;
 }
 
 .contact .editable-click {

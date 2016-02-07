@@ -81,7 +81,7 @@ angular.module('Main').factory('CalendarHelper', function () {
                     arrival.setHours(0, 0, 0, 0);
                     departure.setHours(0, 0, 0, 0);
                     date.setHours(0, 0, 0, 0);
-                    if (arrival.valueOf() <= date.valueOf() && date.valueOf() <= departure.valueOf()) {
+                    if (!entry._deleted && arrival.valueOf() <= date.valueOf() && date.valueOf() <= departure.valueOf()) {
                         result.push(entry);
                     }
                 });
