@@ -191,8 +191,6 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         return $scope.auth_token != null;
     };
 
-    // loadReservations();
-
     $scope.numberOfDays = function(from_date, to_date) {
         var days = Math.abs(Math.floor(( Date.parse(from_date) - Date.parse(to_date) ) / 86400000));
         return days;
@@ -246,19 +244,19 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             });
     };
 
-    $scope.deleteReservation = function (id) {
+    $scope.deleteReservation = function (reservation) {
         if (!confirm('Ben je zeker?')) {
             return;
         }
-        $scope.message = 'Verwijderen reservatie ' + id + '...';
-        Reservations.single.delete({id: id}).$promise
+        $scope.message = 'Verwijderen reservatie ' + reservation._id + '...';
+        reservation._deleted = true;
+        Reservations.single.update({id: reservation._id}, reservation).$promise
             .then(function (data) {
-                $scope.current_reservations = [];
+                $scope.status = 'ok';
                 $scope.message = 'Reservatie succesvol verwijderd';
-                loadReservations(false);
             }, function (error) {
                 $scope.status = 'Fout bij verwijderen van reservatie';
-                $scope.message = error.response;
+                $scope.message = error.data;
             });
     };
 
@@ -269,13 +267,10 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             .then(function (data) {
                 $scope.status = 'ok';
                 $scope.message = 'Reservatie succesvol hersteld';
-                loadReservations(false);
             }, function (error) {
                 $scope.status = 'Fout bij herstellen van reservatie';
                 $scope.message = error.data;
-                loadReservations(false);
             });
-
     }
 
     $scope.updateReservation = function (reservation) {
@@ -284,11 +279,9 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             .then(function (data) {
                 $scope.status = 'ok';
                 $scope.message = 'Reservatie succesvol geupdate';
-                loadReservations(false);
             }, function (error) {
                 $scope.status = 'Fout bij updaten van reservatie';
                 $scope.message = error.data;
-                loadReservations(false);
             });
     };
 
