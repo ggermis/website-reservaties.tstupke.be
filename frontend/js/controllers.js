@@ -74,12 +74,6 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     }
     $scope.block = {
         year: $scope.today.getFullYear(),
-        // legacy_blocks_2016: [
-        //     { "id": 1, "from": "07-01", "to": "07-10", disabled: false },
-        //     { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
-        //     { "id": 3, "from": "07-23", "to": "08-03", disabled: false },
-        //     { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
-        // ],
         legacy_blocks_2018: [
             { "id": 1, "from": "07-01", "to": "07-10", disabled: false },
             { "id": 2, "from": "07-10", "to": "07-21", disabled: false },
@@ -96,9 +90,9 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     };
 
     $scope.reservation_filter = {
-        closed: false,
-        confirmed: true,
         pending: true,
+        confirmed: true,
+        closed: true,
         deleted: false
     };
 
@@ -331,13 +325,18 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
        }
     }
 
-    $scope.$watch('reservation._arrival', function (newValue, oldValue) {
+    // $scope.$watch('reservation._arrival', function (newValue, oldValue) {
+    //    $scope.updateCalendarSelection();
+    // }, true);
+
+    // $scope.$watch('reservation._departure', function (newValue, oldValue) {
+    //    $scope.updateCalendarSelection();
+    // }, true);
+
+    $scope.$watch('reservation', function (newValue, oldValue) {
        $scope.updateCalendarSelection();
     }, true);
 
-    $scope.$watch('reservation._departure', function (newValue, oldValue) {
-       $scope.updateCalendarSelection();
-    }, true);
 
     $scope.$watch('state.year', function (newValue, oldValue) {
         $scope.current_reservations = [];
