@@ -198,7 +198,11 @@ angular.module('Main')
                                     var now = new Date();
                                     var yesterday = new Date().setDate(now.getDate()-1);
                                     if (d.valueOf() < yesterday.valueOf()) {
-                                        cell.className = cell.className + " done";
+                                        if (scope.is_authorized()) {
+                                            cell.className = cell.className + " done";
+                                        } else {
+                                            cell.className = "day free done";
+                                        }
                                     }
                                     if ((d.getYear() == now.getYear()) && (d.getMonth() == now.getMonth()) && (d.getDate() == now.getDate())) {
                                         cell.className = cell.className + " today";
