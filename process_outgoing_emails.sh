@@ -11,7 +11,7 @@ PHP="$(which php)"
 "$PHP" "${ROOT_DIR}/backend/scripts/outgoing_emails.php" reminder 15 pending weekend
 
 # 2 months before arriving, send instruction email
-"$PHP" "${ROOT_DIR}/backend/scripts/outgoing_emails.php" instruction 60 confirmed weekend
+"$PHP" "${ROOT_DIR}/backend/scripts/outgoing_emails.php" instruction 15 confirmed weekend
 
 # 1 week before arriving, send arrival email
 "$PHP" "${ROOT_DIR}/backend/scripts/outgoing_emails.php" arrival 7 confirmed weekend
@@ -25,4 +25,4 @@ PHP="$(which php)"
 "$PHP" "${ROOT_DIR}/backend/scripts/outgoing_emails.php" reminder 15 pending bivak
 
 # 2 months before arriving, send instruction email
-"$PHP" "${ROOT_DIR}/backend/scripts/outgoing_emails.php" instruction 60 confirmed bivak
+"$PHP" "${ROOT_DIR}/backend/scripts/outgoing_emails.php" instruction 15 confirmed bivak
