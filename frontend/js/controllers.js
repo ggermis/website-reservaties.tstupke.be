@@ -74,6 +74,14 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     }
     $scope.block = {
         year: $scope.today.getFullYear(),
+        legacy_blocks_2017: [
+            { "id": 1, "from": "07-01", "to": "07-10", disabled: false },
+            { "id": 2, "from": "07-10", "to": "07-19", disabled: false },
+            { "id": 3, "from": "07-19", "to": "07-31", disabled: false },
+            { "id": 4, "from": "07-31", "to": "08-10", disabled: false },
+            { "id": 5, "from": "08-10", "to": "08-19", disabled: false },
+            { "id": 6, "from": "08-20", "to": "08-30", disabled: false }
+        ],
         legacy_blocks_2018: [
             { "id": 1, "from": "07-01", "to": "07-10", disabled: false },
             { "id": 2, "from": "07-10", "to": "07-21", disabled: false },

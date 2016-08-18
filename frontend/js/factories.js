@@ -101,26 +101,26 @@ angular.module('Main').factory('CalendarHelper', function () {
         existsReservationBetween: function (reservations, start_date, end_date, exact) {
             if (reservations) {
                 return reservations.some(function (entry) {
-                    var arrival = new Date(entry._arrival);
-                    var departure = new Date(entry._departure);
-                    arrival.setHours(0, 0, 0, 0);
-                    departure.setHours(0, 0, 0, 0);
-                    start_date.setHours(0, 0, 0, 0);
-                    end_date.setHours(0, 0, 0, 0);
-                    if ((start_date.getFullYear() >= 2019) && exact) {
-                        var doubleBooking = (start_date.valueOf() == arrival.valueOf()) && (end_date.valueOf() == departure.valueOf());
-                    } else if (exact) {
-                        var doubleBooking = ((start_date.valueOf() <= arrival.valueOf()) && (arrival.valueOf() < end_date.valueOf())) ||
-                                            ((arrival.valueOf() <= start_date.valueOf()) && (start_date.valueOf() < departure.valueOf()));                        
-                    } else {
-                        var doubleBooking = ((start_date.valueOf() <= arrival.valueOf()) && (arrival.valueOf() <= end_date.valueOf())) ||
-                                            ((arrival.valueOf() <= start_date.valueOf()) && (start_date.valueOf() <= departure.valueOf()));
-                    }
-                    // if (start_date.getDate() == 1 && arrival.getFullYear() == 2017 && arrival.getMonth() == 6) {
-                    //     console.log("Start: " + start_date +", end: " + end_date + ", Arrival: " + arrival + ", Departure: " + departure + " -> " + doubleBooking);
-                    // }
-                    if (entry._status != 'pending' && doubleBooking) {
-                        return true;
+                    if (!entry._deleted) {
+                        var arrival = new Date(entry._arrival);
+                        var departure = new Date(entry._departure);
+                        arrival.setHours(0, 0, 0, 0);
+                        departure.setHours(0, 0, 0, 0);
+                        start_date.setHours(0, 0, 0, 0);
+                        end_date.setHours(0, 0, 0, 0);
+                        if (exact) {
+                            var doubleBooking = ((start_date.valueOf() <= arrival.valueOf()) && (arrival.valueOf() < end_date.valueOf())) ||
+                                                ((arrival.valueOf() <= start_date.valueOf()) && (start_date.valueOf() < departure.valueOf()));                        
+                        } else {
+                            var doubleBooking = ((start_date.valueOf() <= arrival.valueOf()) && (arrival.valueOf() <= end_date.valueOf())) ||
+                                                ((arrival.valueOf() <= start_date.valueOf()) && (start_date.valueOf() <= departure.valueOf()));
+                        }
+                        // if (start_date.getDate() == 1 && arrival.getFullYear() == 2017 && arrival.getMonth() == 6) {
+                        //   console.log("Start: " + start_date +", end: " + end_date + ", Arrival: " + arrival + ", Departure: " + departure + " (" + entry._deleted + ") -> " + doubleBooking);
+                        // }
+                        if (entry._status != 'pending' && doubleBooking) {
+                            return true;
+                        }
                     }
                 });
             }
