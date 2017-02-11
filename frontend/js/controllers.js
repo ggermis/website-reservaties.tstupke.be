@@ -88,6 +88,12 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             { "id": 3, "from": "07-21", "to": "08-01", disabled: false },
             { "id": 4, "from": "08-01", "to": "08-12", disabled: false }
         ],
+        legacy_blocks_2020: [
+            { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
+            { "id": 2, "from": "07-12", "to": "07-21", disabled: false },
+            { "id": 3, "from": "07-21", "to": "07-31", disabled: false },
+            { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
+        ],
         default_blocks: [
             { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
             { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
