@@ -1,6 +1,1 @@
-config.php
-frontend/.htaccess
-frontend/api/templates_c
-templates_c
-_backups/
-changes.txt
+backups/
