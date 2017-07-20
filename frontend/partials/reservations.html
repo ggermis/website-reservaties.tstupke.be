@@ -253,7 +253,7 @@
                         href="http://www.tstupke.be/Teksten/Huishoudelijk%20Reglement%20Kampplaats%20%27t%20Stupke.pdf" target="_blank">reglement</a></span><br><br><br>
 
                     <div class="price" ng-show="reservation._type == 'weekend'">Geschatte prijs (exclusief kosten): 250 &euro;</div>
-                    <div class="price" ng-show="reservation._type != 'weekend'">Geschatte prijs (exclusief kosten): {{(reservation._nr_of_people * 3.25 * numberOfDays(reservation._arrival, reservation._departure)) | number:0}} &euro;</div>
+                    <div class="price" ng-show="reservation._type != 'weekend'">Geschatte prijs (exclusief kosten): {{(reservation._nr_of_people * 3.75 * numberOfDays(reservation._arrival, reservation._departure)) | number:0}} &euro;</div>
                     <br><br>
 
                     <button ng-click="already_sending || submitReservationForm()"
