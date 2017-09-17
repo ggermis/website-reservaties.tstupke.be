@@ -96,8 +96,8 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             { "id": 5, "from": "08-13", "to": "08-25", disabled: false }
         ],
         legacy_blocks_2020: [
-            { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
-            { "id": 2, "from": "07-12", "to": "07-21", disabled: false },
+            { "id": 1, "from": "07-01", "to": "07-11", disabled: false },
+            { "id": 2, "from": "07-11", "to": "07-21", disabled: false },
             { "id": 3, "from": "07-21", "to": "07-31", disabled: false },
             { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
         ],
