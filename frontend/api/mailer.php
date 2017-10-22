@@ -1,6 +1,7 @@
 <?php
 
 require_once(realpath(dirname(__FILE__) . '/../../config.php'));
+use PHPMailer\PHPMailer\PHPMailer;
 
 $params = json_decode(file_get_contents('php://input'), true);
 
@@ -21,11 +22,11 @@ class Mailer {
     }
 
     function sendWithoutHistory($to, $subject, $type = "reservation") {
-        return mail($to, $subject, $this->message, $this->headers);
+        return $this->sendSMTPEmail($to, $subject, $this->message);
     }
 
     function send($to, $subject, $type = "reservation") {
-        $result = mail($to, $subject, $this->message, $this->headers);
+        $result = $this->sendSMTPEmail($to, $subject, $this->message);
         if ($result) {
             $dt = new DateTime();
             $dt->setTimeZone(new DateTimeZone('Europe/Brussels'));
@@ -46,10 +47,36 @@ class Mailer {
         file_put_contents('/tmp/test.txt', $result[0]['_id']);
         return $result[0]['_id'];
     }
+
+    function sendSMTPEmail($to, $subject, $message) {
+        $mail = new PHPMailer;
+        $mail->isSMTP();
+        $mail->SMTPDebug = 2;
+        $mail->Debugoutput = 'html';
+        $mail->Host = "localhost";
+        $mail->Port = 25;
+        $mail->SMTPSecure = '';
+        $mail->SMTPAutoTLS = false;
+        $mail->SMTPAuth = true;
+        $mail->Username = __INCOMING_MAIL_USERNAME__;
+        $mail->Password = __INCOMING_MAIL_PASSWORD__;
+        $mail->setFrom(__INCOMING_MAIL_USERNAME__, __MAIL_TSTUPLE_FROM__);
+        $mail->addAddress($to, $this->reservation['_name']);
+        $mail->addReplyTo(__MAIL_TSTUPKE_EMAIL__, __MAIL_TSTUPLE_FROM__);
+        $mail->Subject = $subject;
+        $mail->msgHTML($message);
+        $mail->SMTPDebug = 0;
+        if (!$mail->send()) {
+            $this->error = $mail->ErrorInfo;
+            return false;
+        }
+        return true;
+    }
 }
 
 
 $reservation = $params['message'];
+
 
 
 $template = __FRONTEND_DIR__ . '/api/mail-templates/internal/reservation.tpl';
@@ -58,9 +85,11 @@ $mailer->sendWithoutHistory(__MAIL_TSTUPKE_EMAIL__, "Reservatie: " . $reservatio
 
 $template = realpath(dirname(__FILE__)) . '/mail-templates/' . $reservation['_type'] . '/reservation.tpl';
 $mailer = new Mailer($reservation, $template);
+
+
 if ($mailer->send($reservation['_email'], "Bevestiging reservatie " . $reservation['_code'])) {
     echo json_encode(array("status" => "ok"));
 } else {
-    header(':', true, 500);
+    header(':', true, 501);
     echo json_encode(array("status" => "error"));;
 }

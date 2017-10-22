@@ -1,0 +1,17 @@
+RewriteEngine On
+RewriteBase /
+
+RewriteCond %{REQUEST_URI} !\.php$
+RewriteRule ^api/reservation/all/?([0-9]*) api/api.php?model=reservation&year=$1 [L]
+
+RewriteCond %{REQUEST_URI} !\.php$
+RewriteRule ^api/note/reservation/?([0-9]*) api/api.php?model=note&reservation_id=$1 [L]
+
+RewriteCond %{REQUEST_URI} !\.php$
+RewriteRule ^api/([^/]*)/?([0-9]*)/?([^/]*) api/api.php?model=$1&id=$2&action=$3 [L]
+
+RewriteRule ^mailer$ api/mailer.php
+
+RewriteRule ^auth/([^/]*) api/auth.php?action=$1
+
+#AddHandler application/x-httpd-php54 .php

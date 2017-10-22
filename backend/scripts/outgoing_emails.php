@@ -1,6 +1,7 @@
 <?php
 
 require_once(realpath(dirname(__FILE__) . '/../../config.php'));
+use PHPMailer\PHPMailer\PHPMailer;
 
 //
 // Usage:
@@ -87,7 +88,8 @@ class Mailer {
     }
 
     function send($to, $subject, $type = "reservation") {
-      if (mail($to, $subject, $this->message, $this->headers)) {
+      if ($this->sendSMTPEmail($to, $subject, $this->message)) {
+      // if (mail($to, $subject, $this->message, $this->headers)) {
           $dt = new DateTime();
           $dt->setTimeZone(new DateTimeZone('Europe/Brussels'));
           $date = $dt->format("Y-m-d H:i:s");
@@ -98,6 +100,31 @@ class Mailer {
           $status_query = "UPDATE reservations SET _has_emails = TRUE WHERE _id = ?";
           $sql->rawQuery($status_query, Array($this->reservation['_id']));
       }
+    }
+
+    function sendSMTPEmail($to, $subject, $message) {
+        $mail = new PHPMailer;
+        $mail->isSMTP();
+        $mail->SMTPDebug = 2;
+        $mail->Debugoutput = 'html';
+        $mail->Host = "localhost";
+        $mail->Port = 25;
+        $mail->SMTPSecure = '';
+        $mail->SMTPAutoTLS = false;
+        $mail->SMTPAuth = true;
+        $mail->Username = __INCOMING_MAIL_USERNAME__;
+        $mail->Password = __INCOMING_MAIL_PASSWORD__;
+        $mail->setFrom(__INCOMING_MAIL_USERNAME__, __MAIL_TSTUPLE_FROM__);
+        $mail->addAddress($to, $this->reservation['_name']);
+        $mail->addReplyTo(__MAIL_TSTUPKE_EMAIL__, __MAIL_TSTUPLE_FROM__);
+        $mail->Subject = $subject;
+        $mail->msgHTML($message);
+        $mail->SMTPDebug = 0;
+        if (!$mail->send()) {
+            $this->error = $mail->ErrorInfo;
+            return false;
+        }
+        return true;
     }
 }
 
