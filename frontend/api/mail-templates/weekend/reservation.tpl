@@ -8,7 +8,7 @@ contract en de storting van het voorschot. Het contract vinden jullie op <a href
 en mag ondertekend verstuurd worden naar <a href="mailto:kampplaats@tstupke.be">kampplaats@tstupke.be</a>.</p>
 <p>
 <p>
-Voor weekendverhuur dient 500&euro; overgeschreven te worden op rek. nr. <em>BE93 0689 0133 7767</em> met vermelding
+Voor weekendverhuur dient 525&euro; overgeschreven te worden op rek. nr. <em>BE93 0689 0133 7767</em> met vermelding
 van jullie groepsnaam en de begindatum van de reservatie.
 </p>
 <p>
