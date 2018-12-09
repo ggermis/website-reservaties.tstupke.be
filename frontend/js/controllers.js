@@ -216,6 +216,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
 
         $scope.reservation._name = "'t Stupke";
         $scope.reservation._address = "Stroekestraat, Val-Meer";
+        $scope.reservation._city = "Val-Meer";
         $scope.reservation._email = "kampplaats@tstupke.be";
         $scope.reservation._phone = "0495/246650";
         $scope.reservation._agreed = true;

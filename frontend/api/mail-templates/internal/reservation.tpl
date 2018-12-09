@@ -14,6 +14,7 @@ voor de periode van {$reservation._arrival} tot {$reservation._departure} voor {
     <li>Tot: {$reservation._departure}</li>
     <li>Naam: {$reservation._name}</li>
     <li>Adres: {$reservation._address}</li>
+    <li>Gemeente: {$reservation._city}</li>
     <li>Email: {$reservation._email}</li>
     <li>Telefoon: {$reservation._phone}</li>
 </ul>

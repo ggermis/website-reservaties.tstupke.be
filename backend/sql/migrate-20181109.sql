@@ -1,0 +1,1 @@
+ALTER TABLE `reservations` ADD `_city` VARCHAR(255) NOT NULL AFTER `_address`;

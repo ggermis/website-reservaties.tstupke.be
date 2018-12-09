@@ -206,6 +206,11 @@
                     <span class="validation-error" ng-show="reservationForm.address.$error.required">Verplicht!</span>
                     <br>
 
+                    <label for="city">Gemeente</label>
+                    <input id="city" name="city" ng-model="reservation._city" placeholder="Gemeente" autocomplete="off" required>
+                    <span class="validation-error" ng-show="reservationForm.city.$error.required">Verplicht!</span>
+                    <br>
+
                     <label for="email">Email</label>
                     <input id="email" name="email" type="email" ng-model="reservation._email" autocomplete="off" placeholder="Email" required>
                     <span class="validation-error" ng-show="reservationForm.email.$error.email">Ongeldige email</span>
@@ -292,6 +297,9 @@
                     <div class="entity">
                         <span editable-text="reservation._entity" onaftersave="updateReservation(reservation)" buttons="no">{{reservation._entity}}</span>
                         <span editable-text="reservation._name" onaftersave="updateReservation(reservation)" buttons="no">({{reservation._name}})</span>
+                        <span editable-text="reservation._city" onaftersave="updateReservation(reservation)" buttons="no">
+                        - {{reservation._city}}
+                        </span>
                     </div>
                     <div>Type: <select id="type" name="entity" ng-model="reservation._type" 
                                                                ng-options="t for t in reservation_types"

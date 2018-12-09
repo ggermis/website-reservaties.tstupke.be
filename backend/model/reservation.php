@@ -17,6 +17,7 @@ class Reservation extends Model {
     // Contact information
     protected $_name;
     protected $_address;
+    protected $_city;
     protected $_email;
     protected $_phone;
 
@@ -94,6 +95,7 @@ class Reservation extends Model {
             '_name' => $this->_name,
             '_email' => $this->_email,
             '_address' => $this->_address,
+            '_city' => $this->_city,
             '_phone' => $this->_phone,
             '_created' => $this->_created,
             '_agreed' => $this->_agreed,
