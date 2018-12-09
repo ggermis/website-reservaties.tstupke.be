@@ -12,15 +12,17 @@ Voor weekendverhuur dient 525&euro; overgeschreven te worden op rek. nr. <em>BE9
 van jullie groepsnaam en de begindatum van de reservatie.
 </p>
 <p>
-Indien jullie Kampplaats ’t Stupke op voorhand wensen te bezichtigen, is dit mogelijk tijdens het weekend of op weekdagen 
-na 18u. Een afspraak maken kan via <a href="mailto:kampplaats@tstupke.be">kampplaats@tstupke.be</a> of via 0496/38.61.13 (Fabienne Rosias).
+Indien jullie Kampplaats ’t Stupke op voorhand wensen te bezichtigen dan kan dit na telefonische afspraak op het nummer
+0495/24.66.50 (Peter) of 0474/76.85.14 (Fabienne)
+</p>
+<p>
 Let op: jullie optie is vanaf heden maximaal 15 dagen geldig. Zet dus tijdig de nodige stappen!
 </p>
 
 <p>
 Met vriendelijke groeten,
 <br><br>
-Fabienne Rosias
+Kampplaats 't Stupke
 </p>
 
 <br>

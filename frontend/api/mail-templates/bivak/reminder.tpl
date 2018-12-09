@@ -13,7 +13,7 @@ met vermelding van jullie groepsnaam en de begindatum van de reservatie.
 <p>
 Met vriendelijke groeten,
 <br><br>
-Fabienne Rosias
+Kampplaats 't Stupke
 </p>
 
 <br>

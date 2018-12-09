@@ -10,7 +10,7 @@ Deze lijst mag verstuurd worden aan <a href="mailto:kampplaats@tstupke.be">kampp
 <p>
 Met vriendelijke groeten,
 <br><br>
-Fabienne Rosias
+Kampplaats 't Stupke
 </p>
 
 <br>
