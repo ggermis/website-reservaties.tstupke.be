@@ -74,20 +74,6 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     }
     $scope.block = {
         year: $scope.today.getFullYear(),
-        legacy_blocks_2017: [
-            { "id": 1, "from": "07-01", "to": "07-10", disabled: false },
-            { "id": 2, "from": "07-10", "to": "07-19", disabled: false },
-            { "id": 3, "from": "07-19", "to": "07-31", disabled: false },
-            { "id": 4, "from": "07-31", "to": "08-10", disabled: false },
-            { "id": 5, "from": "08-10", "to": "08-19", disabled: false },
-            { "id": 6, "from": "08-20", "to": "08-30", disabled: false }
-        ],
-        legacy_blocks_2018: [
-            { "id": 1, "from": "07-01", "to": "07-10", disabled: false },
-            { "id": 2, "from": "07-10", "to": "07-21", disabled: false },
-            { "id": 3, "from": "07-23", "to": "08-01", disabled: false },
-            { "id": 4, "from": "08-01", "to": "08-12", disabled: false }
-        ],
         legacy_blocks_2019: [
             { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
             { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
@@ -100,6 +86,20 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             { "id": 2, "from": "07-11", "to": "07-21", disabled: false },
             { "id": 3, "from": "07-21", "to": "07-31", disabled: false },
             { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
+        ],
+        legacy_blocks_2021: [
+            { "id": 1, "from": "07-01", "to": "07-11", disabled: false },
+            { "id": 2, "from": "07-11", "to": "07-21", disabled: false },
+            { "id": 3, "from": "07-21", "to": "07-31", disabled: false },
+            { "id": 4, "from": "07-31", "to": "08-10", disabled: false },
+            { "id": 5, "from": "08-10", "to": "08-17", disabled: false }
+        ],
+        legacy_blocks_2022: [
+            { "id": 1, "from": "07-01", "to": "07-11", disabled: false },
+            { "id": 2, "from": "07-11", "to": "07-21", disabled: false },
+            { "id": 3, "from": "07-21", "to": "07-31", disabled: false },
+            { "id": 4, "from": "07-31", "to": "08-10", disabled: false },
+            { "id": 5, "from": "08-10", "to": "08-17", disabled: false }
         ],
         default_blocks: [
             { "id": 1, "from": "07-01", "to": "07-12", disabled: false },

@@ -1,3 +1,5 @@
 backups/
 config.php
 .DS_store
+
+**/*.old
