@@ -7,7 +7,7 @@ Jullie weekendverhuur komt met rasse schreden dichterbij. Graag zetten we nog en
 </p>
 <ul>
 	<li>Aankomstuur is vooraf bespreekbaar zodat we een vlotte sleuteloverdracht en meteropname kunnen garanderen. Dit kan
-	via de telefoonnummers 0495/24.66.50 (Peter) of 0474/76.85.14 (Fabienne)</li>
+	via het telefoonnummer 0474/76.85.14 (Fabienne)</li>
 	<li>Indien jullie de kampvuurkring wensen te gebruiken, adviseren we jullie tijdig hout te bestellen of zelf mee brengen.
 	Afvalhout is tegen een democratische prijs te verkrijgen bij Steve (0472/11.29.36). Hardhout is aan 65&euro; te verkrijgen
 	bij Hermans Wi na telefonische afspraak op het nummer 0472/66.23.35 na 18u.</li>
