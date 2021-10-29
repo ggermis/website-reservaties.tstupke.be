@@ -38,7 +38,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         $scope.set_limits($scope.reservation);
         $scope.already_sending = false;
         $scope.reservation_button = 'Reserveer nu!';
-        $scope.selected_block = "0";
+        // $scope.selected_block = "0";
     };
 
     $scope.set_limits = function(reservation) {
@@ -56,7 +56,7 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         reservation._nr_of_people = 0;
         reservation._arrival = '';
         reservation._departure = '';
-        $scope.block.selected_block = "0";
+        // $scope.block.selected_block = "0";
     };
 
     $scope.note = {};
@@ -72,43 +72,43 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
     } else {
         $scope.years = [$scope.state.year, $scope.state.year + 1, $scope.state.year + 2, $scope.state.year + 3, $scope.state.year + 4, $scope.state.year + 5];
     }
-    $scope.block = {
-        year: $scope.today.getFullYear(),
-        legacy_blocks_2019: [
-            { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
-            { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
-            { "id": 3, "from": "07-23", "to": "08-03", disabled: false },
-            { "id": 4, "from": "08-03", "to": "08-13", disabled: false },
-            { "id": 5, "from": "08-13", "to": "08-25", disabled: false }
-        ],
-        legacy_blocks_2020: [
-            { "id": 1, "from": "07-01", "to": "07-11", disabled: false },
-            { "id": 2, "from": "07-11", "to": "07-21", disabled: false },
-            { "id": 3, "from": "07-21", "to": "07-31", disabled: false },
-            { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
-        ],
-        legacy_blocks_2021: [
-            { "id": 1, "from": "07-01", "to": "07-11", disabled: false },
-            { "id": 2, "from": "07-11", "to": "07-21", disabled: false },
-            { "id": 3, "from": "07-21", "to": "07-31", disabled: false },
-            { "id": 4, "from": "07-31", "to": "08-10", disabled: false },
-            { "id": 5, "from": "08-10", "to": "08-17", disabled: false }
-        ],
-        legacy_blocks_2022: [
-            { "id": 1, "from": "07-01", "to": "07-11", disabled: false },
-            { "id": 2, "from": "07-11", "to": "07-21", disabled: false },
-            { "id": 3, "from": "07-21", "to": "07-31", disabled: false },
-            { "id": 4, "from": "07-31", "to": "08-10", disabled: false },
-            { "id": 5, "from": "08-10", "to": "08-17", disabled: false }
-        ],
-        default_blocks: [
-            { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
-            { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
-            { "id": 3, "from": "07-23", "to": "08-03", disabled: false },
-            { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
-        ],
-        selected_block: "0"        
-    };
+    // $scope.block = {
+    //     year: $scope.today.getFullYear(),
+    //     legacy_blocks_2019: [
+    //         { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
+    //         { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
+    //         { "id": 3, "from": "07-23", "to": "08-03", disabled: false },
+    //         { "id": 4, "from": "08-03", "to": "08-13", disabled: false },
+    //         { "id": 5, "from": "08-13", "to": "08-25", disabled: false }
+    //     ],
+    //     legacy_blocks_2020: [
+    //         { "id": 1, "from": "07-01", "to": "07-11", disabled: false },
+    //         { "id": 2, "from": "07-11", "to": "07-21", disabled: false },
+    //         { "id": 3, "from": "07-21", "to": "07-31", disabled: false },
+    //         { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
+    //     ],
+    //     legacy_blocks_2021: [
+    //         { "id": 1, "from": "07-01", "to": "07-11", disabled: false },
+    //         { "id": 2, "from": "07-11", "to": "07-21", disabled: false },
+    //         { "id": 3, "from": "07-21", "to": "07-31", disabled: false },
+    //         { "id": 4, "from": "07-31", "to": "08-10", disabled: false },
+    //         { "id": 5, "from": "08-10", "to": "08-17", disabled: false }
+    //     ],
+    //     legacy_blocks_2022: [
+    //         { "id": 1, "from": "07-01", "to": "07-11", disabled: false },
+    //         { "id": 2, "from": "07-11", "to": "07-21", disabled: false },
+    //         { "id": 3, "from": "07-21", "to": "07-31", disabled: false },
+    //         { "id": 4, "from": "07-31", "to": "08-10", disabled: false },
+    //         { "id": 5, "from": "08-10", "to": "08-17", disabled: false }
+    //     ],
+    //     default_blocks: [
+    //         { "id": 1, "from": "07-01", "to": "07-12", disabled: false },
+    //         { "id": 2, "from": "07-12", "to": "07-23", disabled: false },
+    //         { "id": 3, "from": "07-23", "to": "08-03", disabled: false },
+    //         { "id": 4, "from": "08-03", "to": "08-14", disabled: false }
+    //     ],
+    //     selected_block: "0"        
+    // };
 
     $scope.reservation_filter = {
         pending: true,
@@ -133,9 +133,9 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
             $scope.reservation_count = $scope.reservations.filter(function(reservation) {
                 return reservation._status != 'closed' && ! reservation._deleted;
             }).length;
-            if (!$scope.already_sending) {
-                $scope.loadReservationBlocks(true);
-            }
+            // if (!$scope.already_sending) {
+            //     $scope.loadReservationBlocks(true);
+            // }
         });
     }
 
@@ -310,30 +310,30 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
         return ((reservation._status == 'pending') && ((new Date() - creation_date) > 12096e5)); // 12096e5 = 14 days
     }
 
-    $scope.loadReservationBlocks = function(keep_year) {
-        $scope.block.selected_block = "0";
-        if (!keep_year) {
-            $scope.state.year = $scope.block.year;
-        }        
-        for (var $i=0; $i<$scope.block[$scope.blocks_to_use].length; $i++) {
-            var $block = $scope.block[$scope.blocks_to_use][$i];
-            var $start_date = $scope.block.year + "-" + $block.from;
-            var $end_date = $scope.block.year + "-" + $block.to;
-            $block.disabled = !CalendarHelper.isBlockFree($scope.all_reservations, $start_date, $end_date);
-        }        
-        $scope.selectedReservationBlock();
-    }    
+    // $scope.loadReservationBlocks = function(keep_year) {
+    //     $scope.block.selected_block = "0";
+    //     if (!keep_year) {
+    //         $scope.state.year = $scope.block.year;
+    //     }        
+    //     for (var $i=0; $i<$scope.block[$scope.blocks_to_use].length; $i++) {
+    //         var $block = $scope.block[$scope.blocks_to_use][$i];
+    //         var $start_date = $scope.block.year + "-" + $block.from;
+    //         var $end_date = $scope.block.year + "-" + $block.to;
+    //         $block.disabled = !CalendarHelper.isBlockFree($scope.all_reservations, $start_date, $end_date);
+    //     }        
+    //     $scope.selectedReservationBlock();
+    // }    
 
-    $scope.selectedReservationBlock = function() {
-        var block_id = parseInt($scope.block.selected_block) - 1;
-        if (block_id >= 0 && block_id < $scope.block[$scope.blocks_to_use].length) {
-            $scope.reservation._arrival = $scope.block.year + "-" + $scope.block[$scope.blocks_to_use][block_id].from;
-            $scope.reservation._departure = $scope.block.year + "-" + $scope.block[$scope.blocks_to_use][block_id].to;
-        } else {
-            $scope.reservation._arrival = "";
-            $scope.reservation._departure = "";                          
-        }
-    }
+    // $scope.selectedReservationBlock = function() {
+    //     var block_id = parseInt($scope.block.selected_block) - 1;
+    //     if (block_id >= 0 && block_id < $scope.block[$scope.blocks_to_use].length) {
+    //         $scope.reservation._arrival = $scope.block.year + "-" + $scope.block[$scope.blocks_to_use][block_id].from;
+    //         $scope.reservation._departure = $scope.block.year + "-" + $scope.block[$scope.blocks_to_use][block_id].to;
+    //     } else {
+    //         $scope.reservation._arrival = "";
+    //         $scope.reservation._departure = "";                          
+    //     }
+    // }
 
     $scope.updateCalendarSelection = function() {
        $('.selected_period').removeClass('selected_period');
@@ -362,9 +362,9 @@ angular.module('Main').controller('ReservationCtrl', ['$scope', '$filter', 'Rese
 
     $scope.$watch('state.year', function (newValue, oldValue) {
         $scope.current_reservations = [];
-        $scope.block.year = newValue;
-        var legacy_blocks = "legacy_blocks_" + $scope.state.year;
-        $scope.blocks_to_use = (typeof $scope.block[legacy_blocks] === "undefined") ? "default_blocks" : legacy_blocks;
+        // $scope.block.year = newValue;
+        // var legacy_blocks = "legacy_blocks_" + $scope.state.year;
+        // $scope.blocks_to_use = (typeof $scope.block[legacy_blocks] === "undefined") ? "default_blocks" : legacy_blocks;
         loadReservations();
     }, true);
 

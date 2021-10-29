@@ -8,7 +8,7 @@ contract en de storting van het voorschot. Het contract vinden jullie op <a href
 en mag ondertekend verstuurd worden naar <a href="mailto:kampplaats@tstupke.be">kampplaats@tstupke.be</a>.</p>
 <p>
 <p>
-Voor kampperiodes bedraagt het voorschot 1200&euro;. Het bedrag dient overgeschreven te worden op rek. nr. <em>BE93 0689 0133 7767</em> met vermelding van jullie groepsnaam en de begindatum van de reservatie.
+Voor kampperiodes bedraagt het voorschot 1200&euro;. Het bedrag dient overgeschreven te worden op rek. nr. <em>BE49 0637 1885 1271</em> met vermelding van jullie groepsnaam en de begindatum van de reservatie.
 </p>
 <p>
 Indien jullie Kampplaats ’t Stupke op voorhand wensen te bezichtigen, is dit mogelijk tijdens het weekend of op weekdagen 

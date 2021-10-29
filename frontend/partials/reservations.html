@@ -222,35 +222,20 @@
                     <span class="validation-error" ng-show="reservationForm.phone.$error.required">Verplicht!</span>
                     <br>
 
-                    <div ng-if="reservation._type == 'weekend'">
-                        <!-- VAN -->
-                        <label for="arrival">Aankomst</label>
-                        <input type="text" id="arrival" name="arrival" size="10" min="{{today}}" ng-model="reservation._arrival" 
-                               placeholder="Aankomst" date-from with-to="departure" readonly autocomplete="off" required>
-                        <span class="validation-error" ng-show="reservationForm.arrival.$error.required">Verplicht!</span>
-                        <br>
+                    <!-- VAN -->
+                    <label for="arrival">Aankomst</label>
+                    <input type="text" id="arrival" name="arrival" size="10" min="{{today}}" ng-model="reservation._arrival" 
+                           placeholder="Aankomst" date-from with-to="departure" readonly autocomplete="off" required>
+                    <span class="validation-error" ng-show="reservationForm.arrival.$error.required">Verplicht!</span>
+                    <br>
 
-                        <!-- TOT -->
-                        <label for="departure">Vertrek</label>
-                        <input type="text" id="departure" name="departure" size="10" min="{{reservation._arrival}}"
-                               ng-model="reservation._departure" placeholder="Vertrek" date-to with-from="arrival" autocomplete="off" readonly disabled required>
-                        <span class="validation-error" ng-show="reservationForm.departure.$error.required">Verplicht!</span>
-                        <br>
-                    </div>
+                    <!-- TOT -->
+                    <label for="departure">Vertrek</label>
+                    <input type="text" id="departure" name="departure" size="10" min="{{reservation._arrival}}"
+                           ng-model="reservation._departure" placeholder="Vertrek" date-to with-from="arrival" disabled readonly autocomplete="off" required>
+                    <span class="validation-error" ng-show="reservationForm.departure.$error.required">Verplicht!</span>
+                    <br>
 
-                    <div ng-if="reservation._type == 'bivak'">
-                        <br>
-                        <label for="block_year">Selecteer periode</label>
-                        <select name="block_year" ng-model="block.year" ng-options="y for y in years" ng-change="loadReservationBlocks()"></select>
-                        <span class="validation-error" ng-show="!reservation._arrival">Verplicht!</span>
-                        <br><br>
-
-                        <div ng-repeat="b in block[blocks_to_use]">
-                            <input name="period" type="radio" value="{{b.id}}" ng-model="block.selected_block" ng-change="selectedReservationBlock()" ng-disabled="b.disabled" ng-required="true">
-                            <span class="radio {{b.disabled ? 'disabled' : ''}}">Periode: {{block.year}}-{{b.from}} - {{block.year}}-{{b.to}}</span>
-                        </div>                        
-                    </div>
-                    </div>
                     <br><br>
                     <textarea ng-model="reservation._remarks" placeholder="Eventuele opmerkingen (vb: afwijkende aankomst/vertrekdatums)"/><br>
 

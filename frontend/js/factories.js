@@ -95,7 +95,8 @@ angular.module('Main').factory('CalendarHelper', function () {
             arrival.setHours(0, 0, 0, 0);
             departure.setHours(0, 0, 0, 0);
             date.setHours(0, 0, 0, 0);
-            return arrival.valueOf() == date.valueOf() || departure.valueOf() == date.valueOf();
+            // return arrival.valueOf() == date.valueOf() || departure.valueOf() == date.valueOf();
+            return departure.valueOf() == date.valueOf();
         },
 
         existsReservationBetween: function (reservations, start_date, end_date, exact) {
@@ -127,11 +128,11 @@ angular.module('Main').factory('CalendarHelper', function () {
             return false;
         },
 
-        isBlockFree: function (reservations, start_date, end_date) {
-            var start = new Date(start_date);
-            var end = new Date(end_date);
-            return start.valueOf() > new Date().valueOf() && !this.existsReservationBetween(reservations, start, end, true);  
-        },
+        // isBlockFree: function (reservations, start_date, end_date) {
+        //     var start = new Date(start_date);
+        //     var end = new Date(end_date);
+        //     return start.valueOf() > new Date().valueOf() && !this.existsReservationBetween(reservations, start, end, true);  
+        // },
 
         isDayFree: function (reservations, date, type, start_date) {
             var found_reservations = this.getReservations(reservations, date);
@@ -157,7 +158,7 @@ angular.module('Main').factory('CalendarHelper', function () {
                 }
                 return reservation == null || reservation._status == 'pending' || isFreeDate;
             }
-        }
+        }  
     }
 });
 
