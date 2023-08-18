@@ -8,8 +8,7 @@ contract en de storting van het voorschot. Het contract vinden jullie op <a href
 en mag ondertekend verstuurd worden naar <a href="mailto:kampplaats@tstupke.be">kampplaats@tstupke.be</a>.</p>
 <p>
 <p>
-Voor weekendverhuur dient 535&euro; overgeschreven te worden op rek. nr. <em>BE49 0637 1885 1271</em> met vermelding
-van jullie groepsnaam en de begindatum van de reservatie.
+Het exacte bedrag en het rekeningnummer waarnaar mag overgeschreven worden om de voorschot te betalen kan u vinden op <a href="https://www.tstupke.be" alt="website">onze website </a>.
 </p>
 <p>
 Indien jullie Kampplaats ’t Stupke op voorhand wensen te bezichtigen dan kan dit na een afspraak te maken via ons email adres <a href="mailto:kampplaats@tstupke.be">kampplaats@tstupke.be</a>.

@@ -6,8 +6,7 @@ Beste,
 Wij ontvingen jullie reservatie-aanvraag, maar merken dat julie geen verdere stappen gezet hebben. Indien
 dit betekent dat jullie geen verdere interesse hebben, zullen wij jullie optie wissen. Indien jullie toch
 een reservering wensen te doen, vragen wij om deze week het ondertekende contract te versturen en het voorschot
-te storten. Voor kampperiodes dient 1200&euro; overgeschreven te worden op rek. nr. <em>BE49 0637 1885 1271</em> 
-met vermelding van jullie groepsnaam en de begindatum van de reservatie.
+te storten. Het exacte bedrag en het rekeningnummer waarnaar mag overgeschreven worden om de voorschot te betalen kan u vinden op <a href="https://www.tstupke.be" alt="website">onze website </a>.
 </p>
 
 <p>
