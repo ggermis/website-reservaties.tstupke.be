@@ -2,7 +2,3 @@
   Order allow,deny
   Allow from all
 </Limit>
-<LimitExcept GET POST PUT DELETE>
-   Order deny,allow
-   Deny from all
-</LimitExcept>

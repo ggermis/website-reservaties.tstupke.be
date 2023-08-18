@@ -15,5 +15,6 @@ Kampplaats 't Stupke
 
 <br>
 <p>
+Reservatie-id: {$reservation._id}<br>
 Reservatie-code: {$reservation._code}
 <p>

@@ -31,10 +31,6 @@ angular.module('Main', ['ngRoute', 'ngResource', 'ngCookies', 'pascalprecht.tran
                 templateUrl: 'partials/reservations.html',
                 controller: 'ReservationCtrl'
             })
-            .when('/contact', {
-                templateUrl: 'partials/contact.html',
-                controller: 'MainCtrl'
-            })
             .otherwise({ redirectTo: '/welcome'})
     }])
     .config(['$translateProvider', function($translateProvider) {

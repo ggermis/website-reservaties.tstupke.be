@@ -24,3 +24,6 @@ voor de periode van {$reservation._arrival} tot {$reservation._departure} voor {
 
 <h3>Reservatiecode</h3>
 {$reservation._code}
+
+<h3>Reservatieid</h3>
+{$reservation._id}
